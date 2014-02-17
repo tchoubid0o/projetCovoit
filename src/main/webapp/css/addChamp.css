@@ -1,0 +1,93 @@
+body
+{
+	margin: 0px;
+	background-color:#272326;
+	font-family: arial sans-serif;
+}
+
+a
+{	
+	text-decoration:none;
+	color:#272326;
+}
+
+#font
+{
+	background-color:#161616;
+	text-align:center;
+	margin-top:68px;
+}
+
+#font img
+{
+	width:80%;
+}
+
+#content
+{
+	width:900px;
+	margin:auto;
+	margin-top:5px;
+	margin-bottom:20px;
+	border:2px solid #bA4b0b;
+	border-radius: 10px;
+	padding:5px;
+	background-color:#dcdcdc;
+}
+
+.division
+{	
+	margin-bottom:20px;		
+	border:2px solid #272326;
+	border-radius:8px;
+}
+
+#infoNomChamp
+{	
+	padding-left:250px;
+}
+
+#infoNomChamp div
+{	
+	margin-top:8px;
+	margin-bottom:8px;
+}
+
+#odmdChamp
+{
+	padding-left:350px;
+}
+
+#odmdChamp div
+{
+	margin-top:8px;
+	margin-bottom:8px;	
+}
+
+.division table
+{
+	padding-left:100px;
+}
+
+td
+{
+	padding-right:30px;
+	padding-top:3px;
+	padding-bottom:3px;
+}
+
+#submit
+{
+	margin-left:350px;
+}
+
+footer
+{
+	position:fixed;
+	bottom:0px;
+	width:100%;
+	background-color:#161616;
+	text-align:center;		
+	opacity:0.9;
+	color:#dcdcdc;
+}

@@ -1,0 +1,195 @@
+body
+{
+	margin: 0px;
+	background-color:#272326;
+	font-family: arial sans-serif;
+}
+
+a
+{	
+	text-decoration:none;
+	color:#272326;
+}
+
+#addChammp
+{
+	margin-left:370px;
+}
+
+.backgroundChamp button
+{
+	position:absolute;
+	bottom:5px;
+	right:120px;
+}
+
+#font
+{
+	background-color:#161616;
+	text-align:center;
+	margin-top:68px;
+}
+
+#font img
+{
+	width:80%;
+}
+
+#content
+{
+	width:900px;
+	margin:auto;
+	margin-bottom:20px;
+	border:2px solid #bA4b0b;
+	border-radius: 10px;
+	padding:5px;
+}
+
+ul
+{
+	list-style-type:none;
+}
+
+li
+{
+	display:inline;
+}
+
+h2
+{
+	color:#272326;
+}
+
+.champion
+{
+	height:320px;
+}
+
+.imgChamp img
+{
+	padding:5px;
+	border-radius:10px;
+	float:left;
+	height:300px;
+	background-color:#dcdcdc;
+}
+
+.backgroundChamp
+{
+	position:relative;
+	height:300px;
+	margin-left:180px;
+	padding:5px;
+	border-radius: 10px;
+	background-color:#dcdcdc;
+}
+
+.caracChamp
+{
+	opacity:0.0;
+	display:none;
+}
+
+.caracChamp table
+{
+	position:absolute;
+	width:600px;
+}
+
+.caracChamp td
+{
+	padding-top:9px;
+	padding-bottom:9px;
+	padding-left:5px;
+}
+
+.contentCarac
+{
+	margin-left:106px;
+}
+
+.arrow
+{
+	position:absolute;
+	border:2px solid #bA4b0b;	
+	border-radius: 10px;
+	background-color:#272326;
+	top:3px;
+	right:3px;
+}
+
+aside img
+{
+	cursor:pointer;
+	width:100px;
+	height:295px;
+}
+
+.viewChamp h2
+{
+	padding-left:10px;
+}
+
+.abilities
+{
+	margin-top:-20px;
+}
+
+.abilities img
+{
+	margin-top:-10px;
+	margin-right:22px;
+	margin-left:22px;
+	width:50px;
+	border-radius:8px;
+	padding:3px;
+	background-color:#272326;
+}
+
+.stats
+{
+	margin-top:-10px;
+}
+
+.stats table
+{
+	margin-top:-20px;
+	margin-left:25px;
+}
+
+.stats tr
+{
+	height:30px;
+}
+
+.libelle
+{	
+	color:#272326;
+	font-weight:bold;
+}
+
+meter
+{
+	width:300px;
+	background:#272326;
+	border-radius: 5px;
+}
+
+.siteOfficiel
+{
+	position:absolute;
+	bottom:5px;
+	padding-left:10px;
+	font-weight:bold;
+}
+
+footer
+{
+	position:fixed;
+	bottom:0px;
+	width:100%;
+	background-color:#161616;
+	text-align:center;		
+	opacity:0.9;
+	color:#dcdcdc;
+}

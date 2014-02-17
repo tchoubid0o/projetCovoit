@@ -1,0 +1,56 @@
+Meow LoL - Projet Dev Web - Charles Moreel
+
+*
+*
+*
+*
+*
+
+Dans la page 'champions' :
+
+	-un clic sur l'image renvoie sur la page 'skins' concernant ce champion et deploie ses skins
+	
+	-un clic sur les fleches bleues laisse apparaitre les info complementaires sur le champion
+	
+	
+Dans la page 'skins' :
+
+	-un clic sur l'une des images d'un champion renvoie sur la page 'champions' concernant ce champion
+	
+	-un clic le triangle orange laisse apparaitre les skins du champion
+	
+	
+	
+/!\ un clic sur 'supprimer champion' supprime automatiquement le champion, ses skins et ses competences de la base de donnee /!\	
+	|
+	---> reexporter la bdd 	pour retrouver tous les champions (src/main/sql/meowlolbdd.sql)
+	
+	
+*
+*
+*
+*
+*
+
+En ce qui concerne la bdd :
+
+/!\ La base de donnees du projet est nommee : 'meowlolbdd'
+
+
+=> 1 champion correspond a 1 image, a 5 abilities (competences) et a (0,n) skins
+
+=> 1 ability correspond a 1 image
+
+=> 1 skin correspond a 1 image
+
+*
+*
+*
+*
+*
+
+Probleme rencontre :
+
+j'ai du cree un super classe 'DatChampion' afin de gerer le probleme des 2 INNER JOIN, je n'ai pas reussi a trouver une solution plus simple (bien que je pense qu'il y en a une)
+		
+
