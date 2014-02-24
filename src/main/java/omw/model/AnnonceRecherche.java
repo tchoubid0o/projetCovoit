@@ -9,6 +9,7 @@ public class AnnonceRecherche {
 	private String villeArriveeRecherche;
 	private Date dateEtHeureRecherche;
 	private String commentaireRecherche;
+	private String login;
 	
 	public AnnonceRecherche(){
 		
@@ -53,7 +54,12 @@ public class AnnonceRecherche {
 	public void setCommentaireRecherche(String commentaireRecherche) {
 		this.commentaireRecherche = commentaireRecherche;
 	}
-	
-	
 
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
 }

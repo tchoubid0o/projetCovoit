@@ -13,6 +13,7 @@ public class AnnonceProposition {
 	private String commentaire;
 	private int prix;
 	private int nbPlace;
+	private String login;
 	private ArrayList<String> listeEtapes;
 	
 	public AnnonceProposition(){
@@ -81,6 +82,14 @@ public class AnnonceProposition {
 
 	public void setNbPlace(int nbPlace) {
 		this.nbPlace = nbPlace;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public ArrayList<String> getListeEtapes() {
