@@ -1,0 +1,373 @@
+body {
+    color: black;
+    margin: 0px;
+}
+
+@font-face {
+    font-family: daunpenh;
+    src: url('../fonts/daunpenh.ttf'),
+		url('../fonts/daunpenh.eot') format("opentype"); /* IE */
+}
+
+@font-face {
+    font-family: gill;
+    src: url('../fonts/GLSNECB.TTF'),
+		url('../fonts/GLSNECB.eot') format("opentype"); /* IE */
+}
+
+@font-face {
+    font-family: gillcondensed;
+    src: url('../fonts/GILC____.TTF'),
+		url('../fonts/GILC____.eot') format("opentype"); /* IE */
+}
+
+* {
+    font-family: "daunpenh";
+    font-size: 24px;
+    padding-bottom: 0px;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #3e3e3e;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #3e3e3e;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #3e3e3e;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #3e3e3e;
+}
+
+a{
+    text-decoration: none;
+}
+
+.align{
+    text-align: center;
+}
+
+.width1000{
+    width: 1000px;
+    margin: auto;
+}
+
+.size18 a{
+    font-family: "gillcondensed";
+    font-size: 18px;
+}
+
+.gill{
+    font-family: "gillcondensed";
+    font-size: 18px;
+    color: #3f3f3f;
+}
+
+.grey{
+    color: #7b7b7b;
+    font-family: "gillcondensed";
+    font-size: 24px;
+}
+
+.red{
+    color: #ea3c3d;
+}
+
+.white{
+    color: white !important;
+}
+
+header{
+    background: #030303 url("../img/ban.jpg") 50% 0 no-repeat;;
+    height: 574px;
+}
+
+#nav{
+    width: 1000px;
+    margin: auto;
+    padding-top: 70px;
+}
+
+#nav #leftNav{
+    width: 180px;
+    float: left;
+    color: white;
+    font-size: 30px;
+}
+
+#nav #rightNav{
+    float: right;
+}
+
+#nav #rightNav ul{
+    list-style-type: none;
+    margin: 0px;
+}
+
+#nav #rightNav ul li{
+    display: inline;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.borderli{
+    border: 2px solid white;
+    padding-top: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+#nav #rightNav ul li a{
+    color: #6f6a67;
+}
+
+#nav #rightNav ul li a:hover{
+    color: white;
+}
+
+#nav #rightNav ul li .active{
+    color: white;
+}
+
+header .width1000 #slideTitle{
+    margin-top: 140px;
+    text-align: center;
+    font-size: 52px !important;
+    color: white;
+}
+
+header .width1000 #slideDesc{
+    text-align: center;
+    font-size: 30px !important;
+    color: #ea3c3d;
+}
+
+.sepa{
+    height: 2px;
+    width: 229px;
+    background-color: rgba(255,255,255,0.2);
+    margin: auto;
+    margin-top: 45px;
+}
+
+.slideDown{
+    text-align: center;
+    margin-top: 55px;
+}
+
+.wrapper1 {
+    /* height: 420px; */
+}
+
+.wrapper2{
+    background: url('../img/howtofont.jpg') repeat-x;
+    height: 270px;
+}
+
+.wrapper3{
+    background-color: #f6f6f6;
+    margin-top: 0px;
+    padding-top: 0px;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.wrapper4{
+    background-color: white;
+    margin-top: 15px;
+}
+
+.wrapper5{
+    background: url('../img/getintouch.jpg') repeat-x;
+    height: 238px;
+    margin-top: 25px;
+}
+
+.wrapper6{
+    background-color: #121212;
+}
+
+.searchcar{
+    margin-top: 28px;
+    color: #161615; 
+    border-radius: 10px; 
+    background-color: #ea3c3d; 
+    text-transform: none; 
+    text-decoration: none; 
+    width: 945px;
+    height: 65px;
+}
+
+.searchForm{
+    padding: 13px;
+}
+
+.searchForm select{
+    opacity: 0;
+    width: 100%;
+}
+
+.country{
+    float: left;
+    width: 91px;
+    margin-right: 5px;
+    background-color: #fff;
+    position: relative;
+}
+
+.label_country{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100%;
+}
+
+.town{
+    float: left;
+    width: 273px;
+    margin-right: 5px;
+    background-color: #fff;
+    position: relative;
+}
+
+.label_town{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    width: 100%;
+}
+
+.arrowdownChoose{
+    position: absolute; 
+    top: 10px; 
+    right: 30px;
+}
+
+.submitSearchCar{
+    cursor: pointer;  
+    border-radius: 4px; 
+    background-color: white; 
+    text-transform: none; 
+    text-decoration: none;   
+    border: none;
+    height: 40px;
+    line-height: 50px;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-left: 10px;
+}
+
+.columnheader {
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 30px;
+    color: #161615;
+    font-weight: bold;
+}
+
+.columnheader2 {
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: #7b7b7b;
+    font-family: "gill";
+}
+
+.leftColumn{
+    width: 333px;
+    float: left;
+    margin: auto;
+    text-align: center;
+}
+
+.middleColumn{
+    width: 334px;
+    float: left;
+    margin: auto;
+    text-align: center;
+}
+
+.rightColumn{
+    width: 333px;
+    float: left;
+    margin: auto;
+    text-align: center;
+}
+
+.columnInside{
+    padding: 15px;
+    color: #424242;
+}
+
+.imgSpanAlign img, .imgSpanAlign span{
+    vertical-align: middle;
+    display: inline-block;
+    padding: 0px 10px;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 36px;
+}
+
+.imgSpanAlign span{
+    padding-top: 15px;
+}
+
+.leftColumn500, .rightColumn500{
+    width: 500px;
+    float: left;
+    margin: auto;
+    color: #d6d6d6;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.titleAbout{
+    color: #161615;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.lastCars{
+    color: #666e74; 
+    width: 80%; 
+    margin: auto;
+    line-height: 20px;
+}
+
+.getInTouch{
+    font-size: 72px; 
+    font-family: 'gill'; 
+    color: #f6f6f6; 
+    text-align: center; 
+    padding-top: 50px;
+}
+
+.input_contact, .textarea_contact{
+    border: none;
+    background-color: #0e0e0e;
+    color: #3e3e3e;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.textarea_contact{
+    height: 225px;
+}
+
+.submitContactForm{
+    font-family: "gillcondensed";
+    font-size: 24px;
+    color: white;
+    cursor: pointer;  
+    border-radius: 4px; 
+    background-color: #ea3c3d;   
+    border: 1px solid #55292a;
+    height: 40px;
+    width: 100%;
+}
+
+footer{
+    background: url("../img/copyright.jpg") repeat-x;
+    height: 70px;
+}
