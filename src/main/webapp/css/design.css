@@ -5,28 +5,28 @@ body {
 
 @font-face {
     font-family: daunpenh;
-    src: url('fonts/daunpenh.ttf'),
-        url('fonts/daunpenh.eot') format("opentype"); /* IE */
+    src: url('../fonts/daunpenh.ttf'),
+        url('../fonts/daunpenh.eot') format("opentype"); /* IE */
 }
 
 @font-face {
     font-family: gill;
-    src: url('fonts/GLSNECB.TTF'),
-        url('fonts/GLSNECB.eot') format("opentype"); /* IE */
+    src: url('../fonts/GLSNECB.TTF'),
+        url('../fonts/GLSNECB.eot') format("opentype"); /* IE */
 }
 
 @font-face {
     font-family: gillcondensed;
-    src: url('fonts/GILC____.TTF'),
-        url('fonts/GILC____.eot') format("opentype"); /* IE */
+    src: url('../fonts/GILC____.TTF'),
+        url('../fonts/GILC____.eot') format("opentype"); /* IE */
 }
 
 /** fonts used for the icons **/ 
 @font-face {
     font-family: 'fontello';
-    src: url('fonts/fontello.eot');
-    src: url('fonts/fontello.woff') format('woff'),
-        url('fonts/fontello.ttf') format('truetype');
+    src: url('../fonts/fontello.eot');
+    src: url('../fonts/fontello.woff') format('woff'),
+        url('../fonts/fontello.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -89,7 +89,7 @@ a{
 }
 
 header{
-    background: #030303 url("img/ban.jpg") 50% 0 no-repeat;;
+    background: #030303 url("../img/ban.jpg") 50% 0 no-repeat;;
     height: 574px;
 }
 
@@ -171,7 +171,7 @@ header .width1000 #slideDesc{
 }
 
 .wrapper2{
-    background: url('img/howtofont.jpg') repeat-x;
+    background: url('../img/howtofont.jpg') repeat-x;
     height: 270px;
 }
 
@@ -188,7 +188,7 @@ header .width1000 #slideDesc{
 }
 
 .wrapper5{
-    background: url('img/getintouch.jpg') repeat-x;
+    background: url('../img/getintouch.jpg') repeat-x;
     height: 238px;
     margin-top: 25px;
 }
@@ -378,7 +378,7 @@ header .width1000 #slideDesc{
 }
 
 footer{
-    background: url("img/copyright.jpg") repeat-x;
+    background: url("../img/copyright.jpg") repeat-x;
     height: 70px;
 }
 
@@ -450,4 +450,17 @@ footer{
     font-weight: normal;
     text-decoration: inherit;
     font-size: 15px;
+}
+
+#back-top{
+    background-color: #000;
+    background-image: url('../img/top.png');
+    right: 50%;
+    bottom: 0px;
+    height: 48px;
+    width: 52px;
+    position: fixed;
+    margin-right: -26px;
+    
+    display: none;
 }

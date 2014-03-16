@@ -1,3 +1,4 @@
+<%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +11,7 @@
         <!-- Mots-clés de la page -->
         <meta name="keywords" content="Covoiturage, HEI" />
 
-        <link rel="stylesheet" media="screen" type="text/css" title="Design" href="design.css" />
+        <link rel="stylesheet" media="screen" type="text/css" title="Design" href="css/design.css" />
         <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     </head>	 
 
@@ -3120,7 +3121,7 @@
             </div>
         </section>
         <footer>
-            <div class="width1000" style="padding-top: 25px;">
+            <div class="width1000" style="padding-top: 22px;">
                 <div style="float: left;">
                     <a href=""><img src="img/social/color/rss.png" alt="" /></a>
                     <a href=""><img src="img/social/color/twitter.png" alt="" /></a>
@@ -3169,8 +3170,21 @@
 
                     $('#global').css({'position': 'fixed', 'left': '0px', 'top': '0px', 'background-color': '', 'height': '', 'width': '100%', 'z-index': '100', 'opacity': ''});
                 });
+
+                $(window).scroll(function() {
+                    posScroll = $(document).scrollTop();
+
+                    280 <= posScroll ? $("#back-top").fadeIn() : $("#back-top").fadeOut();
+                });
+
+                $("#back-top").click(function(b) {
+                    b.preventDefault();
+                    $("html, body").animate({scrollTop: 0}, "slow");
+                    return false;
+                });
             });
         </script>
+        <div id="back-top" style="border: 1px solid #121212;"><a href="#top"><img src="img/top.png" alt=""></a></div>
         <div id="global"></div>
     </body> 
 </html>
