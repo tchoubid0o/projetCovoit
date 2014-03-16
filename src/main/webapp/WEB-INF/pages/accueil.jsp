@@ -1,6 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,11 +10,37 @@
         <!-- Mots-clés de la page -->
         <meta name="keywords" content="Covoiturage, HEI" />
 
-        <link rel="stylesheet" media="screen" type="text/css" title="Design" href="css/design.css" />
+        <link rel="stylesheet" media="screen" type="text/css" title="Design" href="design.css" />
         <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     </head>	 
 
     <body>
+        <div id="logintop">
+
+            <div style="background-color: #353b44; height: 50px;text-align: center;line-height: 50px;color: white;font-size: 1.1em;font-family: calibri;">
+                Connexion
+            </div>
+            <div class="loginh" style="text-align: left; padding: 25px;">
+                <div style="color: #8c9197; font-size: 18px; line-height: 15px;margin-bottom: 5px;">Connectez-vous rapidement pour accéder à toutes les fonctionnalitées du site!</div>
+                <form action="connexion" method="post">
+                    <div>
+                        <input class="iconForm" type="text" name="pseudonyme" id="pseudonyme" style="border-bottom: 1px solid #dfdede;background-position: 5px -10px !important;" placeholder="Pseudonyme" />
+                    </div>
+                    <div>
+                        <input class="iconForm" type="password" name="password" id="password" style="background-position: 5px -60px !important;" placeholder="Password..." />
+                    </div>
+                    <input type="hidden" name="connexion" value="1" />
+                    <div style="margin: auto;">
+                        <input class="submit" type="submit" value="Login !"	style="margin-top: 15px;border: none;width: 100%;cursor: pointer; color: #fff; border-radius: 4px; padding-top: 10px; background-color: #ea3c3d; text-transform: none; text-decoration: none; font-weight: 600; -moz-transition: background-color 0.35s linear; -webkit-transition: background-color 0.35s linear; transition: background-color 0.35s linear;" id="submit2" />
+                    </div>
+                    <div style="color: #ea3c3d;font-size: 18px; line-height: 15px; margin-top: 15px; text-align: center;">
+                        <i class="helpIcon"></i>
+                        Mot de passe oublié?
+                    </div>
+                </form>
+            </div>
+
+        </div>
         <header>
             <div id="nav">
                 <div id="leftNav">
@@ -30,7 +53,7 @@
                         <li><a href="">Trouver un trajet</a></li>
                         <li><a href="">Publier un trajet</a></li>
                         <li><a href="">Contact</a></li>
-                        <li class="borderli"><a href="" class="white"><img src="img/user.png" alt="" />&nbsp;Connexion</a></li>
+                        <li class="borderli"><span id="loginname" class="white" style="cursor: pointer;"><img src="img/user.png" alt="" />&nbsp;Connexion</span></li>
                     </ul>
                 </div>
                 <div style="clear: both;"></div>
@@ -3097,7 +3120,7 @@
             </div>
         </section>
         <footer>
-            <div class="width1000" style="padding-top: 20px;">
+            <div class="width1000" style="padding-top: 25px;">
                 <div style="float: left;">
                     <a href=""><img src="img/social/color/rss.png" alt="" /></a>
                     <a href=""><img src="img/social/color/twitter.png" alt="" /></a>
@@ -3111,22 +3134,43 @@
             </div>
         </footer>
         <script>
-            function getCountryFrom() {
-                var myselect = $("#countryFrom").val();
-                $("#label_country_from").html('<img src="img/flags/' + myselect + '.png" alt="">&nbsp;<img class="arrowdownChoose" src="img/arrowdown.png" alt="">');
-            }
-            function getCountryTo() {
-                var myselect = $("#countryTo").val();
-                $("#label_country_to").html('<img src="img/flags/' + myselect + '.png" alt="">&nbsp;<img class="arrowdownChoose" src="img/arrowdown.png" alt="">');
-            }
-            function getTownFrom() {
-                var myselect = $("#townFrom").find('option:selected').text();
-                $("#label_town_from").html(myselect + '&nbsp;<img class="arrowdownChoose" src="img/arrowdown.png" alt="">');
-            }
-            function getTownTo() {
-                var myselect = $("#townTo").find('option:selected').text();
-                $("#label_town_to").html(myselect + '&nbsp;<img class="arrowdownChoose" src="img/arrowdown.png" alt="">');
-            }
+            $(document).ready(function() {
+                function getCountryFrom() {
+                    var myselect = $("#countryFrom").val();
+                    $("#label_country_from").html('<img src="img/flags/' + myselect + '.png" alt="">&nbsp;<img class="arrowdownChoose" src="img/arrowdown.png" alt="">');
+                }
+                function getCountryTo() {
+                    var myselect = $("#countryTo").val();
+                    $("#label_country_to").html('<img src="img/flags/' + myselect + '.png" alt="">&nbsp;<img class="arrowdownChoose" src="img/arrowdown.png" alt="">');
+                }
+                function getTownFrom() {
+                    var myselect = $("#townFrom").find('option:selected').text();
+                    $("#label_town_from").html(myselect + '&nbsp;<img class="arrowdownChoose" src="img/arrowdown.png" alt="">');
+                }
+                function getTownTo() {
+                    var myselect = $("#townTo").find('option:selected').text();
+                    $("#label_town_to").html(myselect + '&nbsp;<img class="arrowdownChoose" src="img/arrowdown.png" alt="">');
+                }
+                $("#loginname").click(function() {
+                    if ($("#logintop").is(":hidden")) { /* Si le menu d'inscription est cachï¿½ alors lorsque l'on clique... */
+
+                        $("#logintop").slideDown("slow");  /* Permet de descendre le menu inscription */
+                        $('#global').css({'position': 'fixed', 'left': '0px', 'top': '0px', 'background-color': 'white', 'height': '100%', 'width': '100%', 'z-index': '100', 'opacity': '0.7'});
+                    }
+                    else {
+                        $("#logintop").slideUp("slow");
+                        $('#global').css({'position': 'fixed', 'left': '0px', 'top': '0px', 'background-color': '', 'height': '', 'width': '100%', 'z-index': '100', 'opacity': ''});
+                    }
+                });
+
+                $("#global").click(function() {	/* Si l'on clique hors des menus alors, on remonte tous et on enlï¿½ve l'opacitï¿½ du fond */
+
+                    $("#logintop").slideUp("slow");
+
+                    $('#global').css({'position': 'fixed', 'left': '0px', 'top': '0px', 'background-color': '', 'height': '', 'width': '100%', 'z-index': '100', 'opacity': ''});
+                });
+            });
         </script>
+        <div id="global"></div>
     </body> 
 </html>

@@ -5,20 +5,30 @@ body {
 
 @font-face {
     font-family: daunpenh;
-    src: url('../fonts/daunpenh.ttf'),
-		url('../fonts/daunpenh.eot') format("opentype"); /* IE */
+    src: url('fonts/daunpenh.ttf'),
+        url('fonts/daunpenh.eot') format("opentype"); /* IE */
 }
 
 @font-face {
     font-family: gill;
-    src: url('../fonts/GLSNECB.TTF'),
-		url('../fonts/GLSNECB.eot') format("opentype"); /* IE */
+    src: url('fonts/GLSNECB.TTF'),
+        url('fonts/GLSNECB.eot') format("opentype"); /* IE */
 }
 
 @font-face {
     font-family: gillcondensed;
-    src: url('../fonts/GILC____.TTF'),
-		url('../fonts/GILC____.eot') format("opentype"); /* IE */
+    src: url('fonts/GILC____.TTF'),
+        url('fonts/GILC____.eot') format("opentype"); /* IE */
+}
+
+/** fonts used for the icons **/ 
+@font-face {
+    font-family: 'fontello';
+    src: url('fonts/fontello.eot');
+    src: url('fonts/fontello.woff') format('woff'),
+        url('fonts/fontello.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
@@ -79,7 +89,7 @@ a{
 }
 
 header{
-    background: #030303 url("../img/ban.jpg") 50% 0 no-repeat;;
+    background: #030303 url("img/ban.jpg") 50% 0 no-repeat;;
     height: 574px;
 }
 
@@ -161,7 +171,7 @@ header .width1000 #slideDesc{
 }
 
 .wrapper2{
-    background: url('../img/howtofont.jpg') repeat-x;
+    background: url('img/howtofont.jpg') repeat-x;
     height: 270px;
 }
 
@@ -178,7 +188,7 @@ header .width1000 #slideDesc{
 }
 
 .wrapper5{
-    background: url('../img/getintouch.jpg') repeat-x;
+    background: url('img/getintouch.jpg') repeat-x;
     height: 238px;
     margin-top: 25px;
 }
@@ -368,6 +378,76 @@ header .width1000 #slideDesc{
 }
 
 footer{
-    background: url("../img/copyright.jpg") repeat-x;
+    background: url("img/copyright.jpg") repeat-x;
     height: 70px;
+}
+
+
+#logintop {
+    position: fixed;
+    left: 50%;
+    top: 15%;
+    border-radius: 5px;
+    background-color: white;
+    margin-left: -163px;
+    display: none;
+    z-index: 999;
+    width: 325px;
+    border: 1px solid #353b44;
+    /* margin: auto; */
+}
+
+.loginh .iconForm{
+    background: #f1f1f1 url(http://www.red-team-design.com/wp-content/uploads/2011/09/login-sprite.png) no-repeat;
+    padding-left: 30px;
+    /* padding: 5px 0px 0px 30px; */
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    width: 245px;
+}
+
+.loginh ::-webkit-input-placeholder { /* WebKit browsers */
+    color: #c6c6c6;
+}
+.loginh:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #c6c6c6;
+}
+.loginh::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #c6c6c6;
+}
+.loginh:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #c6c6c6;
+}
+
+.loginh input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #f1f1f1 inset !important;
+}
+
+.loginh label{
+    position: relative;
+}
+
+[data-icon]:after {
+    content: attr(data-icon);
+    font-family: 'fontello';
+    color: rgb(198, 198, 198);
+    position: absolute;
+    left: 10px;
+    top: 35px;
+    font-size: 15px;
+}
+
+.helpIcon:before{
+    content: '\68';
+    font-family: 'fontello';
+    color: rgb(234, 60, 61);
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    font-size: 15px;
 }
