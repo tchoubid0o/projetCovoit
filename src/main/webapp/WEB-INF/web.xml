@@ -4,34 +4,20 @@
     <servlet-name>Accueil</servlet-name>
     <servlet-class>omw.controllers.AccueilServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Connexion</servlet-name>
+    <servlet-class>omw.controllers.ConnexionServlet</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
     <url-pattern>/accueil</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>Champions</servlet-name>
-    <servlet-class>omw.controllers.ChampionsServlet</servlet-class>
-  </servlet>
   <servlet-mapping>
-    <servlet-name>Champions</servlet-name>
-    <url-pattern>/champions</url-pattern>
+    <servlet-name>Connexion</servlet-name>
+    <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>Skins</servlet-name>
-    <servlet-class>omw.controllers.SkinsServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Skins</servlet-name>
-    <url-pattern>/skins</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>AddChampion</servlet-name>
-    <servlet-class>omw.controllers.AddChampionServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddChampion</servlet-name>
-    <url-pattern>/addChampion</url-pattern>
-  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>accueil</welcome-file>
   </welcome-file-list>

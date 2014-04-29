@@ -15,9 +15,9 @@ public class AnnonceProposition {
 	private int nbPlace;
 	private String login;
 	private ArrayList<String> listeEtapes;
-	
+
 	public AnnonceProposition(){
-		
+
 	}
 
 	public int getIdAnnonceProposition() {
@@ -99,11 +99,11 @@ public class AnnonceProposition {
 	public void setListeEtapes(ArrayList<String> listeEtapes) {
 		this.listeEtapes = listeEtapes;
 	}
-	
+
 	public void addListeEtapes(String etape){
 		if(etape != null && etape.equals("")){
 			listeEtapes.add(etape);
 		}
 	}
-	
+
 }
