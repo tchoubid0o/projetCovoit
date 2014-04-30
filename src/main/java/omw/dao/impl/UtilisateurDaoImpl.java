@@ -52,6 +52,42 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 		return liste;
 	}
+	
+	public Utilisateur getUser(String login) {
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM utilisateur WHERE login = ?");
+			stmt.setString(1, login);
+			ResultSet results = stmt.executeQuery();
+			while (results.next()) {
+				Utilisateur user = new Utilisateur(
+						results.getString("login"),
+						results.getString("email"),
+						results.getString("password"),
+						results.getString("ip"),
+						results.getString("nom"),
+						results.getString("prenom"),
+						results.getString("telephone"),
+						results.getDate("registered"));
+
+				results.close();
+				stmt.close();
+				
+				connection.close();
+
+				//On retourne qu'une seule image
+				return user;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		//Si aucun résultat
+		return null;
+	}
 
 	public Integer countUsersMailUsed(String user_mail) {
 		try {

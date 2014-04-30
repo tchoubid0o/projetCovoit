@@ -27,6 +27,10 @@ public class UtilisateurManager {
 		return usersDao.listerUsers();
 	}
 	
+	public Utilisateur getUser(String login){
+		return usersDao.getUser(login);
+	}
+	
 	public Integer countUsersMailUsed(String user_mail){
 		return usersDao.countUsersMailUsed(user_mail);
 	}

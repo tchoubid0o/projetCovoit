@@ -9,6 +9,8 @@ public interface UtilisateurDao {
 
 	public List<Utilisateur> listerUsers();
 	
+	public Utilisateur getUser(String login); 
+	
 	public Integer countUsersMailUsed(String user_mail);
 	
 	public Integer countUsersPseudoUsed(String user_pseudo);
