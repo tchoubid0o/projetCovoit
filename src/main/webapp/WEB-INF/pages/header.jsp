@@ -54,6 +54,7 @@
                         <li><a href="">Trouver un trajet</a></li>
                         <li><a href="">Publier un trajet</a></li>
                         <li><a href="">Contact</a></li>
+                        <li><a href="inscription">Inscription</a></li>
                         <li class="borderli"><span id="loginname" class="white" style="cursor: pointer;"><img src="img/user.png" alt="" />&nbsp;Connexion</span></li>
                     </ul>
                 </div>
