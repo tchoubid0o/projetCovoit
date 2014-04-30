@@ -60,7 +60,11 @@
 					<li><a href="accueil" class="active">Accueil</a></li>
 					<li><a href="">A propos</a></li>
 					<li><a href="">Trouver un trajet</a></li>
+					<%
+						if (request.getSession().getAttribute("login") != null) {
+					%>
 					<li><a href="">Publier un trajet</a></li>
+					<%} %>
 					<li><a href="">Contact</a></li>
 					<%
 						if (request.getSession().getAttribute("login") == null) {
@@ -70,6 +74,7 @@
 						style="cursor: pointer;"><img src="img/user.png" alt="" />&nbsp;Connexion</span></li>
 					<%}else{ %>
 					<li><a href="profil">Profil</a></li>
+					<li class="borderli"><a href="deconnexion" class="white"><img src="img/user.png" alt="" />&nbsp;Deconnexion</a></li>
 					<%} %>
 				</ul>
 			</div>

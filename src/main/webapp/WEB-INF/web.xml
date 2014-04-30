@@ -9,6 +9,10 @@
     <servlet-class>omw.controllers.ConnexionServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>Deconnexion</servlet-name>
+    <servlet-class>omw.controllers.DeconnexionServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>Inscription</servlet-name>
     <servlet-class>omw.controllers.InscriptionServlet</servlet-class>
   </servlet>
@@ -24,6 +28,10 @@
   <servlet-mapping>
     <servlet-name>Connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/deconnexion</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
