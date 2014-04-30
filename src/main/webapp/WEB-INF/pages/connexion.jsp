@@ -4,36 +4,30 @@
 
 <jsp:include page="header.jsp" />
 
-<section class="wrapper1">
+<section class="wrapper3">
 	<div class="width1000">
 		<div style="text-align: center;">
-			<h2 class="h2_right_content">Connexion</h2>
+			<span class="titleAbout">Connexion</span>
 			<form action="connexion" method="post">
-				<fieldset>
-					<label for="user_pseudo">Pseudo :</label><br />
+					<label for="login">Pseudo :</label><br />
 					<div>
-						<input type="text" value="<c:out value="${param.user_pseudo}"/>"
-							name="user_pseudo" id="user_pseudo" placeholder="Pseudonyme" />
+						<input type="text" value="<c:out value="${param.login}"/>"
+							name="login" id="login" style="line-height: 40px;height: 30px;" placeholder="Identifiant" />
 					</div>
-					<br /> <span class="erreur">${erreurs['user_pseudo']}</span> <label
-						for="user_password">Mot de passe :</label><br />
+					<span class="erreur">${erreurs['login']}</span> <label
+						for="password">Mot de passe :</label><br />
 					<div>
-						<input type="password" name="user_password" id="user_password"
-							placeholder="Password..." />
+						<input type="password" name="password" id="password" style="line-height: 40px;height: 30px;" placeholder="Mot de passe" />
 					</div>
-					<br />
-					<br /> <span class="erreur">${erreurs['user_password']}</span> <input
+					 <span class="erreur">${erreurs['password']}</span> <input
 						type="hidden" name="connexion" value="1" />
 					<div style="margin: auto;">
-						<input class="submit" type="submit" value="Login !" id="submit" />
+						<input class="submit" style="background-color: #ea3c3d;border: 1px solid white;color: white;padding-left: 15px;padding-right: 15px;height: 35px;line-height: 40px;" type="submit" value="Login !" id="submit" />
 					</div>
 					<p style="${empty erreurs ? 'color: green;' : 'color: red;'}">${resultat}</p>
-				</fieldset>
 			</form>
 		</div>
 	</div>
-	<div style="clear: both"></div>
 </section>
 
-<!-- Footer -->
 <jsp:include page="footer.jsp" />

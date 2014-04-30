@@ -1,15 +1,12 @@
 package omw.controllers;
 
-import hei.devweb.metier.ImagesManager;
-import hei.devweb.metier.UsersManager;
-import hei.devweb.model.Images;
-import hei.devweb.model.Users;
+import omw.metier.UtilisateurManager;
+import omw.model.Utilisateur;
 
 import java.io.IOException;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -24,10 +21,6 @@ public class InscriptionServlet extends GlobalInformationsServlet{
 	@Override
 	public void getRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
-		//Nécessaire à l'affichage des dernières images publiées
-		List<Images> images = ImagesManager.getInstance().listerImages();
-		request.setAttribute("images", images);
-		// Fin dernière images publiées
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/inscription.jsp");
 		view.forward(request, response);
@@ -36,47 +29,47 @@ public class InscriptionServlet extends GlobalInformationsServlet{
 	@Override
 	public void postRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//Nécessaire à l'affichage des dernières images publiées
-		List<Images> images = ImagesManager.getInstance().listerImages();
-		request.setAttribute("images", images);
-		// Fin dernière images publiées
 		
 		Map<String, String> erreursMessage = new HashMap<String, String>();
 		
-		String user_pseudo = request.getParameter("user_pseudo");
-		String user_mail = request.getParameter("user_mail");
-		String user_password = request.getParameter("user_password");
-		String user_password_verif = request.getParameter("user_password_verif");
+		String login = request.getParameter("login");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String password_verif = request.getParameter("password_verif");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String telephone = request.getParameter("telephone");
 		String resultat = "";
 
 		//Validation pseudo
         try {
-            validationPseudo(user_pseudo);
+            validationPseudo(login);
         } catch ( Exception e ) {
-            erreursMessage.put("user_pseudo", e.getMessage() );
+            erreursMessage.put("login", e.getMessage() );
         }
         //Validation mail
         try {
-            validationEmail(user_mail);
+            validationEmail(email);
         } catch ( Exception e ) {
-            erreursMessage.put("user_mail", e.getMessage() );
+            erreursMessage.put("email", e.getMessage() );
         }
 		//Validation password
 		try {
-			validationMotsDePasse(user_password,user_password_verif);
+			validationMotsDePasse(password,password_verif);
 		} catch ( Exception e ) {
-			erreursMessage.put("user_password", e.getMessage() );
+			erreursMessage.put("password", e.getMessage() );
 		}
 
 		if ( erreursMessage.isEmpty() ) {
 			//On crypte le password
 			try {
-				String password = UtilisateurManager.getInstance().HashMyPassword(user_password);
-				UtilisateurManager.getInstance().ajouterUser(new Users(null, user_pseudo, user_mail, password, null, null));
-				request.getSession().setAttribute("idUser", UtilisateurManager.getInstance().getTheIdUser(user_pseudo));
-				request.getSession().setAttribute("user_pseudo",user_pseudo);
-				request.getSession().setAttribute("user_mail",user_mail);
-				resultat = "<div class='erreur_message' style='color: green !important;'>Succès de l'inscription.</div>";
+				String passwd = UtilisateurManager.getInstance().HashMyPassword(password);
+				UtilisateurManager.getInstance().ajouterUser(new Utilisateur(login, email, passwd, null, nom, prenom, telephone, null));
+				request.getSession().setAttribute("login",login);
+				request.getSession().setAttribute("email",email);
+				request.getSession().setAttribute("nom",nom);
+				request.getSession().setAttribute("prenom",prenom);
+				resultat = "<div class='erreur_message' style='color: green !important;'><span class='titleAbout'>Inscription</span>Succès de l'inscription.<script>$('#wrapperInsc').slideUp();</script></div>";
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

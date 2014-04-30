@@ -19,7 +19,7 @@ public class GlobalInformationsManager {
 		}
 		return instance;
 	}
-	
+	/*
 	public Integer countImagesDataBase(){
 		return globalInformationsDao.countImagesDataBase();
 	}
@@ -34,5 +34,5 @@ public class GlobalInformationsManager {
 
 	public ArrayList<String> returnAllCategorie() {
 		return globalInformationsDao.returnAllCategorie();
-	}
+	}*/
 }

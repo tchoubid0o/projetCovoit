@@ -12,7 +12,7 @@
         <meta name="keywords" content="Covoiturage, HEI" />
 
         <link rel="stylesheet" media="screen" type="text/css" title="Design" href="css/design.css" />
-        <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     </head>	 
 
     <body>
@@ -25,10 +25,10 @@
                 <div style="color: #8c9197; font-size: 18px; line-height: 15px;margin-bottom: 5px;">Connectez-vous rapidement pour accéder à toutes les fonctionnalitées du site!</div>
                 <form action="connexion" method="post">
                     <div>
-                        <input class="iconForm" type="text" name="pseudonyme" id="pseudonyme" style="border-bottom: 1px solid #dfdede;background-position: 5px -10px !important;" placeholder="Pseudonyme" />
+                        <input class="iconForm" type="text" name="login" id="login" style="border-bottom: 1px solid #dfdede;background-position: 5px -10px !important;" placeholder="Identifiant" />
                     </div>
                     <div>
-                        <input class="iconForm" type="password" name="password" id="password" style="background-position: 5px -60px !important;" placeholder="Password..." />
+                        <input class="iconForm" type="password" name="password" id="password" style="background-position: 5px -60px !important;" placeholder="Mot de passe" />
                     </div>
                     <input type="hidden" name="connexion" value="1" />
                     <div style="margin: auto;">
@@ -49,7 +49,7 @@
                 </div>
                 <div id="rightNav">
                     <ul>
-                        <li><a href="" class="active">Accueil</a></li>
+                        <li><a href="accueil" class="active">Accueil</a></li>
                         <li><a href="">A propos</a></li>
                         <li><a href="">Trouver un trajet</a></li>
                         <li><a href="">Publier un trajet</a></li>

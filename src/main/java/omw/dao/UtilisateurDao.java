@@ -18,8 +18,8 @@ public interface UtilisateurDao {
 	public String HashMyPassword(String user_password) throws Exception;
 	
 	public String GetPasswordConnexion(String user_pseudo);
-
+	/*
 	public Integer getTheIdUser(String user_pseudo);
 
-	public String getUserPseudo(Integer idUser);
+	public String getUserPseudo(Integer idUser);*/
 }

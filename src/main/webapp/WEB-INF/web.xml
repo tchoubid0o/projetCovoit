@@ -8,6 +8,10 @@
     <servlet-name>Connexion</servlet-name>
     <servlet-class>omw.controllers.ConnexionServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Inscription</servlet-name>
+    <servlet-class>omw.controllers.InscriptionServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
@@ -16,6 +20,10 @@
   <servlet-mapping>
     <servlet-name>Connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Inscription</servlet-name>
+    <url-pattern>/inscription</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

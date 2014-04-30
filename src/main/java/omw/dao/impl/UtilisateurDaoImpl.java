@@ -118,7 +118,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			
 			String ip = InetAddress.getLocalHost().getHostAddress();
 
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `users`(`login`,`email`,`password`, `ip`, `nom`, `prenom`, `telephone`, `registered`) VALUES(?,?,?,?,?,?,?, NOW())");
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `utilisateur`(`login`,`email`,`password`, `ip`, `nom`, `prenom`, `telephone`, `registered`) VALUES(?,?,?,?,?,?,?, NOW())");
 			stmt.setString(1, user.getLogin());
 			stmt.setString(2, user.getEmail());
 			stmt.setString(3, user.getPassword());

@@ -46,12 +46,12 @@ public class UtilisateurManager {
 	public String GetPasswordConnexion(String user_pseudo){
 		return usersDao.GetPasswordConnexion(user_pseudo);
 	}
-	
+	/*
 	public Integer getTheIdUser(String user_pseudo){
 		return usersDao.getTheIdUser(user_pseudo);
 	}
 	
 	public String getUserPseudo(Integer idUser){
 		return usersDao.getUserPseudo(idUser);
-	}
+	}*/
 }
