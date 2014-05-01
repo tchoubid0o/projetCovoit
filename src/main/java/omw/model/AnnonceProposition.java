@@ -9,101 +9,98 @@ public class AnnonceProposition {
 	private boolean estReponseARecherche;
 	private String villeDepart;
 	private String villeArrivee;
-	private Date dateEtHeureTrajet;
+	private String dateEtHeureTrajet;
+	private String heure;
+	private String minute;
 	private String commentaire;
 	private int prix;
 	private int nbPlace;
 	private String login;
-	private ArrayList<String> listeEtapes;
-
-	public AnnonceProposition(){
-
+	
+	public AnnonceProposition(int idAnnonceProposition,
+			boolean estReponseARecherche, String villeDepart,
+			String villeArrivee, String dateEtHeureTrajet, String heure,
+			String minute, String commentaire, int prix, int nbPlace,
+			String login) {
+		super();
+		this.idAnnonceProposition = idAnnonceProposition;
+		this.estReponseARecherche = estReponseARecherche;
+		this.villeDepart = villeDepart;
+		this.villeArrivee = villeArrivee;
+		this.dateEtHeureTrajet = dateEtHeureTrajet;
+		this.heure = heure;
+		this.minute = minute;
+		this.commentaire = commentaire;
+		this.prix = prix;
+		this.nbPlace = nbPlace;
+		this.login = login;
 	}
-
 	public int getIdAnnonceProposition() {
 		return idAnnonceProposition;
 	}
-
 	public void setIdAnnonceProposition(int idAnnonceProposition) {
 		this.idAnnonceProposition = idAnnonceProposition;
 	}
-
 	public boolean isEstReponseARecherche() {
 		return estReponseARecherche;
 	}
-
 	public void setEstReponseARecherche(boolean estReponseARecherche) {
 		this.estReponseARecherche = estReponseARecherche;
 	}
-
 	public String getVilleDepart() {
 		return villeDepart;
 	}
-
 	public void setVilleDepart(String villeDepart) {
 		this.villeDepart = villeDepart;
 	}
-
 	public String getVilleArrivee() {
 		return villeArrivee;
 	}
-
 	public void setVilleArrivee(String villeArrivee) {
 		this.villeArrivee = villeArrivee;
 	}
-
-	public Date getDateEtHeureTrajet() {
+	public String getDateEtHeureTrajet() {
 		return dateEtHeureTrajet;
 	}
-
-	public void setDateEtHeureTrajet(Date dateEtHeureTrajet) {
+	public void setDateEtHeureTrajet(String dateEtHeureTrajet) {
 		this.dateEtHeureTrajet = dateEtHeureTrajet;
 	}
-
+	public String getHeure() {
+		return heure;
+	}
+	public void setHeure(String heure) {
+		this.heure = heure;
+	}
+	public String getMinute() {
+		return minute;
+	}
+	public void setMinute(String minute) {
+		this.minute = minute;
+	}
 	public String getCommentaire() {
 		return commentaire;
 	}
-
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
-
 	public int getPrix() {
 		return prix;
 	}
-
 	public void setPrix(int prix) {
 		this.prix = prix;
 	}
-
 	public int getNbPlace() {
 		return nbPlace;
 	}
-
 	public void setNbPlace(int nbPlace) {
 		this.nbPlace = nbPlace;
 	}
-
 	public String getLogin() {
 		return login;
 	}
-
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
-	public ArrayList<String> getListeEtapes() {
-		return listeEtapes;
-	}
-
-	public void setListeEtapes(ArrayList<String> listeEtapes) {
-		this.listeEtapes = listeEtapes;
-	}
-
-	public void addListeEtapes(String etape){
-		if(etape != null && etape.equals("")){
-			listeEtapes.add(etape);
-		}
-	}
-
+	
 }

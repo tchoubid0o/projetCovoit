@@ -28,6 +28,10 @@
     <servlet-name>Rechercher</servlet-name>
     <servlet-class>omw.controllers.RechercherServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Trouver</servlet-name>
+    <servlet-class>omw.controllers.TrouverServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
@@ -56,6 +60,10 @@
   <servlet-mapping>
     <servlet-name>Rechercher</servlet-name>
     <url-pattern>/rechercher</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Trouver</servlet-name>
+    <url-pattern>/find</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

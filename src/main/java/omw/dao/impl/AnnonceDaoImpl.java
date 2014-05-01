@@ -7,12 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.hamcrest.core.SubstringMatcher;
 
 import omw.dao.AnnonceDao;
 import omw.model.AnnonceProposition;
 import omw.model.AnnonceRecherche;
 
 public class AnnonceDaoImpl implements AnnonceDao{
+	
+	
 	
 	public void insertProposition(Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
 		/*
@@ -89,6 +94,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		}
 	}
 	
+	/*
 	public ArrayList<AnnonceProposition> listerAnnonceProposition(){
 		
 		ArrayList<AnnonceProposition> listAnnonceProposition = new ArrayList<AnnonceProposition>();
@@ -111,6 +117,43 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		}
 		
 		return listAnnonceProposition;
+	}
+	*/
+	
+	public List<AnnonceProposition> listerAnnonceProposition() {
+		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			Statement stmt = connection.createStatement();
+			ResultSet results = stmt.executeQuery("SELECT * FROM annonceproposition ORDER BY idAnnonceProposition ASC");
+
+			while (results.next()) {
+				AnnonceProposition proposition = new AnnonceProposition(
+						results.getInt("idAnnonceProposition"),
+						results.getBoolean("estReponseARecherche"),
+						results.getString("villeDepart"),
+						results.getString("villeArrivee"),
+						(results.getString("dateEtHeureTrajet")).substring(0,10),
+						(results.getString("dateEtHeureTrajet")).substring(10,12),
+						(results.getString("dateEtHeureTrajet")).substring(12),
+						results.getString("commentaire"),
+						results.getInt("prix"),
+						results.getInt("nbPlace"),
+						results.getString("login"));
+				liste.add(proposition);
+			}
+			results.close();
+			stmt.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+		return liste;
 	}
 	
 	public void proposerAnnonce(String login, AnnonceProposition annonceProposition){
