@@ -46,32 +46,32 @@
 				<label>Heure de départ :</label><br />
 				<div>
 					<select id="heure" name="heure">
-							<option value="00"/></option>
-							<option value="01"/></option>
-							<option value="02"/></option>
-							<option value="03"/></option>
-							<option value="04"/></option>
-							<option value="05"/></option>
-							<option value="06"/></option>
-							<option value="07"/></option>
-							<option value="08"/></option>
-							<option value="09"/></option>
+							<option value="00">00</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
 						<c:forEach var="j" begin="10" end="23">
 							<option value="<c:out value="${j}"/>"><c:out value="${j}"/></option>
 						</c:forEach>
 					</select>
 					<span> h</span>
 					<select id="minute" name="minute">
-							<option value="00"/></option>
-							<option value="01"/></option>
-							<option value="02"/></option>
-							<option value="03"/></option>
-							<option value="04"/></option>
-							<option value="05"/></option>
-							<option value="06"/></option>
-							<option value="07"/></option>
-							<option value="08"/></option>
-							<option value="09"/></option>
+							<option value="00">00</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
 						<c:forEach var="i" begin="10" end="59">
 							<option value="<c:out value="${i}"/>"><c:out value="${i}"/></option>
 						</c:forEach>

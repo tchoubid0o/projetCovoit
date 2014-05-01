@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import omw.dao.GlobalInformationsDao;
 
 public class GlobalInformationsDaoImpl implements GlobalInformationsDao {
+	
 	/*
 	public Integer countImagesDataBase(){
 		Integer nbImages = 0;

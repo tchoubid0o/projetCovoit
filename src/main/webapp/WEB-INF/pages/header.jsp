@@ -83,7 +83,7 @@
 					<%
 						}
 					%>
-					<li><a href="find">Trouver un trajet</a></li>
+					<li><a href="trouver">Trouver un trajet</a></li>
 					<%
 						if (request.getSession().getAttribute("login") != null) {
 					%>

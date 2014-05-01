@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import omw.metier.AnnonceManager;
 
 
-public class RechercherServlet extends HttpServlet {
+public class RechercherServlet extends GlobalInformationsServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void getRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/rechercher.jsp");
 		view.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void postRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String villeDepart = request.getParameter("villeDepart");
 		String villeArrivee = request.getParameter("villeArrivee");

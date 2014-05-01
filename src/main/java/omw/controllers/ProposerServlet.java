@@ -11,17 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import omw.metier.AnnonceManager;
 
+public class ProposerServlet extends GlobalInformationsServlet{
 
-public class ProposerServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4927724527514530512L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	public void getRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {	
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/proposer.jsp");
 		view.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	public void postRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		
 		String villeDepart = request.getParameter("villeDepart");
 		String villeArrivee = request.getParameter("villeArrivee");
@@ -41,6 +45,7 @@ public class ProposerServlet extends HttpServlet {
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/proposer.jsp");
 		view.forward(request, response);
-	}
 
+	}
+	
 }

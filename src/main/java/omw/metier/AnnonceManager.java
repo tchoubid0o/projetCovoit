@@ -5,6 +5,7 @@ import omw.dao.UtilisateurDao;
 import omw.dao.impl.AnnonceDaoImpl;
 import omw.dao.impl.UtilisateurDaoImpl;
 import omw.model.AnnonceProposition;
+import omw.model.AnnonceRecherche;
 import omw.model.Utilisateur;
 
 import java.net.UnknownHostException;
@@ -28,6 +29,10 @@ public class AnnonceManager {
 	
 	public List<AnnonceProposition> listerAnnonceProposition(){
 		return annonceDao.listerAnnonceProposition();
+	}
+	
+	public List<AnnonceRecherche> listerAnnonceRecherche(){
+		return annonceDao.listerAnnonceRecherche();
 	}
 
 	public void insertProposition(Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){

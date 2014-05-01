@@ -14,6 +14,7 @@ import org.hamcrest.core.SubstringMatcher;
 import omw.dao.AnnonceDao;
 import omw.model.AnnonceProposition;
 import omw.model.AnnonceRecherche;
+import omw.model.Ville;
 
 public class AnnonceDaoImpl implements AnnonceDao{
 	
@@ -55,7 +56,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			    lastId = rs.getInt(1);
 			}
 			
-			for(int i=1;i<=etapes.length;i++){
+			for(int i=0;i<etapes.length;i++){
 				PreparedStatement stmt2 = connection.prepareStatement("INSERT INTO `etapes`(`idAnnonceProposition`, `nomVille`, `ordre`) VALUES(?,?,?)");
 				stmt2.setInt(1, lastId);
 				stmt2.setString(2, etapes[i]);
@@ -133,8 +134,8 @@ public class AnnonceDaoImpl implements AnnonceDao{
 				AnnonceProposition proposition = new AnnonceProposition(
 						results.getInt("idAnnonceProposition"),
 						results.getBoolean("estReponseARecherche"),
-						results.getString("villeDepart"),
-						results.getString("villeArrivee"),
+						ucfirst(results.getString("villeDepart")),
+						ucfirst(results.getString("villeArrivee")),
 						(results.getString("dateEtHeureTrajet")).substring(0,10),
 						(results.getString("dateEtHeureTrajet")).substring(10,12),
 						(results.getString("dateEtHeureTrajet")).substring(12),
@@ -156,12 +157,49 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		return liste;
 	}
 	
+	public List<AnnonceRecherche> listerAnnonceRecherche() {
+		List<AnnonceRecherche> liste = new ArrayList<AnnonceRecherche>();
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			Statement stmt = connection.createStatement();
+			ResultSet results = stmt.executeQuery("SELECT * FROM annoncerecherche ORDER BY idAnnonceRecherche ASC");
+
+			while (results.next()) {
+				AnnonceRecherche proposition = new AnnonceRecherche(
+						results.getInt("idAnnonceRecherche"),
+						ucfirst(results.getString("villeDepartRecherche")),
+						ucfirst(results.getString("villeArriveeRecherche")),
+						(results.getString("dateEtHeureRecherche")).substring(0,10),
+						(results.getString("dateEtHeureRecherche")).substring(10,12),
+						(results.getString("dateEtHeureRecherche")).substring(12),
+						results.getString("commentaireRecherche"),
+						results.getString("login"));
+				liste.add(proposition);
+			}
+			results.close();
+			stmt.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+		return liste;
+	}
+	
 	public void proposerAnnonce(String login, AnnonceProposition annonceProposition){
 		
 	}
 	
 	public void rechercherAnnonce(String login, AnnonceRecherche annonceRecherche){
 		
+	}
+	
+	public static String ucfirst(String chaine){
+		return chaine.substring(0, 1).toUpperCase()+ chaine.substring(1).toLowerCase();
 	}
 
 }

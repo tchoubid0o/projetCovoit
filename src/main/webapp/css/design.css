@@ -89,6 +89,10 @@ h1,h2,h3,h4{
     color: #3f3f3f;
 }
 
+.center{
+	text-align: center;
+}
+
 .grey{
     color: #7b7b7b;
     font-family: "gillcondensed";

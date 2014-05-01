@@ -10,26 +10,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import omw.dao.impl.AnnonceDaoImpl;
 import omw.metier.AnnonceManager;
 import omw.model.AnnonceProposition;
+import omw.model.AnnonceRecherche;
 
 
-public class TrouverServlet extends HttpServlet {
+public class TrouverServlet extends GlobalInformationsServlet{
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void getRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<AnnonceProposition> propositions = AnnonceManager.getInstance().listerAnnonceProposition();
 		request.setAttribute("propositions", propositions);
 		request.setAttribute("propositions_size", propositions.size());
 		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/find.jsp");
+		List<AnnonceRecherche> propositionsp = AnnonceManager.getInstance().listerAnnonceRecherche();
+		request.setAttribute("propositionsp", propositionsp);
+		request.setAttribute("propositionsp_size", propositionsp.size());
+		
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/trouver.jsp");
 		view.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void postRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/find.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/trouver.jsp");
 		view.forward(request, response);
 	}
 
