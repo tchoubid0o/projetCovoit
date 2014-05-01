@@ -72,20 +72,26 @@
 	</div>
 	<header>
 		<div id="nav">
-			<div id="leftNav">CovoiturageHEI</div>
+			<div id="leftNav"><a href="accueil" style="color: white;font-size: 30px;">CovoiturageHEI</a></div>
 			<div id="rightNav">
 				<ul>
 					<li><a href="accueil" class="active">Accueil</a></li>
+					<%
+						if (request.getSession().getAttribute("login") == null) {
+					%>
 					<li><a href="">A propos</a></li>
+					<%
+						}
+					%>
 					<li><a href="">Trouver un trajet</a></li>
 					<%
 						if (request.getSession().getAttribute("login") != null) {
 					%>
 					<li><a href="proposer">Publier un trajet</a></li>
+					<li><a href="rechercher">Publier une recherche</a></li>
 					<%
 						}
 					%>
-					<li><a href="">Contact</a></li>
 					<%
 						if (request.getSession().getAttribute("login") == null) {
 					%>

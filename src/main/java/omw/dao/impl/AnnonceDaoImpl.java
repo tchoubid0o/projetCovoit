@@ -67,6 +67,28 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		
 	}
 	
+	public void insertRecherche(String villeDepart, String villeArrivee, String date, String heure, String minute, String comment,	String login){
+		try {
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+	
+			String formatedDate = date.concat(heure).concat(minute);
+			
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `annoncerecherche`(`villeDepartRecherche`,`villeArriveeRecherche`, `dateEtHeureRecherche`, `commentaireRecherche`, `login`) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, villeDepart);
+			stmt.setString(2, villeArrivee);
+			stmt.setString(3, formatedDate);
+			stmt.setString(4, comment);
+			stmt.setString(5, login);	
+			stmt.executeUpdate();
+			
+			stmt.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<AnnonceProposition> listerAnnonceProposition(){
 		
 		ArrayList<AnnonceProposition> listAnnonceProposition = new ArrayList<AnnonceProposition>();
