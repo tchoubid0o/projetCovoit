@@ -3,6 +3,16 @@ body {
     margin: 0px;
 }
 
+thread{
+	font-family: Verdana,Arial,sans-serif !important;
+	font-size: 10px !important;
+}
+
+.ui-widget,.ui-datepicker .ui-datepicker-title,.ui-datepicker-calendar thread,.ui-datepicker .ui-datepicker-prev,.ui-datepicker th, .ui-datepicker .ui-datepicker-next, .ui-datepicker td span, .ui-datepicker td a,.ui-widget-header, .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button, .ui-datepicker .ui-datepicker-title select, .ui-datepicker table, .ui-datepicker th {
+font-family: Verdana,Arial,sans-serif !important;
+font-size: 10px !important;
+}
+
 @font-face {
     font-family: daunpenh;
     src: url('../fonts/daunpenh.ttf'),

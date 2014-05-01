@@ -20,6 +20,10 @@
     <servlet-name>Profil</servlet-name>
     <servlet-class>omw.controllers.ProfilServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Proposer</servlet-name>
+    <servlet-class>omw.controllers.ProposerServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
@@ -37,9 +41,13 @@
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
+   <servlet-mapping>
     <servlet-name>Profil</servlet-name>
     <url-pattern>/profil</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Proposer</servlet-name>
+    <url-pattern>/proposer</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

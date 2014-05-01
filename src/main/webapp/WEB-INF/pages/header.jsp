@@ -15,6 +15,24 @@
 	href="css/design.css" />
 <script type="text/javascript"
 	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Datepicker -->
+<link rel="stylesheet" type="text/css"
+	href="js/datepicker/jquery-ui.css">
+<link rel="stylesheet" type="text/css"
+	href="js/datepicker/demos.css">
+<script src="js/datepicker/jquery-1.5.1.js"></script>
+<script src="js/datepicker/jquery.ui.core.js"></script>
+<script src="js/datepicker/jquery.ui.widget.js"></script>
+<script src="js/datepicker/jquery.ui.datepicker.js"></script>
+<script src="js/datepicker/jquery.ui.datepicker-fr.js"></script>
+<script>
+	$(function() {
+		$(".datepicker").datepicker({
+			changeMonth : true,
+			changeYear : true
+		});
+	});
+</script>
 </head>
 
 <body>
@@ -63,8 +81,10 @@
 					<%
 						if (request.getSession().getAttribute("login") != null) {
 					%>
-					<li><a href="">Publier un trajet</a></li>
-					<%} %>
+					<li><a href="proposer">Publier un trajet</a></li>
+					<%
+						}
+					%>
 					<li><a href="">Contact</a></li>
 					<%
 						if (request.getSession().getAttribute("login") == null) {
@@ -72,10 +92,15 @@
 					<li><a href="inscription">Inscription</a></li>
 					<li class="borderli"><span id="loginname" class="white"
 						style="cursor: pointer;"><img src="img/user.png" alt="" />&nbsp;Connexion</span></li>
-					<%}else{ %>
+					<%
+						} else {
+					%>
 					<li><a href="profil">Profil</a></li>
-					<li class="borderli"><a href="deconnexion" class="white"><img src="img/user.png" alt="" />&nbsp;Deconnexion</a></li>
-					<%} %>
+					<li class="borderli"><a href="deconnexion" class="white"><img
+							src="img/user.png" alt="" />&nbsp;Deconnexion</a></li>
+					<%
+						}
+					%>
 				</ul>
 			</div>
 			<div style="clear: both;"></div>
