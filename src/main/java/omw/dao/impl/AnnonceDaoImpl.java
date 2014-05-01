@@ -14,7 +14,7 @@ import omw.model.AnnonceRecherche;
 
 public class AnnonceDaoImpl implements AnnonceDao{
 	
-	public void insertProposition(Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login){
+	public void insertProposition(Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
 		/*
 		
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -31,8 +31,9 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 	
 			String formatedDate = date.concat(heure).concat(minute);
+			int lastId = 0;
 			
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `annonceproposition`(`estReponseARecherche`,`villeDepart`,`villeArrivee`, `dateEtHeureTrajet`, `commentaire`, `prix`, `nbPlace`, `login`) VALUES(?,?,?,?,?,?,?,?)");
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `annonceproposition`(`estReponseARecherche`,`villeDepart`,`villeArrivee`, `dateEtHeureTrajet`, `commentaire`, `prix`, `nbPlace`, `login`) VALUES(?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, rep);
 			stmt.setString(2, villeDepart);
 			stmt.setString(3, villeArrivee);
@@ -42,7 +43,21 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			stmt.setInt(7, Integer.parseInt(nbPlace));
 			stmt.setString(8, login);
 			
-			stmt.executeUpdate();
+			int numero = stmt.executeUpdate();
+
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs.next()){
+			    lastId = rs.getInt(1);
+			}
+			
+			for(int i=1;i<=etapes.length;i++){
+				PreparedStatement stmt2 = connection.prepareStatement("INSERT INTO `etapes`(`idAnnonceProposition`, `nomVille`, `ordre`) VALUES(?,?,?)");
+				stmt2.setInt(1, lastId);
+				stmt2.setString(2, etapes[i]);
+				stmt2.setInt(3, i);
+				stmt2.executeUpdate();
+		    }
+			
 			stmt.close();
 			connection.close();
 			

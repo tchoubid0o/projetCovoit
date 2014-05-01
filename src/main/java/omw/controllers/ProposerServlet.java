@@ -1,6 +1,7 @@
 package omw.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,10 +31,13 @@ public class ProposerServlet extends HttpServlet {
 		String prix = request.getParameter("prix");
 		String nbPlace = request.getParameter("nbPlace");
 		String comment = request.getParameter("comment");
+ 
+        String[] etapes=request.getParameterValues("etapes");
+        
 		
 		String login = (String) request.getSession().getAttribute("login");
 		
-		AnnonceManager.getInstance().insertProposition(0, villeDepart, villeArrivee, date, heure, minute, prix, nbPlace, comment, login);
+		AnnonceManager.getInstance().insertProposition(0, villeDepart, villeArrivee, date, heure, minute, prix, nbPlace, comment, login, etapes);
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/proposer.jsp");
 		view.forward(request, response);

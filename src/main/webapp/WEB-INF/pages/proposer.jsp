@@ -21,7 +21,7 @@
 				<label for="etapes">Etapes éventuelles :</label><br />
 				<div>
 					<div id="dynamicInput">
-          				Etape 1<br><input type="text" name="etapes[]">
+          				Etape 1<br><input type="text" name="etapes">
      				</div>
      				<input type="button" value="Ajouter une autre étape" style="font-family: Verdana,Arial,sans-serif;font-size: 12px;" onClick="addInput('dynamicInput');">
 					<script>
@@ -33,7 +33,7 @@
 					     }
 					     else {
 					          var newdiv = document.createElement('div');
-					          newdiv.innerHTML = "Etape " + (counter + 1) + " <br><input type='text' name='etapes[]'>";
+					          newdiv.innerHTML = "Etape " + (counter + 1) + " <br><input type='text' name='etapes'>";
 					          document.getElementById(divName).appendChild(newdiv);
 					          counter++;
 					     }
