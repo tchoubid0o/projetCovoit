@@ -42,4 +42,12 @@ public class AnnonceManager {
 	public void insertRecherche(String villeDepart, String villeArrivee, String date, String heure, String minute, String comment,	String login) {
 		annonceDao.insertRecherche(villeDepart, villeArrivee, date, heure, minute, comment, login);
 	}
+	
+	public List<AnnonceRecherche> listerMesAnnonceRecherche(String login) {
+		return annonceDao.listerMesAnnonceRecherche(login);
+	}
+	
+	public List<AnnonceProposition> listerMesAnnonceProposition(String login) {
+		return annonceDao.listerMesAnnonceProposition(login);
+	}
 }

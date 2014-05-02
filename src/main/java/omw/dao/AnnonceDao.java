@@ -13,4 +13,8 @@ public interface AnnonceDao {
 	public List<AnnonceProposition> listerAnnonceProposition();
 
 	public List<AnnonceRecherche> listerAnnonceRecherche();
+
+	public List<AnnonceRecherche> listerMesAnnonceRecherche(String login);
+
+	public List<AnnonceProposition> listerMesAnnonceProposition(String login);
 }

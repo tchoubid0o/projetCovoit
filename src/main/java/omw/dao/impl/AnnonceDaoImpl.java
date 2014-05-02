@@ -190,6 +190,81 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		return liste;
 	}
 	
+	public List<AnnonceProposition> listerMesAnnonceProposition(String login) {
+		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+			
+			ResultSet results = null;
+
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE login = ? ORDER BY idAnnonceProposition ASC");
+			stmt.setString(1,login);
+			results = stmt.executeQuery();
+
+			while (results.next()) {
+				AnnonceProposition proposition = new AnnonceProposition(
+						results.getInt("idAnnonceProposition"),
+						results.getBoolean("estReponseARecherche"),
+						ucfirst(results.getString("villeDepart")),
+						ucfirst(results.getString("villeArrivee")),
+						(results.getString("dateEtHeureTrajet")).substring(0,10),
+						(results.getString("dateEtHeureTrajet")).substring(10,12),
+						(results.getString("dateEtHeureTrajet")).substring(12),
+						results.getString("commentaire"),
+						results.getInt("prix"),
+						results.getInt("nbPlace"),
+						results.getString("login"));
+				liste.add(proposition);
+			}
+			results.close();
+			stmt.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+		return liste;
+	}
+	
+	public List<AnnonceRecherche> listerMesAnnonceRecherche(String login) {
+		List<AnnonceRecherche> liste = new ArrayList<AnnonceRecherche>();
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+			
+			ResultSet results = null;
+			
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annoncerecherche WHERE login = ? ORDER BY idAnnonceRecherche ASC");
+			stmt.setString(1,login);
+			results = stmt.executeQuery();
+
+			while (results.next()) {
+				AnnonceRecherche proposition = new AnnonceRecherche(
+						results.getInt("idAnnonceRecherche"),
+						ucfirst(results.getString("villeDepartRecherche")),
+						ucfirst(results.getString("villeArriveeRecherche")),
+						(results.getString("dateEtHeureRecherche")).substring(0,10),
+						(results.getString("dateEtHeureRecherche")).substring(10,12),
+						(results.getString("dateEtHeureRecherche")).substring(12),
+						results.getString("commentaireRecherche"),
+						results.getString("login"));
+				liste.add(proposition);
+			}
+			results.close();
+			stmt.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+		return liste;
+	}
+	
 	public void proposerAnnonce(String login, AnnonceProposition annonceProposition){
 		
 	}

@@ -1,18 +1,13 @@
 $(document).ready( function ()
 {	
-	$("#champions").mouseenter(function(){
-		$("#addChamp").slideDown(50);
-	});
-	
-	$("#skins").mouseenter(function(){
-		$("#addSkin").slideDown(50);
-	});
-	
-	$("#champions").mouseleave(function(){
-		$("#addChamp").slideUp(50);
-	});
-	
-	$("#skins").mouseleave(function(){
-		$("#addSkin").slideUp(50);
+	$(".down").click(function(){
+		if($(this).next(".wrapProfil").css('display') != 'none'){
+			$(this).next(".wrapProfil").slideUp();
+			$(this).attr("src", "img/downarrow.png");
+		}
+		else{
+			$(this).next(".wrapProfil").slideDown();
+			$(this).attr("src", "img/uparrow.png");
+		}
 	});
 });	

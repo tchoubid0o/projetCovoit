@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
+import omw.metier.AnnonceManager;
 import omw.metier.UtilisateurManager;
 import omw.model.Utilisateur;
 
@@ -24,6 +25,17 @@ public class ProfilServlet extends GlobalInformationsServlet{
 		if(login != null){
 			
 			Utilisateur user = UtilisateurManager.getInstance().getUser(login);
+			
+			/*LISTER SES ANNONCES*/
+				/*Annonces Proposition*/
+				request.setAttribute("propositions", AnnonceManager.getInstance().listerMesAnnonceProposition(login) );
+				request.setAttribute("propositions_size", (AnnonceManager.getInstance().listerMesAnnonceProposition(login)).size() );
+			
+				/*Annonces Recherche*/
+				request.setAttribute("recherches", AnnonceManager.getInstance().listerMesAnnonceRecherche(login) );
+				request.setAttribute("recherches_size", (AnnonceManager.getInstance().listerMesAnnonceRecherche(login)).size() );
+				
+				System.out.println((AnnonceManager.getInstance().listerMesAnnonceProposition(login)).size());
 			
 			request.setAttribute("user", user );
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/profil.jsp");

@@ -20,6 +20,7 @@
 	href="js/datepicker/jquery-ui.css">
 <link rel="stylesheet" type="text/css"
 	href="js/datepicker/demos.css">
+<script src="js/nav.js"></script>
 <script src="js/datepicker/jquery-1.5.1.js"></script>
 <script src="js/datepicker/jquery.ui.core.js"></script>
 <script src="js/datepicker/jquery.ui.widget.js"></script>
