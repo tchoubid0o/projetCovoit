@@ -35,6 +35,19 @@ public class TrouverServlet extends GlobalInformationsServlet{
 
 	public void postRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String login = (String) request.getSession().getAttribute("login");
+		
+		if(!login.equals("") && login != null){
+			
+			Integer idAnnonceProposition = Integer.parseInt(request.getParameter("idAnnonceProposition"));
+			
+			AnnonceManager.getInstance().ajouterDemandePourAnnonce(idAnnonceProposition, login);			
+		}
+		else{
+			
+			System.out.printf("user not logged");
+		}
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/trouver.jsp");
 		view.forward(request, response);
 	}
