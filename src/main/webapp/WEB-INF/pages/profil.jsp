@@ -84,6 +84,8 @@
 									<td>Nombre de places: ${proposition.nbPlace}</td>
 									<td>${proposition.dateEtHeureTrajet}à
 										${proposition.heure}h${proposition.minute}min</td>
+									<td style="width: 25px;"><form method="post" action="edit"><input type="hidden" name="idProposition" value="${recherche.idAnnonceProposition}"/><input type="hidden" name="editProposition"/><input type="submit" style="background: url('img/edit.png'); height: 20px; width: 20px;border: none; font-size: 0.1px; cursor: pointer;" /></form></td>
+									<td style="width: 25px;"><form method="post" action="delete"><input type="hidden" name="idProposition" value="${recherche.idAnnonceProposition}"/><input type="hidden" name="deleteProposition"/><input type="submit" style="background: url('img/delete.png'); height: 20px; width: 20px;border: none; font-size: 0.1px; cursor: pointer;" /></form></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -118,6 +120,8 @@
 									<td><img src="img/rightarrow.png" alt=""></td>
 									<td>${recherche.villeArriveeRecherche}</td>
 									<td>${recherche.dateEtHeureRecherche} à ${recherche.heure}h${recherche.minute}min</td>
+									<td style="width: 25px;"><form method="post" action="edit"><input type="hidden" name="idRecherche" value="${recherche.idAnnonceRecherche}"/><input type="hidden" name="editRecherche"/><input type="submit" style="background: url('img/edit.png'); height: 20px; width: 20px;border: none; font-size: 0.1px; cursor: pointer;" /></form></td>
+									<td style="width: 25px;"><form method="post" action="delete"><input type="hidden" name="idRecherche" value="${recherche.idAnnonceRecherche}"/><input type="hidden" name="deleteRecherche"/><input type="submit" style="background: url('img/delete.png'); height: 20px; width: 20px;border: none; font-size: 0.1px; cursor: pointer;" /></form></td>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -34,8 +34,6 @@ public class ProfilServlet extends GlobalInformationsServlet{
 				/*Annonces Recherche*/
 				request.setAttribute("recherches", AnnonceManager.getInstance().listerMesAnnonceRecherche(login) );
 				request.setAttribute("recherches_size", (AnnonceManager.getInstance().listerMesAnnonceRecherche(login)).size() );
-				
-				System.out.println((AnnonceManager.getInstance().listerMesAnnonceProposition(login)).size());
 			
 			request.setAttribute("user", user );
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/profil.jsp");
