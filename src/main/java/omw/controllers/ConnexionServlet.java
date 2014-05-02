@@ -58,7 +58,7 @@ public class ConnexionServlet extends GlobalInformationsServlet{
 			request.getSession().setAttribute("login",login);
 			//request.getSession().setAttribute("idUser",UsersManager.getInstance().getTheIdUser(user_pseudo));
 			
-			response.sendRedirect("accueil");
+			response.sendRedirect("profil");
 		} else {
 			resultat = "Échec de la connexion.";
 			//Stockage des erreurs et du résultat

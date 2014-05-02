@@ -59,15 +59,16 @@
 			</form>
 
 			<div id="myOffer" style="margin-top: 10px;">
-				<span class="titleAbout">Mes offres de Covoiturage <c:if
-						test="${propositions_size > 0 }">
+				<span class="titleAbout">Mes offres de Covoiturage
+					<c:if test="${propositions_size > 0 }">
 						(${propositions_size})
-					</c:if> <c:if test="${propositions_size == 0}"> 
+					</c:if>
+					<c:if test="${propositions_size == 0}"> 
 						(0)
 					</c:if>
 				</span>
 				<c:if test="${propositions_size > 0 }">
-					<img class="down" src="img/downarrow.png" alt="" />
+				<img class="down" src="img/downarrow.png" alt="" />
 				</c:if>
 				<div class="wrapProfil" style="display: none;">
 					<table class="lastCars" style="text-align: center;">
@@ -83,41 +84,30 @@
 									<td>Nombre de places: ${proposition.nbPlace}</td>
 									<td>${proposition.dateEtHeureTrajet}à
 										${proposition.heure}h${proposition.minute}min</td>
-									<td style="width: 25px;"><form method="post" action="edit">
-											<input type="hidden" name="idProposition"
-												value="${recherche.idAnnonceProposition}" /><input
-												type="hidden" name="editProposition" /><input type="submit"
-												style="background: url('img/edit.png'); height: 20px; width: 20px; border: none; font-size: 0.1px; cursor: pointer;" />
-										</form></td>
-									<td style="width: 25px;"><form method="post"
-											action="delete">
-											<input type="hidden" name="idProposition"
-												value="${recherche.idAnnonceProposition}" /><input
-												type="hidden" name="deleteProposition" /><input
-												type="submit"
-												style="background: url('img/delete.png'); height: 20px; width: 20px; border: none; font-size: 0.1px; cursor: pointer;" />
-										</form></td>
+									<td style="width: 25px;"><img class="editAds" src="img/edit.png" data-size="${propositions_size}" data-type="proposition" data-idP="${proposition.idAnnonceProposition}" data-villeD="${proposition.villeDepart}" data-villeA="${proposition.villeArrivee}" data-date="${proposition.dateEtHeureTrajet}" data-heure="${proposition.heure}" data-min="${proposition.minute}" data-commentaire="${proposition.commentaire}" data-prix="${proposition.prix}" data-nbPlace="${proposition.nbPlace}" style="cursor: pointer;" alt="Editer votre recherche" /></td>
+									<td style="width: 25px;"><img class="deleteAds" src="img/delete.png" style="cursor: pointer;" alt="Supprimer votre recherche" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-				</div>
-				<c:if test="${propositions_size == 0 }">
-					<div class="lastCars center">Vous n'avez encore poster aucune
-						offre</div>
-				</c:if>
+					</div>
+					<c:if test="${propositions_size == 0 }">
+						<div class="lastCars center">Vous n'avez encore poster aucune
+							offre</div>
+					</c:if>
 			</div>
-
+			
 			<div id="mySearch" style="margin-top: 10px;">
-				<span class="titleAbout">Mes recherches <c:if
-						test="${recherches_size > 0 }">
+				<span class="titleAbout">Mes recherches
+					<c:if test="${recherches_size > 0 }">
 						(${recherches_size})
-					</c:if> <c:if test="${recherches_size == 0}"> 
+					</c:if>
+					<c:if test="${recherches_size == 0}"> 
 						(0)
 					</c:if>
 				</span>
 				<c:if test="${recherches_size > 0 }">
-					<img class="down" src="img/downarrow.png" alt="" />
+				<img class="down" src="img/downarrow.png" alt="" />
 				</c:if>
 				<div class="wrapProfil" style="display: none;">
 					<table class="lastCars" style="text-align: center;">
@@ -129,62 +119,98 @@
 									<td>${recherche.villeDepartRecherche}</td>
 									<td><img src="img/rightarrow.png" alt=""></td>
 									<td>${recherche.villeArriveeRecherche}</td>
-									<td>${recherche.dateEtHeureRecherche}à
-										${recherche.heure}h${recherche.minute}min</td>
-									<td style="width: 25px;"><form method="post" action="edit">
-											<input type="hidden" name="idRecherche"
-												value="${recherche.idAnnonceRecherche}" /><input
-												type="hidden" name="editRecherche" /><input type="submit"
-												style="background: url('img/edit.png'); height: 20px; width: 20px; border: none; font-size: 0.1px; cursor: pointer;" />
-										</form></td>
-									<td style="width: 25px;"><form method="post"
-											action="delete">
-											<input type="hidden" name="idRecherche"
-												value="${recherche.idAnnonceRecherche}" /><input
-												type="hidden" name="deleteRecherche" /><input type="submit"
-												style="background: url('img/delete.png'); height: 20px; width: 20px; border: none; font-size: 0.1px; cursor: pointer;" />
-										</form></td>
+									<td>${recherche.dateEtHeureRecherche} à ${recherche.heure}h${recherche.minute}min</td>
+									<td style="width: 25px;"><img class="editAds" data-type="recherche" style="cursor: pointer;" src="img/edit.png" alt="Editer votre recherche" /></td>
+									<td style="width: 25px;"><img class="deleteAds" style="cursor: pointer;" src="img/delete.png" alt="Supprimer votre recherche" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-				</div>
-				<c:if test="${recherches_size == 0 }">
-					<div class="lastCars center">Vous n'avez encore poster aucune
-						recherche</div>
-				</c:if>
-
-
+					</div>
+					<c:if test="${recherches_size == 0 }">
+						<div class="lastCars center">Vous n'avez encore poster aucune
+							recherche</div>
+					</c:if>
+					
+				
 			</div>
 		</div>
 	</div>
 </section>
 
-<section class="wrapper6">
+<section class="wrapper6" style="display:none;">
 	<div class="width1000">
-		
-			<span class="titleAbout">Modifier le trajet</span>
+			<script>
+			
+			
+			$(".editAds").click(function(){
+				//Si l'on est pas connecté
+				if($(this).attr("data-type") == "proposition"){
+					
+						$.ajax({ url:"etapes", type:"POST", 
+							data:{id:$(this).attr("data-idP")}
+						}).done(function (response){
+							for(var i=0; i<response.length;i++){
+								$("#inputEtape").append('<div id="dynamicInputPropM" class="columnheader2">Etape <span class="idCurrentEtape">'+(i+1)+'</span><br><input type="text" class="input_contact" name="etapes" value="'+response[i].nomVille+'">');
+							}
+							
+							$("#addEtapeProp").click(function(){
+								var currentEtape = $(this).parent().children("#inputEtape").children("#dynamicInputPropM").last().children(".idCurrentEtape").text();
+								$("#inputEtape").append('<div id="dynamicInputPropM" class="columnheader2">Etape <span class="idCurrentEtape">'+(parseInt(currentEtape)+1)+'</span><br><input type="text" class="input_contact" name="etapes">');
+							});
+						});
+					
+						//On met les valeurs de l'image � modifier dans les div
+						$("#idProp").attr("value", $(this).attr("data-idP"));
+						$("#villeDepartPropM").attr("value", $(this).attr("data-villeD"));
+						$("#villeArriveePropM").attr("value", $(this).attr("data-villeA"));
+	
+						$("#datePropM").attr("value", $(this).attr("data-date"));
+						
+						$("#heurePropM option[value='" +$(this).attr("data-heure") + "']").attr("selected", "selected");
+						$("#minutePropM option[value='" +$(this).attr("data-min") + "']").attr("selected", "selected");
+						
+						$("#commentPropM").text($(this).attr("data-commentaire"));
+						$("#prixPropM").attr("value", $(this).attr("data-prix"));
+						$("#nbPlacePropM").attr("value", $(this).attr("data-nbPlace"));
+						
+						$(".wrapper6").slideDown("slow");
+						$('html, body').animate({
+		                    scrollTop: $(".wrapper6").offset().top
+		                }, 2000);
+					}
+					else{
+						//On delete l'image en ajax 
+						
+					}
+				
+				
+			});
+			
+			</script>
+			<div id="ancreModifyProp" style="margin-bottom: 5px;font-size: 32px;color: #7b7b7b;font-family: 'gill'; text-align: center; padding-top: 25px;">Modifier le trajet</div>
 			<form action="proposer" method="post">
 			<div class="width500" style="float: left;">
 				<div style="padding: 0px 100px 0px 100px;">
+				<input type="hidden" name="idProp" id="idProp"/>
 				<label for="villeDepart" class="columnheader2">Ville de départ :</label>
 				<div>
-					<input type="text" class="input_contact" name="villeDepart" id="villeDepart"
+					<input type="text" class="input_contact" name="villeDepart" id="villeDepartPropM"
 						style="line-height: 40px; height: 30px;"
 						placeholder="Ville de Départ" />
 				</div>
 
 				<label for="villeArrivee" class="columnheader2">Ville d'arrivée :</label><br />
 				<div>
-					<input type="text" class="input_contact" name="villeArrivee" id="villeArrivee"
+					<input type="text" class="input_contact" name="villeArrivee" id="villeArriveePropM"
 						style="line-height: 40px; height: 30px;"
 						placeholder="ville d'Arrivée" />
 				</div>
 				<label for="date" class="columnheader2">Date :</label><br /> <input type="text"
-					class="datepicker input_contact" name="date" id="date" required /><br /> <label class="columnheader2">Heure
+					class="datepicker input_contact" name="date" id="datePropM" required /><br /> <label class="columnheader2">Heure
 					de départ :</label><br />
 				<div>
-					<select id="heure" class="input_contact" style="width: auto;" name="heure">
+					<select id="heurePropM" class="input_contact" style="width: auto;" name="heure">
 						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -199,7 +225,7 @@
 							<option value="<c:out value="${j}"/>"><c:out
 									value="${j}" /></option>
 						</c:forEach>
-					</select> <span class="columnheader2"> h</span> <select id="minute" class="input_contact" style="width: auto;" name="minute">
+					</select> <span class="columnheader2"> h</span> <select id="minutePropM" class="input_contact" style="width: auto;" name="minute">
 						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -222,46 +248,26 @@
 				<div style="padding: 0px 100px 0px 100px;">
 				<label for="etapes" class="columnheader2">Etapes éventuelles :</label><br />
 				
-					<div id="dynamicInput" class="columnheader2">
-						Etape 1<br>
-						<input type="text" class="input_contact" name="etapes">
+					<div id="inputEtape">
+					
 					</div>
-					<input type="button" class="submitContactForm" value="Ajouter une autre étape"
-						
-						onClick="addInput('dynamicInput');">
-					<script>
-						var counter = 1;
-						var limit = 15;
-						function addInput(divName) {
-							if (counter == limit) {
-								alert("Vous avez atteint la limite des "
-										+ counter + " étapes possibles.");
-							} else {
-								var newdiv = document.createElement('div');
-								newdiv.innerHTML = "Etape "
-										+ (counter + 1)
-										+ " <br><input type='text' name='etapes'>";
-								document.getElementById(divName).appendChild(
-										newdiv);
-								counter++;
-							}
-						}
-					</script>
+					<input type="button" id="addEtapeProp" class="submitContactForm" value="Ajouter une autre étape">
+					
 					<label for="prix" class="columnheader2">Prix par passager :</label><br />
 				<div>
-					<input type="text" class="input_contact" name="prix" id="prix"
+					<input type="text" class="input_contact" name="prix" id="prixPropM"
 						style="line-height: 40px; height: 30px;" placeholder="prix" />
 				</div>
 				<label for="nbPlace" class="columnheader2">Nombre de places :</label><br />
 				<div>
-					<input type="text" class="input_contact" name="nbPlace" id="nbPlace"
+					<input type="text" class="input_contact" name="nbPlace" id="nbPlacePropM"
 						style="line-height: 40px; height: 30px;" placeholder="Nb places" />
 				</div>
 				</div>
 			</div>
 				
 				<div style="padding: 0px 100px 0px 100px;">
-					<textarea placeholder="Commentaire" class="input_contact" name="comment"></textarea>
+					<textarea placeholder="Commentaire" id="commentPropM" class="input_contact" name="comment"></textarea>
 				</div>
 				<div style="margin: auto;text-align: center; padding-bottom: 50px;">
 					<input class="submit submitContactForm" style="width: 250px;" type="submit" value="Modifier" id="submit" />
