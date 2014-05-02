@@ -59,16 +59,15 @@
 			</form>
 
 			<div id="myOffer" style="margin-top: 10px;">
-				<span class="titleAbout">Mes offres de Covoiturage
-					<c:if test="${propositions_size > 0 }">
+				<span class="titleAbout">Mes offres de Covoiturage <c:if
+						test="${propositions_size > 0 }">
 						(${propositions_size})
-					</c:if>
-					<c:if test="${propositions_size == 0}"> 
+					</c:if> <c:if test="${propositions_size == 0}"> 
 						(0)
 					</c:if>
 				</span>
 				<c:if test="${propositions_size > 0 }">
-				<img class="down" src="img/downarrow.png" alt="" />
+					<img class="down" src="img/downarrow.png" alt="" />
 				</c:if>
 				<div class="wrapProfil" style="display: none;">
 					<table class="lastCars" style="text-align: center;">
@@ -84,30 +83,41 @@
 									<td>Nombre de places: ${proposition.nbPlace}</td>
 									<td>${proposition.dateEtHeureTrajet}à
 										${proposition.heure}h${proposition.minute}min</td>
-									<td style="width: 25px;"><form method="post" action="edit"><input type="hidden" name="idProposition" value="${recherche.idAnnonceProposition}"/><input type="hidden" name="editProposition"/><input type="submit" style="background: url('img/edit.png'); height: 20px; width: 20px;border: none; font-size: 0.1px; cursor: pointer;" /></form></td>
-									<td style="width: 25px;"><form method="post" action="delete"><input type="hidden" name="idProposition" value="${recherche.idAnnonceProposition}"/><input type="hidden" name="deleteProposition"/><input type="submit" style="background: url('img/delete.png'); height: 20px; width: 20px;border: none; font-size: 0.1px; cursor: pointer;" /></form></td>
+									<td style="width: 25px;"><form method="post" action="edit">
+											<input type="hidden" name="idProposition"
+												value="${recherche.idAnnonceProposition}" /><input
+												type="hidden" name="editProposition" /><input type="submit"
+												style="background: url('img/edit.png'); height: 20px; width: 20px; border: none; font-size: 0.1px; cursor: pointer;" />
+										</form></td>
+									<td style="width: 25px;"><form method="post"
+											action="delete">
+											<input type="hidden" name="idProposition"
+												value="${recherche.idAnnonceProposition}" /><input
+												type="hidden" name="deleteProposition" /><input
+												type="submit"
+												style="background: url('img/delete.png'); height: 20px; width: 20px; border: none; font-size: 0.1px; cursor: pointer;" />
+										</form></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-					</div>
-					<c:if test="${propositions_size == 0 }">
-						<div class="lastCars center">Vous n'avez encore poster aucune
-							offre</div>
-					</c:if>
+				</div>
+				<c:if test="${propositions_size == 0 }">
+					<div class="lastCars center">Vous n'avez encore poster aucune
+						offre</div>
+				</c:if>
 			</div>
-			
+
 			<div id="mySearch" style="margin-top: 10px;">
-				<span class="titleAbout">Mes recherches
-					<c:if test="${recherches_size > 0 }">
+				<span class="titleAbout">Mes recherches <c:if
+						test="${recherches_size > 0 }">
 						(${recherches_size})
-					</c:if>
-					<c:if test="${recherches_size == 0}"> 
+					</c:if> <c:if test="${recherches_size == 0}"> 
 						(0)
 					</c:if>
 				</span>
 				<c:if test="${recherches_size > 0 }">
-				<img class="down" src="img/downarrow.png" alt="" />
+					<img class="down" src="img/downarrow.png" alt="" />
 				</c:if>
 				<div class="wrapProfil" style="display: none;">
 					<table class="lastCars" style="text-align: center;">
@@ -119,30 +129,146 @@
 									<td>${recherche.villeDepartRecherche}</td>
 									<td><img src="img/rightarrow.png" alt=""></td>
 									<td>${recherche.villeArriveeRecherche}</td>
-									<td>${recherche.dateEtHeureRecherche} à ${recherche.heure}h${recherche.minute}min</td>
-									<td style="width: 25px;"><form method="post" action="edit"><input type="hidden" name="idRecherche" value="${recherche.idAnnonceRecherche}"/><input type="hidden" name="editRecherche"/><input type="submit" style="background: url('img/edit.png'); height: 20px; width: 20px;border: none; font-size: 0.1px; cursor: pointer;" /></form></td>
-									<td style="width: 25px;"><form method="post" action="delete"><input type="hidden" name="idRecherche" value="${recherche.idAnnonceRecherche}"/><input type="hidden" name="deleteRecherche"/><input type="submit" style="background: url('img/delete.png'); height: 20px; width: 20px;border: none; font-size: 0.1px; cursor: pointer;" /></form></td>
+									<td>${recherche.dateEtHeureRecherche}à
+										${recherche.heure}h${recherche.minute}min</td>
+									<td style="width: 25px;"><form method="post" action="edit">
+											<input type="hidden" name="idRecherche"
+												value="${recherche.idAnnonceRecherche}" /><input
+												type="hidden" name="editRecherche" /><input type="submit"
+												style="background: url('img/edit.png'); height: 20px; width: 20px; border: none; font-size: 0.1px; cursor: pointer;" />
+										</form></td>
+									<td style="width: 25px;"><form method="post"
+											action="delete">
+											<input type="hidden" name="idRecherche"
+												value="${recherche.idAnnonceRecherche}" /><input
+												type="hidden" name="deleteRecherche" /><input type="submit"
+												style="background: url('img/delete.png'); height: 20px; width: 20px; border: none; font-size: 0.1px; cursor: pointer;" />
+										</form></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-					</div>
-					<c:if test="${recherches_size == 0 }">
-						<div class="lastCars center">Vous n'avez encore poster aucune
-							recherche</div>
-					</c:if>
-					
-				
+				</div>
+				<c:if test="${recherches_size == 0 }">
+					<div class="lastCars center">Vous n'avez encore poster aucune
+						recherche</div>
+				</c:if>
+
+
 			</div>
 		</div>
 	</div>
 </section>
 
-<section class="wrapper3">
+<section class="wrapper6">
 	<div class="width1000">
-		<div style="text-align: center;">
-			<div style="${empty erreurs ? 'color: green;' : 'color: red;'}">${resultat}</div>
-		</div>
+		
+			<span class="titleAbout">Modifier le trajet</span>
+			<form action="proposer" method="post">
+			<div class="width500" style="float: left;">
+				<div style="padding: 0px 100px 0px 100px;">
+				<label for="villeDepart" class="columnheader2">Ville de départ :</label>
+				<div>
+					<input type="text" class="input_contact" name="villeDepart" id="villeDepart"
+						style="line-height: 40px; height: 30px;"
+						placeholder="Ville de Départ" />
+				</div>
+
+				<label for="villeArrivee" class="columnheader2">Ville d'arrivée :</label><br />
+				<div>
+					<input type="text" class="input_contact" name="villeArrivee" id="villeArrivee"
+						style="line-height: 40px; height: 30px;"
+						placeholder="ville d'Arrivée" />
+				</div>
+				<label for="date" class="columnheader2">Date :</label><br /> <input type="text"
+					class="datepicker input_contact" name="date" id="date" required /><br /> <label class="columnheader2">Heure
+					de départ :</label><br />
+				<div>
+					<select id="heure" class="input_contact" style="width: auto;" name="heure">
+						<option value="00">00</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<c:forEach var="j" begin="10" end="23">
+							<option value="<c:out value="${j}"/>"><c:out
+									value="${j}" /></option>
+						</c:forEach>
+					</select> <span class="columnheader2"> h</span> <select id="minute" class="input_contact" style="width: auto;" name="minute">
+						<option value="00">00</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<c:forEach var="i" begin="10" end="59">
+							<option value="<c:out value="${i}"/>"><c:out
+									value="${i}" /></option>
+						</c:forEach>
+					</select> <span class="columnheader2"> min</span>
+				</div>
+				</div>
+			</div>
+			<div class="width500" style="margin-left: 500px;">
+				<div style="padding: 0px 100px 0px 100px;">
+				<label for="etapes" class="columnheader2">Etapes éventuelles :</label><br />
+				
+					<div id="dynamicInput" class="columnheader2">
+						Etape 1<br>
+						<input type="text" class="input_contact" name="etapes">
+					</div>
+					<input type="button" class="submitContactForm" value="Ajouter une autre étape"
+						
+						onClick="addInput('dynamicInput');">
+					<script>
+						var counter = 1;
+						var limit = 15;
+						function addInput(divName) {
+							if (counter == limit) {
+								alert("Vous avez atteint la limite des "
+										+ counter + " étapes possibles.");
+							} else {
+								var newdiv = document.createElement('div');
+								newdiv.innerHTML = "Etape "
+										+ (counter + 1)
+										+ " <br><input type='text' name='etapes'>";
+								document.getElementById(divName).appendChild(
+										newdiv);
+								counter++;
+							}
+						}
+					</script>
+					<label for="prix" class="columnheader2">Prix par passager :</label><br />
+				<div>
+					<input type="text" class="input_contact" name="prix" id="prix"
+						style="line-height: 40px; height: 30px;" placeholder="prix" />
+				</div>
+				<label for="nbPlace" class="columnheader2">Nombre de places :</label><br />
+				<div>
+					<input type="text" class="input_contact" name="nbPlace" id="nbPlace"
+						style="line-height: 40px; height: 30px;" placeholder="Nb places" />
+				</div>
+				</div>
+			</div>
+				
+				<div style="padding: 0px 100px 0px 100px;">
+					<textarea placeholder="Commentaire" class="input_contact" name="comment"></textarea>
+				</div>
+				<div style="margin: auto;text-align: center; padding-bottom: 50px;">
+					<input class="submit submitContactForm" style="width: 250px;" type="submit" value="Modifier" id="submit" />
+				</div>
+
+			</form>
+
 	</div>
 </section>
 

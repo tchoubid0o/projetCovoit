@@ -107,6 +107,12 @@ h1,h2,h3,h4{
     color: white !important;
 }
 
+.width500{
+	width: 500px;
+	margin: auto;
+	text-align: center;
+}
+
 header{
     background: #030303 url("../img/ban.jpg") 50% 0 no-repeat;;
     height: 574px;
