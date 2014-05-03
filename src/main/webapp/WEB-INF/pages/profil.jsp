@@ -146,17 +146,17 @@
 			$(".editAds").click(function(){
 				//Si l'on est pas connecté
 				if($(this).attr("data-type") == "proposition"){
-					
+					$("#inputEtape").html("");
 						$.ajax({ url:"etapes", type:"POST", 
 							data:{id:$(this).attr("data-idP")}
 						}).done(function (response){
 							for(var i=0; i<response.length;i++){
-								$("#inputEtape").append('<div id="dynamicInputPropM" class="columnheader2">Etape <span class="idCurrentEtape">'+(i+1)+'</span><br><input type="text" class="input_contact" name="etapes" value="'+response[i].nomVille+'">');
+								$("#inputEtape").append('<div id="dynamicInputPropM" class="columnheader2">Etape <span class="idCurrentEtape">'+(i+1)+'</span><br><input type="text" class="input_contact" name="etapesPropM" value="'+response[i].nomVille+'">');
 							}
 							
 							$("#addEtapeProp").click(function(){
 								var currentEtape = $(this).parent().children("#inputEtape").children("#dynamicInputPropM").last().children(".idCurrentEtape").text();
-								$("#inputEtape").append('<div id="dynamicInputPropM" class="columnheader2">Etape <span class="idCurrentEtape">'+(parseInt(currentEtape)+1)+'</span><br><input type="text" class="input_contact" name="etapes">');
+								$("#inputEtape").append('<div id="dynamicInputPropM" class="columnheader2">Etape <span class="idCurrentEtape">'+(parseInt(currentEtape)+1)+'</span><br><input type="text" class="input_contact" name="etapesPropM">');
 							});
 						});
 					
@@ -189,28 +189,28 @@
 			
 			</script>
 			<div id="ancreModifyProp" style="margin-bottom: 5px;font-size: 32px;color: #7b7b7b;font-family: 'gill'; text-align: center; padding-top: 25px;">Modifier le trajet</div>
-			<form action="proposer" method="post">
+			<form action="profil" method="post">
 			<div class="width500" style="float: left;">
 				<div style="padding: 0px 100px 0px 100px;">
 				<input type="hidden" name="idProp" id="idProp"/>
 				<label for="villeDepart" class="columnheader2">Ville de départ :</label>
 				<div>
-					<input type="text" class="input_contact" name="villeDepart" id="villeDepartPropM"
+					<input type="text" class="input_contact" name="villeDepartPropM" id="villeDepartPropM"
 						style="line-height: 40px; height: 30px;"
 						placeholder="Ville de Départ" />
 				</div>
 
-				<label for="villeArrivee" class="columnheader2">Ville d'arrivée :</label><br />
+				<label for="villeArriveePropM" class="columnheader2">Ville d'arrivée :</label><br />
 				<div>
-					<input type="text" class="input_contact" name="villeArrivee" id="villeArriveePropM"
+					<input type="text" class="input_contact" name="villeArriveePropM" id="villeArriveePropM"
 						style="line-height: 40px; height: 30px;"
 						placeholder="ville d'Arrivée" />
 				</div>
 				<label for="date" class="columnheader2">Date :</label><br /> <input type="text"
-					class="datepicker input_contact" name="date" id="datePropM" required /><br /> <label class="columnheader2">Heure
+					class="datepicker input_contact" name="datePropM" id="datePropM" required /><br /> <label class="columnheader2">Heure
 					de départ :</label><br />
 				<div>
-					<select id="heurePropM" class="input_contact" style="width: auto;" name="heure">
+					<select id="heurePropM" class="input_contact" style="width: auto;" name="heurePropM">
 						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -225,7 +225,7 @@
 							<option value="<c:out value="${j}"/>"><c:out
 									value="${j}" /></option>
 						</c:forEach>
-					</select> <span class="columnheader2"> h</span> <select id="minutePropM" class="input_contact" style="width: auto;" name="minute">
+					</select> <span class="columnheader2"> h</span> <select id="minutePropM" class="input_contact" style="width: auto;" name="minutePropM">
 						<option value="00">00</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -255,24 +255,24 @@
 					
 					<label for="prix" class="columnheader2">Prix par passager :</label><br />
 				<div>
-					<input type="text" class="input_contact" name="prix" id="prixPropM"
+					<input type="text" class="input_contact" name="prixPropM" id="prixPropM"
 						style="line-height: 40px; height: 30px;" placeholder="prix" />
 				</div>
 				<label for="nbPlace" class="columnheader2">Nombre de places :</label><br />
 				<div>
-					<input type="text" class="input_contact" name="nbPlace" id="nbPlacePropM"
+					<input type="text" class="input_contact" name="nbPlacePropM" id="nbPlacePropM"
 						style="line-height: 40px; height: 30px;" placeholder="Nb places" />
 				</div>
 				</div>
 			</div>
 				
 				<div style="padding: 0px 100px 0px 100px;">
-					<textarea placeholder="Commentaire" id="commentPropM" class="input_contact" name="comment"></textarea>
+					<textarea placeholder="Commentaire" id="commentPropM" class="input_contact" name="commentPropM"></textarea>
 				</div>
 				<div style="margin: auto;text-align: center; padding-bottom: 50px;">
 					<input class="submit submitContactForm" style="width: 250px;" type="submit" value="Modifier" id="submit" />
 				</div>
-
+				<input type="hidden" name="modifierProp" value="1" />
 			</form>
 
 	</div>

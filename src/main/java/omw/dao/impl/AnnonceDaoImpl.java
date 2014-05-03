@@ -19,6 +19,46 @@ import omw.model.Ville;
 public class AnnonceDaoImpl implements AnnonceDao{
 	
 	
+	public void updateProposition(Integer idProp, Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
+
+		try {
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+	
+			String formatedDate = date.concat(heure).concat(minute);
+			
+			PreparedStatement stmt = connection.prepareStatement("UPDATE `annonceproposition` SET estReponseARecherche = ? ,villeDepart = ?,villeArrivee=?, dateEtHeureTrajet=?, commentaire=?, prix=?, nbPlace=? WHERE idAnnonceProposition = ?");
+			stmt.setInt(1, rep);
+			stmt.setString(2, villeDepart);
+			stmt.setString(3, villeArrivee);
+			stmt.setString(4, formatedDate);
+			stmt.setString(5, comment);
+			stmt.setInt(6, Integer.parseInt(prix));
+			stmt.setInt(7, Integer.parseInt(nbPlace));
+			stmt.setInt(8, idProp);
+			
+			stmt.executeUpdate();
+				
+			PreparedStatement stmt2 = connection.prepareStatement("DELETE FROM etapes WHERE idAnnonceProposition = ?");
+			stmt2.setInt(1, idProp);
+			stmt2.executeUpdate();
+			
+			
+			for(int i=0;i<etapes.length;i++){
+				PreparedStatement stmt3 = connection.prepareStatement("INSERT INTO `etapes`(`idAnnonceProposition`, `nomVille`, `ordre`) VALUES(?,?,?)");
+				stmt3.setInt(1, idProp);
+				stmt3.setString(2, etapes[i]);
+				stmt3.setInt(3, i);
+				stmt3.executeUpdate();
+		    }
+			
+			stmt.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public void insertProposition(Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
 		/*

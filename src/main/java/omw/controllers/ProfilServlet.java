@@ -50,6 +50,39 @@ public class ProfilServlet extends GlobalInformationsServlet{
 		Map<String, String> erreursMessage = new HashMap<String, String>();
 		String login = (String) request.getSession().getAttribute("login");
 		
+		if(request.getParameter("modifierProp") != null){
+			
+			Integer idProp = Integer.parseInt(request.getParameter("idProp"));
+			
+			String villeDepart = request.getParameter("villeDepartPropM");
+			String villeArrivee = request.getParameter("villeArriveePropM");
+			String date = request.getParameter("datePropM");
+			String heure = request.getParameter("heurePropM");
+			String minute = request.getParameter("minutePropM");
+			String prix = request.getParameter("prixPropM");
+			String nbPlace = request.getParameter("nbPlacePropM");
+			String comment = request.getParameter("commentPropM");
+	 
+	        String[] etapes=request.getParameterValues("etapesPropM");
+	        
+	        AnnonceManager.getInstance().updateProposition(idProp, 0, villeDepart, villeArrivee, date, heure, minute, prix, nbPlace, comment, login, etapes);
+	        
+			
+		}
+		
+		Utilisateur user = UtilisateurManager.getInstance().getUser(login);
+		
+		/*LISTER SES ANNONCES*/
+			/*Annonces Proposition*/
+			request.setAttribute("propositions", AnnonceManager.getInstance().listerMesAnnonceProposition(login) );
+			request.setAttribute("propositions_size", (AnnonceManager.getInstance().listerMesAnnonceProposition(login)).size() );
+		
+			/*Annonces Recherche*/
+			request.setAttribute("recherches", AnnonceManager.getInstance().listerMesAnnonceRecherche(login) );
+			request.setAttribute("recherches_size", (AnnonceManager.getInstance().listerMesAnnonceRecherche(login)).size() );
+		
+		request.setAttribute("user", user );
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/profil.jsp");
 		view.forward(request, response);
 	}
