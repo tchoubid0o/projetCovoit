@@ -84,6 +84,14 @@ public class ProfilServlet extends GlobalInformationsServlet{
 	        AnnonceManager.getInstance().updateRecherche(idRech, villeDepart, villeArrivee, date, heure, minute, comment, login);
 			
 		}
+
+		if(request.getParameter("deleteAds") != null){
+			Integer idProp = Integer.parseInt(request.getParameter("id"));
+			
+			String type = request.getParameter("type");
+			
+			AnnonceManager.getInstance().deleteAds(idProp, type);
+		}
 		
 		Utilisateur user = UtilisateurManager.getInstance().getUser(login);
 		

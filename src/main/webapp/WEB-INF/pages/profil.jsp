@@ -61,7 +61,7 @@
 			<div id="myOffer" style="margin-top: 10px;">
 				<span class="titleAbout">Mes offres de Covoiturage <c:if
 						test="${propositions_size > 0 }">
-						(${propositions_size})
+						(<span class="nbS">${propositions_size}</span>)
 					</c:if> <c:if test="${propositions_size == 0}"> 
 						(0)
 					</c:if>
@@ -97,12 +97,13 @@
 										data-nbPlace="${proposition.nbPlace}" style="cursor: pointer;"
 										alt="Editer votre recherche" /></td>
 									<td style="width: 25px;"><img class="deleteAds"
-										src="img/delete.png" style="cursor: pointer;"
+										src="img/delete.png" data-idP="${proposition.idAnnonceProposition}" data-type="proposition" style="cursor: pointer;"
 										alt="Supprimer votre recherche" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					<div id="messageAjax"></div>
 				</div>
 				<c:if test="${propositions_size == 0 }">
 					<div class="lastCars center">Vous n'avez encore poster aucune
@@ -113,7 +114,7 @@
 			<div id="mySearch" style="margin-top: 10px;">
 				<span class="titleAbout">Mes recherches <c:if
 						test="${recherches_size > 0 }">
-						(${recherches_size})
+						(<span class="nbS">${recherches_size}</span>)
 					</c:if> <c:if test="${recherches_size == 0}"> 
 						(0)
 					</c:if>
@@ -144,18 +145,18 @@
 										style="cursor: pointer;" src="img/edit.png"
 										alt="Editer votre recherche" /></td>
 									<td style="width: 25px;"><img class="deleteAds"
-										style="cursor: pointer;" src="img/delete.png"
+										style="cursor: pointer;" data-idP="${recherche.idAnnonceRecherche}" data-type="recherche" src="img/delete.png"
 										alt="Supprimer votre recherche" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					<div id="messageAjax"></div>
 				</div>
 				<c:if test="${recherches_size == 0 }">
 					<div class="lastCars center">Vous n'avez encore poster aucune
 						recherche</div>
 				</c:if>
-
 
 			</div>
 		</div>
@@ -408,6 +409,18 @@ $(".editAds").click(function() {
 		}, 2000);
 	}
 
+});
+
+$(".deleteAds").click(function(){
+	$(this).parent().parent().hide();
+	var nbS = parseInt($(this).parent().parent().parent().parent().parent().parent().children(".titleAbout").children(".nbS").text());
+	var nbSafter = nbS - 1;
+	$(this).parent().parent().parent().parent().parent().parent().children(".titleAbout").children(".nbS").html(nbSafter);
+	$(this).parent().parent().parent().parent().parent().children("#messageAjax").html('<span class="red">L\'annonce a correctement été supprimée.</span>');
+	$.ajax({url : "profil",
+		type : "POST",
+		data : {deleteAds : 1, type : $(this).attr("data-type"), id : $(this).attr("data-idP")}
+	});
 });
 </script>
 

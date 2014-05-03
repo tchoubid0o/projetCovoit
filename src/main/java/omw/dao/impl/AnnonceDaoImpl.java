@@ -19,6 +19,43 @@ import omw.model.Ville;
 public class AnnonceDaoImpl implements AnnonceDao{
 	
 	
+	public void deleteAds(Integer idProp, String type){
+		
+		try {
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			
+			if(type.equals("proposition")){
+
+				PreparedStatement stmt = connection.prepareStatement("DELETE FROM annonceproposition WHERE idAnnonceProposition = ?");
+				stmt.setInt(1, idProp);
+				stmt.executeUpdate();
+				
+				stmt.close();
+				
+				PreparedStatement stmt2 = connection.prepareStatement("DELETE FROM etapes WHERE idAnnonceProposition = ?");
+				stmt2.setInt(1, idProp);
+				stmt2.executeUpdate();
+				
+				stmt2.close();
+				
+			}
+			if(type.equals("recherche")){
+				PreparedStatement stmt = connection.prepareStatement("DELETE FROM annoncerecherche WHERE idAnnonceRecherche = ?");
+				stmt.setInt(1, idProp);
+				stmt.executeUpdate();
+				
+				stmt.close();
+				
+			}
+				
+			connection.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void updateProposition(Integer idProp, Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
 
 		try {
