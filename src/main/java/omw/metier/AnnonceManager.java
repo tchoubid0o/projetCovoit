@@ -50,4 +50,7 @@ public class AnnonceManager {
 	public List<AnnonceProposition> listerMesAnnonceProposition(String login) {
 		return annonceDao.listerMesAnnonceProposition(login);
 	}
+	public void ajouterDemandePourAnnonce(Integer idAnnonceProposition, String login){
+		annonceDao.ajouterDemandePourAnnonce(idAnnonceProposition, login);
+	}
 }

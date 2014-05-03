@@ -121,6 +121,25 @@ public class AnnonceDaoImpl implements AnnonceDao{
 	}
 	*/
 	
+	public void ajouterDemandePourAnnonce(Integer idAnnonceProposition, String login){
+		
+		try{
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `reserver`(`login`,`idAnnonceProposition`, `demandeConfirmee`) VALUES(?,?,?)");
+			
+			stmt.setString(1, login);
+			stmt.setInt(2, idAnnonceProposition);
+			stmt.setInt(3, 0);
+			
+			stmt.close();
+			connection.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<AnnonceProposition> listerAnnonceProposition() {
 		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
 		try {
