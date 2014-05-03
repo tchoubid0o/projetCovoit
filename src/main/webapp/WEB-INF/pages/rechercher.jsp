@@ -7,6 +7,7 @@
 <section class="wrapper3" id="wrapperInsc">
 	<div class="width1000">
 		<div style="text-align: center;">
+			${villes}
 			<span class="titleAbout">Poster une recherche de Covoiturage</span>
 			<form action="rechercher" method="post">
 				<label for="villeDepart">Ville de départ :</label>

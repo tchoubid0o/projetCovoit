@@ -49,6 +49,7 @@ public class ProfilServlet extends GlobalInformationsServlet{
 	}
 
 	public void postRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("villes", AnnonceManager.getInstance().listerVille());
 		Map<String, String> erreursMessage = new HashMap<String, String>();
 		String login = (String) request.getSession().getAttribute("login");
 		

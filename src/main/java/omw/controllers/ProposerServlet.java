@@ -29,6 +29,8 @@ public class ProposerServlet extends GlobalInformationsServlet{
 	public void postRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		request.setAttribute("villes", AnnonceManager.getInstance().listerVille());
+		
 		String villeDepart = request.getParameter("villeDepart");
 		String villeArrivee = request.getParameter("villeArrivee");
 		String date = request.getParameter("date");
