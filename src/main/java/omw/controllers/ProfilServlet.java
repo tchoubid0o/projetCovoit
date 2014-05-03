@@ -24,6 +24,8 @@ public class ProfilServlet extends GlobalInformationsServlet{
 		String login = (String) request.getSession().getAttribute("login");
 		if(login != null){
 			
+			request.setAttribute("villes", AnnonceManager.getInstance().listerVille());
+			
 			Utilisateur user = UtilisateurManager.getInstance().getUser(login);
 			
 			/*LISTER SES ANNONCES*/
@@ -49,6 +51,8 @@ public class ProfilServlet extends GlobalInformationsServlet{
 	public void postRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> erreursMessage = new HashMap<String, String>();
 		String login = (String) request.getSession().getAttribute("login");
+		
+		request.setAttribute("villes", AnnonceManager.getInstance().listerVille());
 		
 		if(request.getParameter("modifierProp") != null){
 			

@@ -19,6 +19,8 @@ public class ProposerServlet extends GlobalInformationsServlet{
 	public void getRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
 		
+		request.setAttribute("villes", AnnonceManager.getInstance().listerVille());
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/proposer.jsp");
 		view.forward(request, response);
 	}

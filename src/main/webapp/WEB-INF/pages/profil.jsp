@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <jsp:include page="header.jsp" />
-
+${villes}
 <section class="wrapper3" id="wrapperInsc" style="padding: 20px;">
 	<div class="width1000">
 		<div style="text-align: center;">
@@ -177,7 +177,7 @@
 					<input type="hidden" name="idProp" id="idProp" /> <label
 						for="villeDepart" class="columnheader2">Ville de départ :</label>
 					<div>
-						<input type="text" class="input_contact" name="villeDepartPropM"
+						<input type="text" class="input_contact villeInput" name="villeDepartPropM"
 							id="villeDepartPropM" style="line-height: 40px; height: 30px;"
 							placeholder="Ville de Départ" />
 					</div>
@@ -185,7 +185,7 @@
 					<label for="villeArriveePropM" class="columnheader2">Ville
 						d'arrivée :</label><br />
 					<div>
-						<input type="text" class="input_contact" name="villeArriveePropM"
+						<input type="text" class="input_contact villeInput" name="villeArriveePropM"
 							id="villeArriveePropM" style="line-height: 40px; height: 30px;"
 							placeholder="ville d'Arrivée" />
 					</div>
@@ -280,7 +280,7 @@
 					<input type="hidden" name="idRech" id="idRech" /> <label
 						for="villeDepart" class="columnheader2">Ville de départ :</label>
 					<div>
-						<input type="text" class="input_contact" name="villeDepartRechM"
+						<input type="text" class="input_contact villeInput" name="villeDepartRechM"
 							id="villeDepartRechM" style="line-height: 40px; height: 30px;"
 							placeholder="Ville de Départ" />
 					</div>
@@ -288,7 +288,7 @@
 					<label for="villeArriveeRechM" class="columnheader2">Ville
 						d'arrivée :</label><br />
 					<div>
-						<input type="text" class="input_contact" name="villeArriveeRechM"
+						<input type="text" class="input_contact villeInput" name="villeArriveeRechM"
 							id="villeArriveeRechM" style="line-height: 40px; height: 30px;"
 							placeholder="ville d'Arrivée" />
 					</div>
@@ -362,13 +362,17 @@ $(".editAds").click(function() {
 					type : "POST",
 					data : {id : $(this).attr("data-idP")}
 			}).done(function(response) {
+					var currentEtape = response.length;
 					for (var i = 0; i < response.length; i++) {
-						$("#inputEtape").append('<div id="dynamicInputPropM" class="columnheader2">Etape <span class="idCurrentEtape">'	+ (i + 1)+ '</span><br><input type="text" class="input_contact" name="etapesPropM" value="'+response[i].nomVille+'">');
+						$("#inputEtape").append('<div id="dynamicInputPropM'+(i+1)+'" class="columnheader2">Etape <span class="idCurrentEtape">'	+ (i + 1)+ '</span><br><input type="text" class="input_contact villeInput" name="etapesPropM" id="villeEtape'+ (i+1) +'" value="'+response[i].nomVille+'">');
+					}
+					for(var a = response.length; a <15; a++){
+						$("#inputEtape").append('<div id="dynamicInputPropM'+(a+1)+'" class="columnheader2" style="display: none;">Etape <span class="idCurrentEtape">'	+ (a + 1)+ '</span><br><input type="text" class="input_contact villeInput" name="etapesPropM" id="villeEtape'+ (a+1) +'" >');
 					}
 
 					$("#addEtapeProp").click(function() {
-						var currentEtape = $(this).parent().children("#inputEtape").children("#dynamicInputPropM").last().children(".idCurrentEtape").text();
-						$("#inputEtape").append('<div id="dynamicInputPropM" class="columnheader2">Etape <span class="idCurrentEtape">'+ (parseInt(currentEtape) + 1)+ '</span><br><input type="text" class="input_contact" name="etapesPropM">');
+						$("#inputEtape").children("#dynamicInputPropM"+(currentEtape+1)).show();
+						currentEtape++;
 					});
 			});
 

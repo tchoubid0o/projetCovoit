@@ -65,4 +65,8 @@ public class AnnonceManager {
 	public void deleteAds(Integer idProp, String type){
 		annonceDao.deleteAds(idProp, type);
 	}
+	
+	public String listerVille(){
+		return annonceDao.listerVille();
+	}
 }

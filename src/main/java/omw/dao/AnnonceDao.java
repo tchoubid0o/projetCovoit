@@ -25,4 +25,6 @@ public interface AnnonceDao {
 	public void updateRecherche(Integer idRech, String villeDepart, String villeArrivee, String date, String heure, String minute, String comment,	String login);
 
 	public void deleteAds(Integer idProp, String type);
+	
+	public String listerVille();
 }

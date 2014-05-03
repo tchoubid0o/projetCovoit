@@ -13,18 +13,18 @@
 
 <link rel="stylesheet" media="screen" type="text/css" title="Design"
 	href="css/design.css" />
-<script type="text/javascript"
-	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <!-- Datepicker -->
 <link rel="stylesheet" type="text/css"
 	href="js/datepicker/jquery-ui.css">
 <link rel="stylesheet" type="text/css"
 	href="js/datepicker/demos.css">
 <script src="js/nav.js"></script>
-<script src="js/datepicker/jquery-1.5.1.js"></script>
-<script src="js/datepicker/jquery.ui.core.js"></script>
+<!-- <script src="js/datepicker/jquery.ui.core.js"></script>
 <script src="js/datepicker/jquery.ui.widget.js"></script>
-<script src="js/datepicker/jquery.ui.datepicker.js"></script>
+<script src="js/datepicker/jquery.ui.datepicker.js"></script> -->
 <script src="js/datepicker/jquery.ui.datepicker-fr.js"></script>
 <script>
 	$(function() {

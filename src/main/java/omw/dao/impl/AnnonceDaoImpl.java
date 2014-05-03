@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.hamcrest.core.SubstringMatcher;
 
+import com.google.gson.Gson;
+
 import omw.dao.AnnonceDao;
 import omw.model.AnnonceProposition;
 import omw.model.AnnonceRecherche;
@@ -18,6 +20,55 @@ import omw.model.Ville;
 
 public class AnnonceDaoImpl implements AnnonceDao{
 	
+	
+	public String listerVille(){
+		
+		String script = null;
+		String[] allVille = new String[36568];
+		int a = 0;
+		
+		try {
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			
+				Statement stmt = connection.createStatement();
+				ResultSet results = stmt.executeQuery("SELECT ville_nom_reel FROM villes_france");
+				
+				int i =0;
+				while (results.next()) {
+					allVille[i] = results.getString("ville_nom_reel");
+					i++;
+				}
+				
+				
+				String json = new Gson().toJson(allVille);
+				
+				script = "<script>\n";
+				script += "$( document ).ready(function() {\n";
+				script += "$(\"#villesListe\").html('"+json+"');\n";
+				script += "var availableTags = "+json+";\n";
+				//script += "var test = [\"11\", \"22\", \"33\", \"331\", null]; \n";
+				script += "$(\"#villeDepart\").autocomplete({source: availableTags, minLength: 3});\n";
+				script += "$(\"#villeArrivee\").autocomplete({source: availableTags, minLength: 3});\n";
+				script += "$(\".villeInput\").autocomplete({source: availableTags, minLength: 3});\n";
+				for(a = 1; a<= 15; a++){
+					script += "$(\"#villeEtape"+a+"\").autocomplete({source: availableTags, minLength: 3});\n";
+				}
+				script += "});\n";
+				script += "</script>\n";
+				
+				
+				
+				stmt.close();
+				
+				
+			connection.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return script;
+	}
 	
 	public void deleteAds(Integer idProp, String type){
 		

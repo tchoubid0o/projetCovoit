@@ -8,6 +8,8 @@
 	<div class="width1000">
 		<div style="text-align: center;">
 			<span class="titleAbout">Nouveau trajet</span>
+			<div id="villesListe" style="display: none;"></div>
+			${villes}
 			<form action="proposer" method="post">
 				<label for="villeDepart">Ville de départ :</label>
 				<div>
@@ -21,21 +23,37 @@
 				<label for="etapes">Etapes éventuelles :</label><br />
 				<div>
 					<div id="dynamicInput">
-          				Etape 1<br><input type="text" name="etapes">
+          				Etape 1<br><input type="text" id="villeEtape1" name="etapes">
      				</div>
+     				<div id="dynamicInput2" style="display: none;">Etape 2<br><input type="text" id="villeEtape2" name="etapes"></div>
+     				<div id="dynamicInput3" style="display: none;">Etape 3<br><input type="text" id="villeEtape3" name="etapes"></div>
+     				<div id="dynamicInput4" style="display: none;">Etape 4<br><input type="text" id="villeEtape4" name="etapes"></div>
+     				<div id="dynamicInput5" style="display: none;">Etape 5<br><input type="text" id="villeEtape5" name="etapes"></div>
+     				<div id="dynamicInput6" style="display: none;">Etape 6<br><input type="text" id="villeEtape6" name="etapes"></div>
+     				<div id="dynamicInput7" style="display: none;">Etape 7<br><input type="text" id="villeEtape7" name="etapes"></div>
+     				<div id="dynamicInput8" style="display: none;">Etape 8<br><input type="text" id="villeEtape8" name="etapes"></div>
+     				<div id="dynamicInput9" style="display: none;">Etape 9<br><input type="text" id="villeEtape9" name="etapes"></div>
+     				<div id="dynamicInput10" style="display: none;">Etape 10<br><input type="text" id="villeEtape10" name="etapes"></div>
+     				<div id="dynamicInput11" style="display: none;">Etape 11<br><input type="text" id="villeEtape11" name="etapes"></div>
+     				<div id="dynamicInput12" style="display: none;">Etape 12<br><input type="text" id="villeEtape12" name="etapes"></div>
+     				<div id="dynamicInput13" style="display: none;">Etape 13<br><input type="text" id="villeEtape13" name="etapes"></div>
+     				<div id="dynamicInput14" style="display: none;">Etape 14<br><input type="text" id="villeEtape14" name="etapes"></div>
+     				<div id="dynamicInput15" style="display: none;">Etape 15<br><input type="text" id="villeEtape15" name="etapes"></div>
+     				
      				<input type="button" value="Ajouter une autre étape" style="font-family: Verdana,Arial,sans-serif;font-size: 12px;" onClick="addInput('dynamicInput');">
 					<script>
 					var counter = 1;
 					var limit = 15;
+		
 					function addInput(divName){
 					     if (counter == limit)  {
 					          alert("Vous avez atteint la limite des " + counter + " étapes possibles.");
 					     }
 					     else {
-					          var newdiv = document.createElement('div');
-					          newdiv.innerHTML = "Etape " + (counter + 1) + " <br><input type='text' name='etapes'>";
-					          document.getElementById(divName).appendChild(newdiv);
-					          counter++;
+					    	 
+					    	 $("#dynamicInput"+(counter+1)).show();
+					    	 counter++;
+					         	
 					     }
 					}
 					</script>
