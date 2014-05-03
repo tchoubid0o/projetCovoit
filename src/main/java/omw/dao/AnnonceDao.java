@@ -21,4 +21,6 @@ public interface AnnonceDao {
 	public List<AnnonceProposition> listerMesAnnonceProposition(String login);
 	
 	public void updateProposition(Integer idProp, Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes);
+
+	public void updateRecherche(Integer idRech, String villeDepart, String villeArrivee, String date, String heure, String minute, String comment,	String login);
 }

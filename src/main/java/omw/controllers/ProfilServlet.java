@@ -70,6 +70,21 @@ public class ProfilServlet extends GlobalInformationsServlet{
 			
 		}
 		
+		if(request.getParameter("modifierRech") != null){
+			
+			Integer idRech = Integer.parseInt(request.getParameter("idRech"));
+			
+			String villeDepart = request.getParameter("villeDepartRechM");
+			String villeArrivee = request.getParameter("villeArriveeRechM");
+			String date = request.getParameter("dateRechM");
+			String heure = request.getParameter("heureRechM");
+			String minute = request.getParameter("minuteRechM");
+			String comment = request.getParameter("commentRechM");
+	        
+	        AnnonceManager.getInstance().updateRecherche(idRech, villeDepart, villeArrivee, date, heure, minute, comment, login);
+			
+		}
+		
 		Utilisateur user = UtilisateurManager.getInstance().getUser(login);
 		
 		/*LISTER SES ANNONCES*/

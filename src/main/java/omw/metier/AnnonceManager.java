@@ -38,6 +38,10 @@ public class AnnonceManager {
 	public void updateProposition(Integer idProp, Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
 		annonceDao.updateProposition(idProp, rep, villeDepart, villeArrivee, date, heure, minute, prix, nbPlace, comment, login, etapes);
 	}
+	
+	public void updateRecherche(Integer idRech, String villeDepart, String villeArrivee, String date, String heure, String minute, String comment,	String login){
+		annonceDao.updateRecherche(idRech, villeDepart, villeArrivee, date, heure, minute, comment, login);
+	}
 
 	public void insertProposition(Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
 		annonceDao.insertProposition(rep, villeDepart, villeArrivee, date, heure, minute, prix, nbPlace, comment, login, etapes);
