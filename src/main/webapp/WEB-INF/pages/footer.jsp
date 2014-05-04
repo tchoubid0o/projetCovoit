@@ -67,25 +67,28 @@
                             demandes d’informations, nous y répondrons 
                             dans les plus bref délais.<br/>
                         </div>
-                        <form method="post" action="">
-                            <input class="input_contact" type="text" name="nom" placeholder="Votre nom..."/>
-                            <input class="input_contact" type="text" name="email" placeholder="Votre email..."/>
-                            <textarea class="textarea_contact" name="message" placeholder="Votre message..."></textarea>
+                        <form method="post" action="ajaxcontact" id="contact_form">
+                            <input class="input_contact" type="text" name="nom" id="nomcontact" placeholder="Votre nom..."/>
+                            <input class="input_contact" type="email" name="email" id="emailcontact" placeholder="Votre email..."/>
+                            <textarea class="textarea_contact" name="message" id="messagecontact" placeholder="Votre message..."></textarea>
                             <input type="submit" value="Contacter" class="submitContactForm"/>
                         </form>
+                        <div id="contact_result" style="display: none"></div>
                     </div>
                 </div>
                 <div class="middleColumn" style="text-align: left;">
                     <div class="columnInside" style="width: 80%; margin: auto;">
+                    	
                         <div class="columnheader2" style="text-align: left;">NEWSLETTER</div>
                         <div class="gill">Pour suivre l’évolution du site, le
                             développement de nouveaux modules,
                             inscrivez-vous à notre newsletter.<br/>
                         </div>
-                        <form method="post" action="">
-                            <input class="input_contact" type="text" name="email" placeholder="Votre email..."/>
+                        <form id="newsletter_form" action="ajaxnewsletter">
+                            <input class="input_contact" type="text" name="email" id="newsletter_email"  placeholder="Votre email..."/>
                             <input type="submit" value="Newsletter" class="submitContactForm"/>
                         </form>
+                        <div id="newsletter_result" style="display: none"></div>
                     </div>
                 </div>
                 <div class="rightColumn" style="text-align: left;">
@@ -205,6 +208,54 @@
                 });
             });
         </script>
+        <script>
+                    	$(document).ready(function(){
+                    		
+                    		  $("#newsletter_form").submit(function(){
+                    			  event.preventDefault();
+                    			  if($("#newsletter_email").val() != ""){
+                    			  $.ajax({ url:"ajaxnewsletter", type:"POST", 
+                    					data: $("#newsletter_form").serialize()
+                    					}).done(function (response){		  		
+                    						$("#newsletter_result").html("<div style='color: #ea3c3d; margin-top: 15px;'>"+response+"</div>");
+                    						$("#newsletter_form").slideToggle();
+                    						$("#newsletter_result").slideToggle();	
+                    					})
+                    					.fail(function (response){		
+                    				  		$("#newsletter_result").html("<div style='color: #ea3c3d; margin-top: 15px;'>"+response+"</div>");
+                    				  		$("#newsletter_result").slideToggle();
+                    				  	});
+                    			  }else{
+                    				  $("#newsletter_result").html("<div style='color: #ea3c3d; margin-top: 15px;'>Vous devez renseigner une adresse email.</div>");
+                    				  $("#newsletter_result").show("slow");
+                    				  
+                    			  }
+                    		  }); 	
+                    		
+                    	});
+                    	
+                    	$(document).ready(function(){
+                    		$("#contact_form").submit(function(){
+                    			event.preventDefault(); 
+                    			if($("#nomcontact").val() != "" && $("#emailcontact").val() != "" && $("#messagecontact").text() != ""){
+                    			$.ajax({ url:"ajaxcontact", type:"POST", 
+                    				data: $("#contact_form").serialize()
+                    			}).done(function (response){		  		
+                    				$("#contact_result").html("<div style='color: #ea3c3d; margin-top: 15px;'>"+response+"</div>");
+                    				$("#contact_form").slideToggle();
+                    				$("#contact_result").slideToggle();	
+                    			})
+                    			.fail(function (response){		
+                    				$("#contact_result").html("<div style='color: #ea3c3d; margin-top: 15px;'>"+response+"</div>");
+                    			});
+                    			}else{
+                  				  $("#contact_result").html("<div style='color: #ea3c3d; margin-top: 15px;'>Vous devez renseigner tous les champs.</div>");
+                  				  $("#contact_result").show("slow");
+								}
+                    		}); 	
+                    	});
+                    	
+                    	</script>
         <div id="back-top" style="border: 1px solid #121212;"><a href="#top"><img src="img/top.png" alt=""></a></div>
         <div id="global"></div>
     </body> 
