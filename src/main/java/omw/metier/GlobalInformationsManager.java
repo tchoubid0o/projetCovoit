@@ -1,8 +1,12 @@
 package omw.metier;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import omw.dao.GlobalInformationsDao;
 import omw.dao.impl.GlobalInformationsDaoImpl;
+import omw.model.AnnonceProposition;
+import omw.model.AnnonceRecherche;
 
 public class GlobalInformationsManager {
 
@@ -19,20 +23,11 @@ public class GlobalInformationsManager {
 		}
 		return instance;
 	}
-	/*
-	public Integer countImagesDataBase(){
-		return globalInformationsDao.countImagesDataBase();
+	public List<AnnonceProposition> listLastOffers(){
+		return globalInformationsDao.listLastOffers();
 	}
 	
-	public Integer countUsersDataBase(){
-		return globalInformationsDao.countUsersDataBase();
+	public List<AnnonceRecherche> listLastSearch(){
+		return globalInformationsDao.listLastSearch();
 	}
-	
-	public Integer countVotesDataBase(){
-		return globalInformationsDao.countVotesDataBase();
-	}
-
-	public ArrayList<String> returnAllCategorie() {
-		return globalInformationsDao.returnAllCategorie();
-	}*/
 }

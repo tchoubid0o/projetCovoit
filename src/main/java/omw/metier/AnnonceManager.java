@@ -78,4 +78,8 @@ public class AnnonceManager {
 	public List<AnnonceProposition> listerRechercheProposition(String villeDepart, String villeArrivee){
 		return annonceDao.listerRechercheProposition(villeDepart, villeArrivee);
 	}
+	
+	public String ucfirst(String chaine){
+		return annonceDao.ucfirst(chaine);
+	}
 }

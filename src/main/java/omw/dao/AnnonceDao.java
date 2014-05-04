@@ -31,4 +31,6 @@ public interface AnnonceDao {
 	public String listerVille();
 	
 	public List<AnnonceProposition> listerRechercheProposition(String villeDepart, String villeArrivee);
+	
+	public String ucfirst(String chaine);
 }

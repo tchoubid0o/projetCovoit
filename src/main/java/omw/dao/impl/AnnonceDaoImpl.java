@@ -580,7 +580,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		
 	}
 	
-	public static String ucfirst(String chaine){
+	public String ucfirst(String chaine){
 		return chaine.substring(0, 1).toUpperCase()+ chaine.substring(1).toLowerCase();
 	}
 

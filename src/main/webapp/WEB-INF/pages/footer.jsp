@@ -1,4 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <section class="wrapper4">
             <div class="width1000">
                 <div class="align">
@@ -10,83 +12,34 @@
                     <span style="color: #292a2b;">Les dernières offres<br/></span>
 
                     <table class="lastCars">
-                        <tr>
-                            <td>Lille</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Lomme</td>
-                            <td>5€</td>
-                            <td>le 16/03/14</td>
-                        </tr>
-                        <tr>
-                            <td>Lille</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Englos</td>
-                            <td>4€</td>
-                            <td>le 16/03/14</td>
-                        </tr>
-                        <tr>
-                            <td>Béthune</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Lille</td>
-                            <td>6€</td>
-                            <td>le 16/03/14</td>
-                        </tr>
-                        <tr>
-                            <td>Valenciennes</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Lomme</td>
-                            <td>4€</td>
-                            <td>le 16/03/14</td>
-                        </tr>
-                        <tr>
-                            <td>La Bassée</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Arras</td>
-                            <td>9€</td>
-                            <td>le 16/03/14</td>
-                        </tr>
-                    </table>
+					<tbody>
+						<c:forEach var="last_offers" begin="0" end="${last_offers_size}"	step="1" items="${last_offers}">
+						<tr>
+							<td>${last_offers.villeDepart}</td>
+							<td><img src="img/rightarrow.png" alt=""></td>
+							<td>${last_offers.villeArrivee}</td>
+							<td>${last_offers.prix}€</td>
+							<td>le ${last_offers.dateEtHeureTrajet}</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
                 </div>
                 <div class="rightColumn500" style="padding-top: 20px;">
 
                     <span style="color: #292a2b;">Les dernières demandes<br/></span>
                     <table class="lastCars">
-                        <tr>
-                            <td>Abreschviller</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Airvault</td>
-                            <td>15€</td>
-                            <td>le 16/03/14</td>
-                        </tr>
-                        <tr>
-                            <td>Aix-En-Provence</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Marseille</td>
-                            <td>18€</td>
-                            <td>le 30/03/14</td>
-                        </tr>
-                        <tr>
-                            <td>Angoulême</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Marennes</td>
-                            <td>5€</td>
-                            <td>le 16/03/14</td>
-                        </tr>
-                        <tr>
-                            <td>Lens</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Paris</td>
-                            <td>14€</td>
-                            <td>le 16/03/14</td>
-                        </tr>
-                        <tr>
-                            <td>Seurre</td>
-                            <td><img src="img/rightarrow.png" alt=""/></td>
-                            <td>Nozay</td>
-                            <td>12€</td>
-                            <td>le 16/03/14</td>
-                        </tr>
-                    </table>
+					<tbody>
+						<c:forEach var="last_searchs" begin="0" end="${last_searchs_size}"	step="1" items="${last_searchs}">
+						<tr>
+							<td>${last_searchs.villeDepartRecherche}</td>
+							<td><img src="img/rightarrow.png" alt=""></td>
+							<td>${last_searchs.villeArriveeRecherche}</td>
+							<td>le ${last_searchs.dateEtHeureRecherche}</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
                 </div>
                 <div style="clear: both;"></div>
             </div>

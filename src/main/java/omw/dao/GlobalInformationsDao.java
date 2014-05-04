@@ -1,17 +1,15 @@
 package omw.dao;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import omw.model.AnnonceProposition;
+import omw.model.AnnonceRecherche;
 
 public interface GlobalInformationsDao {
 
-	/*
-	public Integer countImagesDataBase();
+	public List<AnnonceProposition> listLastOffers();
 	
-	public Integer countVotesDataBase();
-	
-	public Integer countUsersDataBase();
-
-	public ArrayList<String> returnAllCategorie();
-	*/
+	public List<AnnonceRecherche> listLastSearch();
 	
 }
