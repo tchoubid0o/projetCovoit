@@ -225,11 +225,13 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			
 			
 			for(int i=0;i<etapes.length;i++){
-				PreparedStatement stmt3 = connection.prepareStatement("INSERT INTO `etapes`(`idAnnonceProposition`, `nomVille`, `ordre`) VALUES(?,?,?)");
-				stmt3.setInt(1, idProp);
-				stmt3.setString(2, etapes[i]);
-				stmt3.setInt(3, i);
-				stmt3.executeUpdate();
+				if(etapes[i] != ""){
+					PreparedStatement stmt3 = connection.prepareStatement("INSERT INTO `etapes`(`idAnnonceProposition`, `nomVille`, `ordre`) VALUES(?,?,?)");
+					stmt3.setInt(1, idProp);
+					stmt3.setString(2, etapes[i]);
+					stmt3.setInt(3, i);
+					stmt3.executeUpdate();
+				}
 		    }
 			
 			stmt.close();
@@ -303,11 +305,13 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			}
 			
 			for(int i=0;i<etapes.length;i++){
-				PreparedStatement stmt2 = connection.prepareStatement("INSERT INTO `etapes`(`idAnnonceProposition`, `nomVille`, `ordre`) VALUES(?,?,?)");
-				stmt2.setInt(1, lastId);
-				stmt2.setString(2, etapes[i]);
-				stmt2.setInt(3, i);
-				stmt2.executeUpdate();
+				if(etapes[i] != ""){
+					PreparedStatement stmt2 = connection.prepareStatement("INSERT INTO `etapes`(`idAnnonceProposition`, `nomVille`, `ordre`) VALUES(?,?,?)");
+					stmt2.setInt(1, lastId);
+					stmt2.setString(2, etapes[i]);
+					stmt2.setInt(3, i);
+					stmt2.executeUpdate();
+				}
 		    }
 			
 			stmt.close();
