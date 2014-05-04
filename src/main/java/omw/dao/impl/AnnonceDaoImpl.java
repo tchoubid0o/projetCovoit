@@ -21,6 +21,99 @@ import omw.model.Ville;
 public class AnnonceDaoImpl implements AnnonceDao{
 	
 	
+	public List<AnnonceProposition> listerRechercheProposition(String villeDepart, String villeArrivee){
+		//Schema trajet possible:
+				// A ---> B
+				// A ~~~~ B ---> C
+				// Other ~~~~ A ~~~~ B ~~~~ D    Requête stmt et stmt2; Les 3 autres cas sont traités simplement avec stmt3
+				// Other ~~~~ A ~~~~ B
+		
+		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+
+			ResultSet results = null;
+			
+			PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT AP.idAnnonceProposition FROM annonceproposition AP INNER JOIN etapes ET ON AP.idAnnonceProposition = ET.idAnnonceProposition "
+					+ "WHERE AP.estReponseARecherche = 0 ");
+			
+			results = stmt.executeQuery();
+
+			while (results.next()) {
+				//System.out.println(results.getInt("idAnnonceProposition"));
+				int i = 0;
+				ResultSet results2 = null;
+				
+				//liste.add(proposition);
+				
+				PreparedStatement stmt2 = connection.prepareStatement("SELECT * FROM etapes WHERE idAnnonceProposition = ? ORDER BY idEtape ASC");
+				stmt2.setInt(1, results.getInt("idAnnonceProposition"));
+				results2 = stmt2.executeQuery();
+				ArrayList<String> maListe = new ArrayList<String>();
+				//System.out.println("----------------");
+				while (results2.next()) {
+					//System.out.println(results2.getString("nomVille"));
+					maListe.add(results2.getString("nomVille"));
+				}
+				
+				maListe.add("null");
+				Integer taille = maListe.size()-1;
+				Integer firstV = 0;
+				Integer lastV = 0;
+				for(i=0; i< taille; i++){
+					//System.out.println(villeDepart+" et "+maListe.get(i)+" avec "+maListe.get(i+1)+" et "+villeArrivee);
+					if(maListe.get(i).toLowerCase().equals(villeDepart)){
+						
+						//System.out.println("idAnnonceProposition"+i+"test");
+						firstV = i;
+					}
+					if(maListe.get(i).toLowerCase().equals(villeArrivee)){
+						lastV = i;
+					}
+				}
+				
+				if(firstV < lastV){
+					liste.add(listerUneAnnonceProposition(results.getInt("idAnnonceProposition")));
+				}
+				
+				results2.close();
+				stmt2.close();
+				
+			}
+			results.close();
+			stmt.close();
+
+			ResultSet results3 = null;
+			
+			PreparedStatement stmt3 = connection.prepareStatement("SELECT DISTINCT AP.idAnnonceProposition FROM annonceproposition AP RIGHT JOIN etapes ET ON AP.idAnnonceProposition = ET.idAnnonceProposition "
+					+ "WHERE AP.estReponseARecherche = 0 "
+					+ "AND ((AP.villeDepart = ? AND AP.villeArrivee = ?) OR (AP.villeDepart = ? AND ET.nomVille = ?) OR (ET.nomVille = ? AND AP.villeArrivee = ?))");
+			stmt3.setString(1,villeDepart);
+			stmt3.setString(2,villeArrivee);
+			stmt3.setString(3,villeDepart);
+			stmt3.setString(4,villeArrivee);
+			stmt3.setString(5,villeDepart);
+			stmt3.setString(6,villeArrivee);
+			
+			results3 = stmt3.executeQuery();
+
+			while (results3.next()) {
+				liste.add(listerUneAnnonceProposition(results3.getInt("idAnnonceProposition")));
+			}
+			results3.close();
+			stmt3.close();
+			
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+		return liste;	
+	}
+	
 	public String listerVille(){
 		
 		String script = null;
@@ -360,6 +453,48 @@ public class AnnonceDaoImpl implements AnnonceDao{
 
 
 		return liste;
+	}
+	
+	public AnnonceProposition listerUneAnnonceProposition(Integer id) {
+		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
+		try {
+			Connection connection = DataSourceProvider.getDataSource()
+					.getConnection();
+			
+			ResultSet results = null;
+
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE idAnnonceProposition = ?");
+			stmt.setInt(1,id);
+			results = stmt.executeQuery();
+
+			while (results.next()) {
+				AnnonceProposition proposition = new AnnonceProposition(
+						results.getInt("idAnnonceProposition"),
+						results.getBoolean("estReponseARecherche"),
+						ucfirst(results.getString("villeDepart")),
+						ucfirst(results.getString("villeArrivee")),
+						(results.getString("dateEtHeureTrajet")).substring(0,10),
+						(results.getString("dateEtHeureTrajet")).substring(10,12),
+						(results.getString("dateEtHeureTrajet")).substring(12),
+						results.getString("commentaire"),
+						results.getInt("prix"),
+						results.getInt("nbPlace"),
+						results.getString("login"));
+				
+				return proposition;
+				
+			}
+			results.close();
+			stmt.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+
+		
 	}
 	
 	public List<AnnonceProposition> listerMesAnnonceProposition(String login) {

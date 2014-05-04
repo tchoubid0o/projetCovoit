@@ -58,6 +58,11 @@ public class AnnonceManager {
 	public List<AnnonceProposition> listerMesAnnonceProposition(String login) {
 		return annonceDao.listerMesAnnonceProposition(login);
 	}
+	
+	public AnnonceProposition listerUneAnnonceProposition(Integer id){
+		return annonceDao.listerUneAnnonceProposition(id);
+	}
+	
 	public void ajouterDemandePourAnnonce(Integer idAnnonceProposition, String login){
 		annonceDao.ajouterDemandePourAnnonce(idAnnonceProposition, login);
 	}
@@ -68,5 +73,9 @@ public class AnnonceManager {
 	
 	public String listerVille(){
 		return annonceDao.listerVille();
+	}
+	
+	public List<AnnonceProposition> listerRechercheProposition(String villeDepart, String villeArrivee){
+		return annonceDao.listerRechercheProposition(villeDepart, villeArrivee);
 	}
 }
