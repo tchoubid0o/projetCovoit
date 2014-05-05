@@ -31,8 +31,6 @@ public class AjaxReserverServlet extends HttpServlet {
 		
 		if(request.getParameter("reserverForm") != null){
 			
-			System.out.printf("in--");
-			
 			String login = (String) request.getSession().getAttribute("login");
 			
 			if(!login.equals("") && login != null){

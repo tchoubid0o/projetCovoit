@@ -376,13 +376,10 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		try{
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			
-			System.out.printf("in");
-			
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `reserver`(`login`,`idAnnonceProposition`, `demandeConfirmee`) VALUES(?,?,?)");
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `reserver`(`login`,`idAnnonceProposition`, `demandeConfirmee`) VALUES(?,?,0)");
 			
 			stmt.setString(1, login);
 			stmt.setInt(2, idAnnonceProposition);
-			stmt.setInt(3, 0);
 			
 			stmt.executeUpdate();
 			

@@ -2,19 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<script>
-            $(document).ready(function() {
-            	
-            	$(".reservation_form").submit(function (event){
-            		
-            		event.preventDefault();
-            		$.ajax({ url:"ajaxreserver", type:"POST", 
-        				data: $(this).serialize()
-        			});
-            	});
-            });
-</script>
-
 <jsp:include page="header.jsp" />
 
 <section class="wrapper3" id="wrapperInsc">
@@ -38,11 +25,29 @@
 							<td>${proposition.prix}€</td>
 							<td>Nombre de places: ${proposition.nbPlace}</td>
 							<td>${proposition.dateEtHeureTrajet} à ${proposition.heure}h${proposition.minute}min</td>
-							<td><form method="post" action="reserver" class="reservation_form"><input type="hidden" name="idAnnonceProposition" value="${proposition.idAnnonceProposition}" /><input type="submit" value="Réserver" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="reserverForm" value="1" /></form></td>
+							<td>
+								<form method="post" action="reserver" class="reservation_form">
+									<input type="hidden" name="idAnnonceProposition" value="${proposition.idAnnonceProposition}" />
+									<input type="hidden" name="reserverForm" value="1" />
+									<input type="submit" value="Réserver" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none; width: 100px;" />
+								</form>
+								<div class="resultReserv" style="display: none;"></div>
+							</td>
 						</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<script>			            	
+					$(".reservation_form").submit(function (event){
+						event.preventDefault();
+						$(this).css("display", "none");
+						$(this).parent().children(".resultReserv").html("<div style='color: #ea3c3d;'>L'annonce a été réservée.</div>");
+						$(this).parent().children(".resultReserv").slideDown();
+						$.ajax({ url:"ajaxreserver", type:"POST", 
+							data: $(this).serialize()
+						});
+					});
+				</script>
 			
 		<c:if test="${propositions_size == 0 }">
 			<div class="lastCars center">Aucun résultat</div>
