@@ -33,21 +33,8 @@ public class TrouverServlet extends GlobalInformationsServlet{
 		view.forward(request, response);
 	}
 
-	public void postRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String login = (String) request.getSession().getAttribute("login");
-		
-		if(!login.equals("") && login != null){
-			
-			Integer idAnnonceProposition = Integer.parseInt(request.getParameter("idAnnonceProposition"));
-			
-			AnnonceManager.getInstance().ajouterDemandePourAnnonce(idAnnonceProposition, login);			
-		}
-		else{
-			
-			System.out.printf("user not logged");
-		}
-		
+	public void postRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/trouver.jsp");
 		view.forward(request, response);
 	}

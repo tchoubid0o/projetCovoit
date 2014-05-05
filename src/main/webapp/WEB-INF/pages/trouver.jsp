@@ -2,6 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<script>
+            $(document).ready(function() {
+            	
+            	$(".reservation_form").submit(function (event){
+            		
+            		event.preventDefault();
+            		$.ajax({ url:"ajaxreserver", type:"POST", 
+        				data: $(this).serialize()
+        			});
+            	});
+            });
+</script>
+
 <jsp:include page="header.jsp" />
 
 <section class="wrapper3" id="wrapperInsc">
@@ -25,7 +38,7 @@
 							<td>${proposition.prix}€</td>
 							<td>Nombre de places: ${proposition.nbPlace}</td>
 							<td>${proposition.dateEtHeureTrajet} à ${proposition.heure}h${proposition.minute}min</td>
-							<td><form method="post" action="reserver"><input type="hidden" name="idAnnonceProposition" value="${proposition.idAnnonceProposition}" /><input type="submit" value="Réserver" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;"></form></td>
+							<td><form method="post" action="reserver" class="reservation_form"><input type="hidden" name="idAnnonceProposition" value="${proposition.idAnnonceProposition}" /><input type="submit" value="Réserver" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="reserverForm" value="1" /></form></td>
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -51,7 +64,7 @@
 							<td><img src="img/rightarrow.png" alt=""></td>
 							<td>${propositionp.villeArriveeRecherche}</td>
 							<td>${propositionp.dateEtHeureRecherche} à ${propositionp.heure}h${propositionp.minute}min</td>
-							<td><form method="post" action="reserver"><input type="hidden" name="idAnnonceProposition" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;"></form></td>
+							<td><form method="post" action="reserver" class="proposition_form"><input type="hidden" name="idAnnonceProposition" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="proposerForm" value="1" /></form></td>
 						</tr>
 						</c:forEach>
 					</tbody>
