@@ -83,6 +83,7 @@ ${villes}
 									<td>Nombre de places: ${proposition.nbPlace}</td>
 									<td>${proposition.dateEtHeureTrajet} à
 										${proposition.heure}h${proposition.minute}min</td>
+									<td><img class="seeMore" data-type="offers" data-id="${proposition.idAnnonceProposition}" data-login="${proposition.login}" src="img/downarrow2.png" alt="" /></td>
 									<td style="width: 25px;"><img class="editAds"
 										src="img/edit.png" data-size="${propositions_size}"
 										data-type="proposition"
@@ -100,6 +101,16 @@ ${villes}
 										src="img/delete.png" data-idP="${proposition.idAnnonceProposition}" data-type="proposition" style="cursor: pointer;"
 										alt="Supprimer votre recherche" /></td>
 								</tr>
+								<tr style="display: none;">
+									<td colspan="1"></td>
+									<td colspan="2">Commentaire: ${proposition.commentaire}</td>
+									<td colspan="7" class="tdEtapes">Etapes: ${proposition.villeDepart}&nbsp;&nbsp;<img src="img/rightarrow.png" alt="">&nbsp;&nbsp;<span class="etapesMore${proposition.idAnnonceProposition}"></span>${proposition.villeArrivee}</td>	
+								</tr>
+								<tr style="display: none;">
+									<td colspan="1"></td>
+									<td colspan="2" class="userAddMore${proposition.idAnnonceProposition}"></td>
+									<td colspan="7"></td>
+								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -110,6 +121,43 @@ ${villes}
 						offre</div>
 				</c:if>
 			</div>
+			<script>				
+				$(".seeMore").click(function(event){
+
+					var type= $(this).attr("data-type");
+					var id = $(this).attr("data-id");
+					var login = $(this).attr("data-login");
+					
+					if($(this).parent().parent().next("tr").css('display') != 'none'){
+						$(this).parent().parent().next("tr").hide();
+						$(this).parent().parent().next("tr").next("tr").hide();
+						$(this).attr("src", "img/downarrow2.png");
+					}
+					else{
+						$(this).parent().parent().next("tr").show();
+						$(this).parent().parent().next("tr").next("tr").show();
+						$(this).attr("src", "img/uparrow2.png");
+					}
+					
+					
+					event.preventDefault();
+					$.ajax({ dataType: "json",url:"etapes", type:"POST", 
+        				data: "type="+type+"&seeMoreInfos=1&id="+id
+        			}).done(function(data){
+        				var etapesTemp = "";
+        				for (var i = 0; i < data.length; ++i) {
+        					etapesTemp += ""+data[i].nomVille+"&nbsp;&nbsp;<img src='img/rightarrow.png' alt=''>&nbsp;&nbsp;";
+        				}
+        				$(".etapesMore"+id).html(etapesTemp);
+        			});
+					
+					$.ajax({ dataType: "json",url:"getuser", type:"POST", 
+        				data: "login="+login+"&seeMoreInfos=1"
+        			}).done(function(data){
+        				$(".userAddMore"+id).html(""+data.prenom+" "+data.nom+"");
+        			});
+				});
+			</script>
 
 			<div id="mySearch" style="margin-top: 10px;">
 				<span class="titleAbout">Mes recherches <c:if

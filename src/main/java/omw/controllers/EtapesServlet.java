@@ -1,6 +1,7 @@
 package omw.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import omw.metier.EtapesManager;
+import omw.metier.UtilisateurManager;
+import omw.model.Utilisateur;
 import omw.model.Ville;
 
 import com.google.gson.Gson;
@@ -37,14 +40,33 @@ public class EtapesServlet extends GlobalInformationsServlet {
 	public void postRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Integer id = Integer.parseInt(request.getParameter("id"));
-	    List<Ville> result = EtapesManager.getInstance().listerEtape(id);
-	    Gson gson = new Gson();
-	    response.setContentType("application/json"); 
-	    response.setCharacterEncoding("utf-8");
-	    
-	    String json = gson.toJson(result);	    
-	    response.getWriter().write(json);
+		
+			if(request.getParameter("seeMoreInfos") != null){
+		
+				Integer id = Integer.parseInt(request.getParameter("id"));
+				String login = request.getParameter("login");
+				
+			    List<Ville> result = EtapesManager.getInstance().listerEtape(id);
+			    
+			    Gson gson = new Gson();
+			    response.setContentType("application/json"); 
+			    response.setCharacterEncoding("utf-8");
+			    
+			    String json = gson.toJson(result);	    
+			    response.getWriter().write(json);
+		    
+			}else{
+				
+				Integer id = Integer.parseInt(request.getParameter("id"));
+			    List<Ville> result = EtapesManager.getInstance().listerEtape(id);
+			    Gson gson = new Gson();
+			    response.setContentType("application/json"); 
+			    response.setCharacterEncoding("utf-8");
+			    
+			    String json = gson.toJson(result);	    
+			    response.getWriter().write(json);
+				
+			}
 	}
 
 }
