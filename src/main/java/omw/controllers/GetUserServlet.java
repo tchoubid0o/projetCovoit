@@ -1,6 +1,7 @@
 package omw.controllers;
 
 import omw.metier.AjaxContactManager;
+import omw.metier.AnnonceManager;
 import omw.metier.EtapesManager;
 import omw.metier.UtilisateurManager;
 import omw.model.Utilisateur;
@@ -37,6 +38,8 @@ public class GetUserServlet extends HttpServlet{
 			String login = request.getParameter("login");
 			
 		    Utilisateur user = UtilisateurManager.getInstance().getUser(login);
+		    user.setNom(AnnonceManager.getInstance().ucfirst(user.getNom()));
+		    user.setPrenom(AnnonceManager.getInstance().ucfirst(user.getPrenom()));
 		    
 		    Gson gson = new Gson();
 		    response.setContentType("application/json"); 

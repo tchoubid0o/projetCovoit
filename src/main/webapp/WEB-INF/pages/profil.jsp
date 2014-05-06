@@ -154,7 +154,7 @@ ${villes}
 					$.ajax({ dataType: "json",url:"getuser", type:"POST", 
         				data: "login="+login+"&seeMoreInfos=1"
         			}).done(function(data){
-        				$(".userAddMore"+id).html(""+data.prenom+" "+data.nom+"");
+        				$(".userAddMore"+id).html(""+data.prenom+" "+data.nom[0]+".");
         			});
 				});
 			</script>

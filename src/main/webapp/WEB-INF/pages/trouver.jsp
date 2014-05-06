@@ -25,6 +25,7 @@
 							<td>${proposition.prix}€</td>
 							<td>Nombre de places: ${proposition.nbPlace}</td>
 							<td>${proposition.dateEtHeureTrajet} à ${proposition.heure}h${proposition.minute}min</td>
+							<td><img class="seeMore" data-type="offers" data-id="${proposition.idAnnonceProposition}" data-login="${proposition.login}" src="img/downarrow2.png" alt="" /></td>
 							<td>
 								<form method="post" action="reserver" class="reservation_form">
 									<input type="hidden" name="idAnnonceProposition" value="${proposition.idAnnonceProposition}" />
@@ -33,6 +34,16 @@
 								</form>
 								<div class="resultReserv" style="display: none;"></div>
 							</td>
+						</tr>
+						<tr style="display: none;">
+							<td colspan="1"></td>
+							<td colspan="2">Commentaire: ${proposition.commentaire}</td>
+							<td colspan="6" class="tdEtapes">Etapes: ${proposition.villeDepart}&nbsp;&nbsp;<img src="img/rightarrow.png" alt="">&nbsp;&nbsp;<span class="etapesMore${proposition.idAnnonceProposition}"></span>${proposition.villeArrivee}</td>	
+						</tr>
+						<tr style="display: none;">
+							<td colspan="1"></td>
+							<td colspan="2" class="userAddMore${proposition.idAnnonceProposition}"></td>
+							<td colspan="6"></td>
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -48,6 +59,43 @@
 						});
 					});
 				</script>
+				<script>				
+				$(".seeMore").click(function(event){
+
+					var type= $(this).attr("data-type");
+					var id = $(this).attr("data-id");
+					var login = $(this).attr("data-login");
+					
+					if($(this).parent().parent().next("tr").css('display') != 'none'){
+						$(this).parent().parent().next("tr").hide();
+						$(this).parent().parent().next("tr").next("tr").hide();
+						$(this).attr("src", "img/downarrow2.png");
+					}
+					else{
+						$(this).parent().parent().next("tr").show();
+						$(this).parent().parent().next("tr").next("tr").show();
+						$(this).attr("src", "img/uparrow2.png");
+					}
+					
+					
+					event.preventDefault();
+					$.ajax({ dataType: "json",url:"etapes", type:"POST", 
+        				data: "type="+type+"&seeMoreInfos=1&id="+id
+        			}).done(function(data){
+        				var etapesTemp = "";
+        				for (var i = 0; i < data.length; ++i) {
+        					etapesTemp += ""+data[i].nomVille+"&nbsp;&nbsp;<img src='img/rightarrow.png' alt=''>&nbsp;&nbsp;";
+        				}
+        				$(".etapesMore"+id).html(etapesTemp);
+        			});
+					
+					$.ajax({ dataType: "json",url:"getuser", type:"POST", 
+        				data: "login="+login+"&seeMoreInfos=1"
+        			}).done(function(data){
+        				$(".userAddMore"+id).html(""+data.prenom+" "+data.nom[0]+".");
+        			});
+				});
+			</script>
 			
 		<c:if test="${propositions_size == 0 }">
 			<div class="lastCars center">Aucun résultat</div>
