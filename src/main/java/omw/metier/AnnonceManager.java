@@ -67,6 +67,14 @@ public class AnnonceManager {
 		annonceDao.ajouterDemandePourAnnonce(idAnnonceProposition, login);
 	}
 	
+	public void refuserDemandePourAnnonce(Integer idAnnonceProposition, String login){
+		annonceDao.refuserDemandePourAnnonce(idAnnonceProposition, login);
+	}
+	
+	public void accepterDemandePourAnnonce(Integer idAnnonceProposition, String login){
+		annonceDao.accepterDemandePourAnnonce(idAnnonceProposition, login);
+	}
+	
 	public void deleteAds(Integer idProp, String type){
 		annonceDao.deleteAds(idProp, type);
 	}
