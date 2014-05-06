@@ -7,57 +7,6 @@ ${villes}
 <section class="wrapper3" id="wrapperInsc" style="padding: 20px;">
 	<div class="width1000">
 		<div style="text-align: center;">
-			<span class="titleAbout">Profil</span>
-			<form action="inscription" method="post">
-				<label for="login">Identifiant :</label><br />
-				<div>
-					<input type="text" value="<c:out value="${user.login}"/>"
-						name="login" id="login" style="line-height: 40px; height: 30px;"
-						disabled />
-				</div>
-				<label for="email">E-mail:</label><br />
-				<div>
-					<input type="email" value="<c:out value="${user.email}"/>"
-						name="email" id="email" style="line-height: 40px; height: 30px;"
-						disabled />
-				</div>
-				<label for="password">Mot de passe :</label><br />
-				<div>
-					<input type="password" name="password" id="password"
-						style="line-height: 40px; height: 30px;"
-						placeholder="Mot de passe" />
-				</div>
-				<label for="password_verif">Confirmez votre mot de passe</label><br />
-				<input type="password" placeholder="Mot de passe"
-					name="password_verif" id="password_verif" required /><br /> <label
-					for="nom">Nom:</label><br />
-				<div>
-					<input type="text" value="<c:out value="${user.nom}"/>" name="nom"
-						id="nom" style="line-height: 40px; height: 30px;" disabled />
-				</div>
-				<label for="prenom">Prenom :</label><br />
-				<div>
-					<input type="text" value="<c:out value="${user.prenom}"/>"
-						name="prenom" id="prenom" style="line-height: 40px; height: 30px;"
-						disabled />
-				</div>
-				<label for="telephone">Téléphone :</label><br /> <i>ex:
-					0625431475</i><br />
-				<div>
-					<input type="text" value="<c:out value="${user.telephone}"/>"
-						name="telephone" id="telephone"
-						style="line-height: 40px; height: 30px;" disabled />
-				</div>
-				<input type="hidden" name="connexion" value="1" />
-				<div style="margin: auto;">
-					<!--  
-					<input class="submit"
-						style="background-color: #ea3c3d; border: 1px solid white; color: white; padding-left: 15px; padding-right: 15px; height: 35px; line-height: 40px;"
-						type="submit" value="S'inscrire" id="submit" />-->
-				</div>
-
-			</form>
-
 			<div id="myOffer" style="margin-top: 10px;">
 				<span class="titleAbout">Mes offres de Covoiturage <c:if
 						test="${propositions_size > 0 }">
@@ -523,6 +472,66 @@ $(".deleteAds").click(function(){
 		data : {deleteAds : 1, type : $(this).attr("data-type"), id : $(this).attr("data-idP")}
 	});
 });
+
 </script>
+
+<section class="wrapper6" style="border-top: 1px solid #7b7b7b;">
+	
+	<div class="width1000" style="text-align: center;">
+		<img src="img/settings.png" style="margin-right: 8px;" alt=""/><span style="margin-bottom: 5px;font-size: 32px;color: #7b7b7b;font-family: 'gill';text-align: center;padding-top: 25px;">Réglages </span><img id="downSettings" src="img/downarrow2.png" alt="" />
+			<script>
+				$("#downSettings").click(function(){
+					if($("#wrap_settings").css('display') != 'none'){
+						$("#wrap_settings").slideUp();
+						$(this).attr("src", "img/downarrow2.png");
+					}
+					else{
+						$("#wrap_settings").slideDown();
+						$(this).attr("src", "img/uparrow2.png");
+					}
+				});
+			</script>
+			<div id="wrap_settings" style="display: none;padding-top: 15px; border-top: 1px dashed #7b7b7b;">
+				<form action="inscription" method="post" style="width: 400px; margin: auto;">
+					<label for="login" class="columnheader2">Identifiant :</label><br />
+					<div>
+						<input type="text" value="<c:out value="${user.login}"/>" name="login" id="login" class="input_contact" style="line-height: 40px; height: 30px; background-color: #121212;" disabled />
+					</div>
+					<label for="email" class="columnheader2">E-mail:</label><br />
+					<div>
+						<input type="email" value="<c:out value="${user.email}"/>" name="email" id="email"  class="input_contact" style="line-height: 40px; height: 30px;background-color: #121212;"	disabled />
+					</div>
+					<label for="password" class="columnheader2">Mot de passe :</label><br />
+					<div>
+						<input type="password" name="password" id="password" style="line-height: 40px; height: 30px;" class="input_contact" placeholder="Mot de passe" />
+					</div>
+					<label for="password_verif" class="columnheader2">Confirmez votre mot de passe</label><br />
+					<input type="password" placeholder="Mot de passe" name="password_verif" class="input_contact" id="password_verif" required /><br /> 
+					
+					<label for="nom" class="columnheader2">Nom:</label><br />
+					<div>
+						<input type="text" value="<c:out value="${user.nom}"/>" name="nom" id="nom" style="line-height: 40px; height: 30px;background-color: #121212;" class="input_contact" disabled />
+					</div>
+					<label for="prenom" class="columnheader2">Prenom :</label><br />
+					<div>
+						<input type="text" value="<c:out value="${user.prenom}"/>" name="prenom" id="prenom" style="line-height: 40px; height: 30px;background-color: #121212;" class="input_contact"	disabled />
+					</div>
+					<label for="telephone" class="columnheader2">Téléphone :</label><br /> <i class="columnheader2">ex:
+						0625431475</i><br />
+					<div>
+						<input type="text" value="<c:out value="${user.telephone}"/>" name="telephone" id="telephone" style="line-height: 40px; height: 30px;background-color: #121212;" class="input_contact" disabled />
+					</div>
+					<input type="hidden" name="connexion" value="1" />
+					<div style="margin: auto;">
+						<!--  
+						<input class="submit"
+							style="background-color: #ea3c3d; border: 1px solid white; color: white; padding-left: 15px; padding-right: 15px; height: 35px; line-height: 40px;"
+							type="submit" value="S'inscrire" id="submit" />-->
+				</div>
+	
+			</form>
+		</div>
+	</div>
+</section>
 
 <jsp:include page="footer.jsp" />
