@@ -37,7 +37,7 @@ public class AjaxReserverServlet extends HttpServlet {
 				
 				Integer idAnnonceProposition = Integer.parseInt(request.getParameter("idAnnonceProposition"));
 				
-				AnnonceManager.getInstance().ajouterDemandePourAnnonce(idAnnonceProposition, login);			
+				AnnonceManager.getInstance().ajouterDemandePourAnnonce(idAnnonceProposition, login);	// ajout d'une demande pour un covoiturage		
 			}
 			else{
 				
