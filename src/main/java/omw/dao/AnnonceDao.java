@@ -11,6 +11,10 @@ public interface AnnonceDao {
 	public void insertRecherche(String villeDepart, String villeArrivee, String date, String heure, String minute,	String comment, String login);	
 
 	public void ajouterDemandePourAnnonce(Integer idAnnonceProposition, String login);
+	
+	public void refuserDemandePourAnnonce(Integer idAnnonceProposition, String login);
+	
+	public void accepterDemandePourAnnonce(Integer idAnnonceProposition, String login);
 
 	public List<AnnonceProposition> listerAnnonceProposition();
 

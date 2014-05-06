@@ -116,17 +116,17 @@ ${villes}
 									<c:forEach var="demandePourEtreDansCovoit" items="${proposition.listePersonneSouhaitantParticiperCovoit}">
 										<tr style="display: none;" class="souhaiteEtreDansCovoit${proposition.idAnnonceProposition}">
 											<td colspan="4"></td>
-											<td colspan="2" >${demandePourEtreDansCovoit}</td>
-											<td style="width: 25px;"><img class="voirDetailPersonne"
-												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit}" src="img/lookAt.png"
-												alt="Voir les details de la personne" title="Regarder les details de ${demandePourEtreDansCovoit}" /></td>
-											<td style="width: 25px;"><img class="ajouterPersonneDansCovoit"
-												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit}" src="img/check.png"
-												alt="Ajouter cette personne au covoiturage" title="Ajouter ${demandePourEtreDansCovoit} au covoiturage" /></td>
-											<td style="width: 25px;"><img class="refuserPersonneDansCovoit"
-												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit}" src="img/delete.png"
-												alt="Refuser cette personne pour le covoiturage" title="Refuser ${demandePourEtreDansCovoit} pour le covoiturage" /></td>												
-											<td colspan="1"></td>											
+											<td colspan="2" >${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}.</td>
+											<td colspan="1"></td>
+											<td style="width: 25px;"><img class="souhaiteEtreDansCovoit"
+												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="voirDetail" src="img/lookAt.png"
+												alt="Voir les details de la personne" title="Regarder les details de ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}." /></td>
+											<td style="width: 25px;"><img class="souhaiteEtreDansCovoit"
+												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="accepterDansCovoit" src="img/check.png"
+												alt="Ajouter cette personne au covoiturage" title="Ajouter ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}. au covoiturage" /></td>
+											<td style="width: 25px;"><img class="souhaiteEtreDansCovoit"
+												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="refusePourCovoit" src="img/delete.png"
+												alt="Refuser cette personne pour le covoiturage" title="Refuser ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}. pour le covoiturage" /></td>												
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -146,7 +146,6 @@ ${villes}
 					var type= $(this).attr("data-type");
 					var id = $(this).attr("data-id");
 					var login = $(this).attr("data-login");
-					var loginDesirEtreDansCovoit = $(this).attr("data-loginDesirEtreDansCovoit");
 					
 					if($(this).parent().parent().next("tr").css('display') != 'none'){
 						$(this).parent().parent().next("tr").hide();
@@ -180,6 +179,32 @@ ${villes}
         			}).done(function(data){
         				$(".userAddMore"+id).html("- "+data.prenom+" "+data.nom[0]+". -");
         			});
+				});
+			</script>
+			<script>				
+				$(".souhaiteEtreDansCovoit").click(function(event){
+
+					var typeDemande= $(this).attr("data-typeDemande");
+					var idAP = $(this).attr("data-idAP");
+					var loginDesirEtreDansCovoit = $(this).attr("data-loginDesirEtreDansCovoit");	
+					
+					event.preventDefault();
+					
+					$.post("ajaxreserver",{ 
+						typeDemande : typeDemande,
+						loginDesirEtreDansCovoit : loginDesirEtreDansCovoit,
+						idAP : idAP
+        			});
+					
+					if(typeDemande == "accepterDansCovoit"){
+
+        				$(this).parent().next("td").remove();
+        				$(this).parent().remove();     
+    				}     
+					else if(typeDemande == "refusePourCovoit"){
+						
+						$(this).parent().parent().remove();
+					}
 				});
 			</script>
 
