@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import omw.dao.AnnonceDao;
 import omw.model.AnnonceProposition;
 import omw.model.AnnonceRecherche;
+import omw.model.Utilisateur;
 import omw.model.Ville;
 
 public class AnnonceDaoImpl implements AnnonceDao{
@@ -380,8 +381,9 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			
 			stmt.setString(1, login);
 			stmt.setInt(2, idAnnonceProposition);
+			stmt.setInt(3, 0);
 			
-			stmt.executeUpdate();
+			stmt.executeUpdate();			
 			
 			stmt.close();
 			connection.close();
@@ -389,6 +391,45 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void refuserDemandePourAnnonce(Integer idAnnonceProposition, String login){
+		
+		try {
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+
+			PreparedStatement stmt = connection.prepareStatement("DELETE FROM reserver WHERE idAnnonceProposition = ? AND login = ?");
+			stmt.setInt(1, idAnnonceProposition);
+			stmt.setString(2, login);
+			stmt.executeUpdate();
+				
+			stmt.close();
+				
+			connection.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	public void accepterDemandePourAnnonce(Integer idAnnonceProposition, String login){
+		
+		try {
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			
+			PreparedStatement stmt = connection.prepareStatement("UPDATE `reserver` SET demandeConfirmee = ? WHERE idAnnonceProposition = ? AND login = ?");
+			stmt.setInt(1, 1);
+			stmt.setInt(2, idAnnonceProposition);
+			stmt.setString(3, login);
+			
+			stmt.executeUpdate();
+			
+			stmt.close();
+			connection.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 	
 	public List<AnnonceProposition> listerAnnonceProposition() {
@@ -505,8 +546,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 	public List<AnnonceProposition> listerMesAnnonceProposition(String login) {
 		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
 		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			
 			ResultSet results = null;
 
@@ -527,6 +567,32 @@ public class AnnonceDaoImpl implements AnnonceDao{
 						results.getInt("prix"),
 						results.getInt("nbPlace"),
 						results.getString("login"));
+				
+				ResultSet resultsBis = null;
+				
+				PreparedStatement stmtBis = connection.prepareStatement("SELECT * FROM reserver INNER JOIN utilisateur ON reserver.login = utilisateur.login WHERE reserver.idAnnonceProposition = ? AND reserver.demandeConfirmee = ? ORDER BY reserver.idReserver ASC ");
+				stmtBis.setInt(1,proposition.getIdAnnonceProposition());
+				stmtBis.setInt(2, 0);
+				resultsBis = stmtBis.executeQuery();
+				
+				while(resultsBis.next()){
+					
+					Utilisateur utlisateur = new Utilisateur(
+							resultsBis.getString("login"), 
+							resultsBis.getString("email"), 
+							resultsBis.getString("password"), 
+							resultsBis.getString("ip"),
+							resultsBis.getString("nom"),
+							resultsBis.getString("prenom"), 
+							resultsBis.getString("telephone"), 
+							resultsBis.getDate("registered"));
+					
+					proposition.addPersonneSouhaitantParticiperCovoit(utlisateur);
+				}				
+				
+				resultsBis.close();
+				stmtBis.close();
+				
 				liste.add(proposition);
 			}
 			results.close();
@@ -575,14 +641,6 @@ public class AnnonceDaoImpl implements AnnonceDao{
 
 
 		return liste;
-	}
-	
-	public void proposerAnnonce(String login, AnnonceProposition annonceProposition){
-		
-	}
-	
-	public void rechercherAnnonce(String login, AnnonceRecherche annonceRecherche){
-		
 	}
 	
 	public String ucfirst(String chaine){

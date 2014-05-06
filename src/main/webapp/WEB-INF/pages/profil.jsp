@@ -110,7 +110,26 @@ ${villes}
 									<td colspan="1"></td>
 									<td colspan="2" class="userAddMore${proposition.idAnnonceProposition}"></td>
 									<td colspan="7"></td>
-								</tr>
+								</tr>	
+								
+								<c:if test='${proposition.listePersonneSouhaitantParticiperCovoit != null }'>	
+									<c:forEach var="demandePourEtreDansCovoit" items="${proposition.listePersonneSouhaitantParticiperCovoit}">
+										<tr style="display: none;" class="souhaiteEtreDansCovoit${proposition.idAnnonceProposition}">
+											<td colspan="4"></td>
+											<td colspan="2" >${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}.</td>
+											<td colspan="1"></td>
+											<td style="width: 25px;"><img class="souhaiteEtreDansCovoit"
+												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="voirDetail" src="img/lookAt.png"
+												alt="Voir les details de la personne" title="Regarder les details de ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}." /></td>
+											<td style="width: 25px;"><img class="souhaiteEtreDansCovoit"
+												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="accepterDansCovoit" src="img/check.png"
+												alt="Ajouter cette personne au covoiturage" title="Ajouter ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}. au covoiturage" /></td>
+											<td style="width: 25px;"><img class="souhaiteEtreDansCovoit"
+												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="refusePourCovoit" src="img/delete.png"
+												alt="Refuser cette personne pour le covoiturage" title="Refuser ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}. pour le covoiturage" /></td>												
+										</tr>
+									</c:forEach>
+								</c:if>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -131,11 +150,15 @@ ${villes}
 					if($(this).parent().parent().next("tr").css('display') != 'none'){
 						$(this).parent().parent().next("tr").hide();
 						$(this).parent().parent().next("tr").next("tr").hide();
+						$(this).parent().parent().next("tr").next("tr").next("tr").hide();
+						$(this).parent().parent().nextAll(".souhaiteEtreDansCovoit"+id).hide();
 						$(this).attr("src", "img/downarrow2.png");
 					}
 					else{
 						$(this).parent().parent().next("tr").show();
 						$(this).parent().parent().next("tr").next("tr").show();
+						$(this).parent().parent().next("tr").next("tr").next("tr").show();
+						$(this).parent().parent().nextAll(".souhaiteEtreDansCovoit"+id).show();
 						$(this).attr("src", "img/uparrow2.png");
 					}
 					
@@ -154,8 +177,34 @@ ${villes}
 					$.ajax({ dataType: "json",url:"getuser", type:"POST", 
         				data: "login="+login+"&seeMoreInfos=1"
         			}).done(function(data){
-        				$(".userAddMore"+id).html(""+data.prenom+" "+data.nom[0]+".");
+        				$(".userAddMore"+id).html("- "+data.prenom+" "+data.nom[0]+". -");
         			});
+				});
+			</script>
+			<script>				
+				$(".souhaiteEtreDansCovoit").click(function(event){
+
+					var typeDemande= $(this).attr("data-typeDemande");
+					var idAP = $(this).attr("data-idAP");
+					var loginDesirEtreDansCovoit = $(this).attr("data-loginDesirEtreDansCovoit");	
+					
+					event.preventDefault();
+					
+					$.post("ajaxreserver",{ 
+						typeDemande : typeDemande,
+						loginDesirEtreDansCovoit : loginDesirEtreDansCovoit,
+						idAP : idAP
+        			});
+					
+					if(typeDemande == "accepterDansCovoit"){
+
+        				$(this).parent().next("td").remove();
+        				$(this).parent().remove();     
+    				}     
+					else if(typeDemande == "refusePourCovoit"){
+						
+						$(this).parent().parent().remove();
+					}
 				});
 			</script>
 

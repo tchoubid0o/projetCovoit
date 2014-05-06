@@ -16,6 +16,7 @@ public class AnnonceProposition {
 	private int prix;
 	private int nbPlace;
 	private String login;
+	private ArrayList<Utilisateur> listePersonneSouhaitantParticiperCovoit;
 	
 	public AnnonceProposition(int idAnnonceProposition,
 			boolean estReponseARecherche, String villeDepart,
@@ -34,6 +35,7 @@ public class AnnonceProposition {
 		this.prix = prix;
 		this.nbPlace = nbPlace;
 		this.login = login;
+		this.listePersonneSouhaitantParticiperCovoit = new ArrayList<Utilisateur>();
 	}
 	public int getIdAnnonceProposition() {
 		return idAnnonceProposition;
@@ -101,6 +103,16 @@ public class AnnonceProposition {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
+	public ArrayList<Utilisateur> getListePersonneSouhaitantParticiperCovoit() {
+		return listePersonneSouhaitantParticiperCovoit;
+	}
+	public void setListePersonneSouhaitantParticiperCovoit(
+			ArrayList<Utilisateur> listePersonneSouhaitantParticiperCovoit) {
+		this.listePersonneSouhaitantParticiperCovoit = listePersonneSouhaitantParticiperCovoit;
+	}
+	public void addPersonneSouhaitantParticiperCovoit(Utilisateur utilisateur){
+			
+		listePersonneSouhaitantParticiperCovoit.add(utilisateur);
+	}
 	
 }

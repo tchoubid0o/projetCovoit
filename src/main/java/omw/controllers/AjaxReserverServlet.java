@@ -28,7 +28,7 @@ public class AjaxReserverServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+				
 		if(request.getParameter("reserverForm") != null){
 			
 			String login = (String) request.getSession().getAttribute("login");
@@ -37,13 +37,32 @@ public class AjaxReserverServlet extends HttpServlet {
 				
 				Integer idAnnonceProposition = Integer.parseInt(request.getParameter("idAnnonceProposition"));
 				
-				AnnonceManager.getInstance().ajouterDemandePourAnnonce(idAnnonceProposition, login);			
+				AnnonceManager.getInstance().ajouterDemandePourAnnonce(idAnnonceProposition, login);	// ajout d'une demande pour un covoiturage		
 			}
 			else{
 				
 				System.out.printf("user not logged");
 			}
-		}		
+		}
+		else if(request.getParameter("typeDemande").equals("voirDetail")){
+			
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/404.jsp");
+			view.forward(request, response);			
+		}
+		else if(request.getParameter("typeDemande").equals("accepterDansCovoit")){
+			
+			Integer idAP = Integer.parseInt(request.getParameter("idAP"));
+			String loginDesirEtreDansCovoit = request.getParameter("loginDesirEtreDansCovoit");
+			
+			AnnonceManager.getInstance().accepterDemandePourAnnonce(idAP, loginDesirEtreDansCovoit);	// acceptation d'une demande pour un covoiturage				
+		}
+		else if(request.getParameter("typeDemande").equals("refusePourCovoit")){
+			
+			Integer idAP = Integer.parseInt(request.getParameter("idAP"));
+			String loginDesirEtreDansCovoit = request.getParameter("loginDesirEtreDansCovoit");
+			
+			AnnonceManager.getInstance().refuserDemandePourAnnonce(idAP, loginDesirEtreDansCovoit);	// refus d'une demande pour un covoiturage			
+		}
 	}
 
 }
