@@ -66,16 +66,7 @@
 					var id = $(this).attr("data-id");
 					var login = $(this).attr("data-login");
 					
-					if($(this).parent().parent().next("tr").css('display') != 'none'){
-						$(this).parent().parent().next("tr").hide();
-						$(this).parent().parent().next("tr").next("tr").hide();
-						$(this).attr("src", "img/downarrow2.png");
-					}
-					else{
-						$(this).parent().parent().next("tr").show();
-						$(this).parent().parent().next("tr").next("tr").show();
-						$(this).attr("src", "img/uparrow2.png");
-					}
+					
 					
 					
 					event.preventDefault();
@@ -94,6 +85,17 @@
         			}).done(function(data){
         				$(".userAddMore"+id).html(""+data.prenom+" "+data.nom[0]+".");
         			});
+					
+					if($(this).parent().parent().next("tr").css('display') != 'none'){
+						$(this).parent().parent().next("tr").hide();
+						$(this).parent().parent().next("tr").next("tr").hide();
+						$(this).attr("src", "img/downarrow2.png");
+					}
+					else{
+						$(this).parent().parent().next("tr").show();
+						$(this).parent().parent().next("tr").next("tr").slideDown();
+						$(this).attr("src", "img/uparrow2.png");
+					}
 				});
 			</script>
 			
