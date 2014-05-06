@@ -381,7 +381,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			stmt.setString(1, login);
 			stmt.setInt(2, idAnnonceProposition);
 			
-			stmt.executeUpdate();
+			stmt.executeUpdate();			
 			
 			stmt.close();
 			connection.close();
@@ -527,6 +527,22 @@ public class AnnonceDaoImpl implements AnnonceDao{
 						results.getInt("prix"),
 						results.getInt("nbPlace"),
 						results.getString("login"));
+				
+				ResultSet resultsBis = null;
+				
+				PreparedStatement stmtBis = connection.prepareStatement("SELECT * FROM reserver WHERE idAnnonceProposition = ? AND demandeConfirmee = ? ORDER BY idReserver ASC ");
+				stmtBis.setInt(1,proposition.getIdAnnonceProposition());
+				stmtBis.setInt(2, 0);
+				resultsBis = stmtBis.executeQuery();
+				
+				while(resultsBis.next()){
+					
+					proposition.addPersonneSouhaitantParticiperCovoit(resultsBis.getString("login"));
+				}
+				
+				resultsBis.close();
+				stmtBis.close();
+				
 				liste.add(proposition);
 			}
 			results.close();
@@ -575,14 +591,6 @@ public class AnnonceDaoImpl implements AnnonceDao{
 
 
 		return liste;
-	}
-	
-	public void proposerAnnonce(String login, AnnonceProposition annonceProposition){
-		
-	}
-	
-	public void rechercherAnnonce(String login, AnnonceRecherche annonceRecherche){
-		
 	}
 	
 	public String ucfirst(String chaine){
