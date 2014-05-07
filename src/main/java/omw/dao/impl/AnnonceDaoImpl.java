@@ -381,7 +381,6 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			
 			stmt.setString(1, login);
 			stmt.setInt(2, idAnnonceProposition);
-			stmt.setInt(3, 0);
 			
 			stmt.executeUpdate();			
 			
