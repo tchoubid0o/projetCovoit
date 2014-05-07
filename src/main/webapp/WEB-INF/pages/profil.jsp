@@ -8,7 +8,7 @@ ${villes}
 	<div class="width1000">
 		<div style="text-align: center;">
 			<div id="myOffer" style="margin-top: 10px;">
-				<span class="titleAbout">Mes offres de Covoiturage <c:if
+				<span class="downTitle titleAbout">Mes offres de Covoiturage <c:if
 						test="${propositions_size > 0 }">
 						(<span class="nbS">${propositions_size}</span>)
 					</c:if> <c:if test="${propositions_size == 0}"> 
@@ -158,7 +158,7 @@ ${villes}
 			</script>
 
 			<div id="mySearch" style="margin-top: 10px;">
-				<span class="titleAbout">Mes recherches <c:if
+				<span class="downTitle titleAbout">Mes recherches <c:if
 						test="${recherches_size > 0 }">
 						(<span class="nbS">${recherches_size}</span>)
 					</c:if> <c:if test="${recherches_size == 0}"> 
@@ -478,7 +478,7 @@ $(".deleteAds").click(function(){
 <section class="wrapper6" style="border-top: 1px solid #7b7b7b;">
 	
 	<div class="width1000" style="text-align: center;">
-		<img src="img/settings.png" style="margin-right: 8px;" alt=""/><span style="margin-bottom: 5px;font-size: 32px;color: #7b7b7b;font-family: 'gill';text-align: center;padding-top: 25px;">Réglages </span><img id="downSettings" src="img/downarrow2.png" alt="" />
+		<img src="img/settings.png" style="margin-right: 8px;" alt=""/><span class="downTitleSettings" style="margin-bottom: 5px;font-size: 32px;color: #7b7b7b;font-family: 'gill';text-align: center;padding-top: 25px;">Réglages </span><img id="downSettings" src="img/downarrow2.png" alt="" />
 			<script>
 				$("#downSettings").click(function(){
 					if($("#wrap_settings").css('display') != 'none'){
@@ -488,6 +488,17 @@ $(".deleteAds").click(function(){
 					else{
 						$("#wrap_settings").slideDown();
 						$(this).attr("src", "img/uparrow2.png");
+					}
+				});
+				
+				$(".downTitleSettings").click(function(){
+					if($("#wrap_settings").css('display') != 'none'){
+						$("#wrap_settings").slideUp();
+						$(this).next().attr("src", "img/downarrow2.png");
+					}
+					else{
+						$("#wrap_settings").slideDown();
+						$(this).next().attr("src", "img/uparrow2.png");
 					}
 				});
 			</script>
