@@ -569,14 +569,13 @@ public class AnnonceDaoImpl implements AnnonceDao{
 				
 				ResultSet resultsBis = null;
 				
-				PreparedStatement stmtBis = connection.prepareStatement("SELECT * FROM reserver INNER JOIN utilisateur ON reserver.login = utilisateur.login WHERE reserver.idAnnonceProposition = ? AND reserver.demandeConfirmee = ? ORDER BY reserver.idReserver ASC ");
+				PreparedStatement stmtBis = connection.prepareStatement("SELECT * FROM reserver INNER JOIN utilisateur ON reserver.login = utilisateur.login WHERE reserver.idAnnonceProposition = ? AND reserver.demandeConfirmee = 1 ORDER BY reserver.idReserver ASC ");
 				stmtBis.setInt(1,proposition.getIdAnnonceProposition());
-				stmtBis.setInt(2, 0);
 				resultsBis = stmtBis.executeQuery();
 				
 				while(resultsBis.next()){
 					
-					Utilisateur utlisateur = new Utilisateur(
+					Utilisateur utilisateur = new Utilisateur(
 							resultsBis.getString("login"), 
 							resultsBis.getString("email"), 
 							resultsBis.getString("password"), 
@@ -586,7 +585,28 @@ public class AnnonceDaoImpl implements AnnonceDao{
 							resultsBis.getString("telephone"), 
 							resultsBis.getDate("registered"));
 					
-					proposition.addPersonneSouhaitantParticiperCovoit(utlisateur);
+					proposition.addPersonneAccepteeDansCovoit(utilisateur);
+				}
+				
+				resultsBis = null;
+				
+				stmtBis = connection.prepareStatement("SELECT * FROM reserver INNER JOIN utilisateur ON reserver.login = utilisateur.login WHERE reserver.idAnnonceProposition = ? AND reserver.demandeConfirmee = 0 ORDER BY reserver.idReserver ASC ");
+				stmtBis.setInt(1,proposition.getIdAnnonceProposition());
+				resultsBis = stmtBis.executeQuery();
+				
+				while(resultsBis.next()){
+					
+					Utilisateur utilisateur = new Utilisateur(
+							resultsBis.getString("login"), 
+							resultsBis.getString("email"), 
+							resultsBis.getString("password"), 
+							resultsBis.getString("ip"),
+							resultsBis.getString("nom"),
+							resultsBis.getString("prenom"), 
+							resultsBis.getString("telephone"), 
+							resultsBis.getDate("registered"));
+					
+					proposition.addPersonneSouhaitantParticiperCovoit(utilisateur);
 				}				
 				
 				resultsBis.close();

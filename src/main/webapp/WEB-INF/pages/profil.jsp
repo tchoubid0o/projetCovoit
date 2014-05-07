@@ -61,19 +61,32 @@ ${villes}
 									<td colspan="7"></td>
 								</tr>	
 								
+								<c:if test='${proposition.listePersonneAccepteeDansCovoit != null }'>	
+									<c:forEach var="accepteDansCovoit" items="${proposition.listePersonneAccepteeDansCovoit}">
+										<tr style="display: none;" class="souhaiteEtreOuAccepteDansCovoit${proposition.idAnnonceProposition}">
+											<td colspan="4"></td>
+											<td colspan="2" >${accepteDansCovoit.prenom} ${accepteDansCovoit.nom.substring(0,1)}.</td>
+											<td colspan="1"></td>
+											<td style="width: 25px;"><img class="personneDansCovoit"
+												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${accepteDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="voirDetail" src="img/lookAt.png"
+												alt="Voir les details de la personne" title="Regarder les details de ${accepteDansCovoit.prenom} ${accepteDansCovoit.nom.substring(0,1)}." /></td>												
+										</tr>
+									</c:forEach>
+								</c:if>
+								
 								<c:if test='${proposition.listePersonneSouhaitantParticiperCovoit != null }'>	
 									<c:forEach var="demandePourEtreDansCovoit" items="${proposition.listePersonneSouhaitantParticiperCovoit}">
-										<tr style="display: none;" class="souhaiteEtreDansCovoit${proposition.idAnnonceProposition}">
+										<tr style="display: none;" class="souhaiteEtreOuAccepteDansCovoit${proposition.idAnnonceProposition}">
 											<td colspan="4"></td>
 											<td colspan="2" >${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}.</td>
 											<td colspan="1"></td>
-											<td style="width: 25px;"><img class="souhaiteEtreDansCovoit"
+											<td style="width: 25px;"><img class="personneDansCovoit"
 												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="voirDetail" src="img/lookAt.png"
 												alt="Voir les details de la personne" title="Regarder les details de ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}." /></td>
-											<td style="width: 25px;"><img class="souhaiteEtreDansCovoit"
+											<td style="width: 25px;"><img class="personneDansCovoit"
 												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="accepterDansCovoit" src="img/check.png"
 												alt="Ajouter cette personne au covoiturage" title="Ajouter ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}. au covoiturage" /></td>
-											<td style="width: 25px;"><img class="souhaiteEtreDansCovoit"
+											<td style="width: 25px;"><img class="personneDansCovoit"
 												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="refusePourCovoit" src="img/delete.png"
 												alt="Refuser cette personne pour le covoiturage" title="Refuser ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}. pour le covoiturage" /></td>												
 										</tr>
@@ -100,14 +113,14 @@ ${villes}
 						$(this).parent().parent().next("tr").hide();
 						$(this).parent().parent().next("tr").next("tr").hide();
 						$(this).parent().parent().next("tr").next("tr").next("tr").hide();
-						$(this).parent().parent().nextAll(".souhaiteEtreDansCovoit"+id).hide();
+						$(this).parent().parent().nextAll(".souhaiteEtreOuAccepteDansCovoit"+id).hide();
 						$(this).attr("src", "img/downarrow2.png");
 					}
 					else{
 						$(this).parent().parent().next("tr").show();
 						$(this).parent().parent().next("tr").next("tr").show();
 						$(this).parent().parent().next("tr").next("tr").next("tr").show();
-						$(this).parent().parent().nextAll(".souhaiteEtreDansCovoit"+id).show();
+						$(this).parent().parent().nextAll(".souhaiteEtreOuAccepteDansCovoit"+id).show();
 						$(this).attr("src", "img/uparrow2.png");
 					}
 					
@@ -131,7 +144,7 @@ ${villes}
 				});
 			</script>
 			<script>				
-				$(".souhaiteEtreDansCovoit").click(function(event){
+				$(".personneDansCovoit").click(function(event){
 
 					var typeDemande= $(this).attr("data-typeDemande");
 					var idAP = $(this).attr("data-idAP");
