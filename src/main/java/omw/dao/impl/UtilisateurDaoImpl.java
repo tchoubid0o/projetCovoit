@@ -150,7 +150,10 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public void ajouterUser(Utilisateur user) throws UnknownHostException {
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
-
+			
+			String nomUser = user.getNom().toUpperCase();
+			String prenomUser = user.getPrenom().toLowerCase();
+			prenomUser = prenomUser.substring(0,1).toUpperCase()+prenomUser.substring(1);
 			
 			String ip = InetAddress.getLocalHost().getHostAddress();
 
@@ -159,8 +162,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			stmt.setString(2, user.getEmail());
 			stmt.setString(3, user.getPassword());
 			stmt.setString(4, ip);
-			stmt.setString(5, user.getNom());
-			stmt.setString(6, user.getPrenom());
+			stmt.setString(5, nomUser);
+			stmt.setString(6, prenomUser);
 			stmt.setString(7, user.getTelephone());
 			
 			stmt.executeUpdate();

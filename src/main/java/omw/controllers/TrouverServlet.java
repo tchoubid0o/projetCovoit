@@ -21,7 +21,9 @@ public class TrouverServlet extends GlobalInformationsServlet{
 
 	public void getRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<AnnonceProposition> propositions = AnnonceManager.getInstance().listerAnnonceProposition();
+		String login = (String) request.getSession().getAttribute("login");
+		
+		List<AnnonceProposition> propositions = AnnonceManager.getInstance().listerAnnonceProposition(login);
 		request.setAttribute("propositions", propositions);
 		request.setAttribute("propositions_size", propositions.size());
 		

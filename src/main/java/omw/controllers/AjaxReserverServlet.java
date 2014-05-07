@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import omw.metier.AnnonceManager;
 
 @WebServlet("/AjaxReserverServlet")
@@ -54,7 +56,14 @@ public class AjaxReserverServlet extends HttpServlet {
 			Integer idAP = Integer.parseInt(request.getParameter("idAP"));
 			String loginDesirEtreDansCovoit = request.getParameter("loginDesirEtreDansCovoit");
 			
-			AnnonceManager.getInstance().accepterDemandePourAnnonce(idAP, loginDesirEtreDansCovoit);	// acceptation d'une demande pour un covoiturage				
+			boolean result = AnnonceManager.getInstance().accepterDemandePourAnnonce(idAP, loginDesirEtreDansCovoit);	// acceptation d'une demande pour un covoiturage si false alors il n'y a plus assez de place dans le covoit
+			
+			Gson gson = new Gson();
+		    response.setContentType("application/json"); 
+		    response.setCharacterEncoding("utf-8");
+		    
+		    String json = gson.toJson(result);	    
+		    response.getWriter().write(json);
 		}
 		else if(request.getParameter("typeDemande").equals("refusePourCovoit")){
 			

@@ -14,9 +14,9 @@ public interface AnnonceDao {
 	
 	public void refuserDemandePourAnnonce(Integer idAnnonceProposition, String login);
 	
-	public void accepterDemandePourAnnonce(Integer idAnnonceProposition, String login);
+	public boolean accepterDemandePourAnnonce(Integer idAnnonceProposition, String login);
 
-	public List<AnnonceProposition> listerAnnonceProposition();
+	public List<AnnonceProposition> listerAnnonceProposition(String login);
 
 	public List<AnnonceRecherche> listerAnnonceRecherche();
 
