@@ -70,7 +70,7 @@ ${villes}
 											<td style="display: inline;">
 												<form style="display: inline;" method="post" action="membre">
 													<input type="hidden" name="idMember" value="${accepteDansCovoit.login}" />
-													<input type="submit" name="searchPersonneDansCovoit" value="1" style="border: none; background: url('img/lookAt.png'); width: 20px; height: 20px;font-size: 0.1px;" />
+													<input type="submit" name="searchPersonneDansCovoit" value="1" style="border: none; background: url('img/lookAt.png');background-repeat: no-repeat;width: 18px;height: 18px;font-size: 0.1px;" />
 												</form>
 											</td>												
 										</tr>
@@ -86,7 +86,7 @@ ${villes}
 											<td style="display: inline;">
 												<form style="display: inline;" method="post" action="membre">
 													<input type="hidden" name="idMember" value="${demandePourEtreDansCovoit.login}" />
-													<input type="submit" name="searchPersonneDansCovoit" value="1" style="border: none; background: url('img/lookAt.png'); width: 20px; height: 20px;font-size: 0.1px;" />
+													<input type="submit" name="searchPersonneDansCovoit" value="1" style="border: none;background: url('img/lookAt.png');background-repeat: no-repeat;width: 18px;height: 18px;font-size: 0.1px;" />
 												</form>
 											</td>	
 											<td style="width: 25px;"><img class="personneDansCovoit"
@@ -236,9 +236,9 @@ ${villes}
 
 <!-- DIV CACHEE -->
 
-<section class="wrapper6 divModif" style="display: none;">
+<section class="wrapper6 divModif" style="display: none;position: relative;">
+	<img class="closeWindow" style="cursor: pointer;position: absolute;right: 10px;top: 10px;" src="img/delete.png" alt="">
 	<div class="width1000">
-
 		<div id="ancreModifyProp"
 			style="margin-bottom: 5px; font-size: 32px; color: #7b7b7b; font-family: 'gill'; text-align: center; padding-top: 25px;">Modifier
 			le trajet</div>
@@ -339,9 +339,9 @@ ${villes}
 	</div>
 </section>
 
-<section class="wrapper6 divModifRech" style="display: none;">
+<section class="wrapper6 divModifRech" style="display: none;position: relative;">
+	<img class="closeWindow" style="cursor: pointer;position: absolute;right: 10px;top: 10px;" src="img/delete.png" alt="">
 	<div class="width1000">
-
 		<div id="ancreModifyRech"
 			style="margin-bottom: 5px; font-size: 32px; color: #7b7b7b; font-family: 'gill'; text-align: center; padding-top: 25px;">Modifier
 			la recherche</div>
@@ -569,5 +569,11 @@ $(".deleteAds").click(function(){
 		</div>
 	</div>
 </section>
+
+<script>
+	$(".closeWindow").click(function(){
+		$(this).parent().slideUp();
+	});
+</script>
 
 <jsp:include page="footer.jsp" />
