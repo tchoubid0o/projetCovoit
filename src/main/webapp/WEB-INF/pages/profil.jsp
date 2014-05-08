@@ -155,6 +155,7 @@ ${villes}
 					var typeDemande= $(this).attr("data-typeDemande");
 					var idAP = $(this).attr("data-idAP");
 					var loginDesirEtreDansCovoit = $(this).attr("data-loginDesirEtreDansCovoit");	
+					var nbPlaceSuffisant = false;
 					
 					event.preventDefault();
 					
@@ -162,9 +163,14 @@ ${villes}
 						typeDemande : typeDemande,
 						loginDesirEtreDansCovoit : loginDesirEtreDansCovoit,
 						idAP : idAP
+        			}, 'json').done(function(data){
+        				
+        				if(data[0]){
+        					nbPlaceSuffisant = true;
+        				}
         			});
 					
-					if(typeDemande == "accepterDansCovoit"){
+					if(typeDemande == "accepterDansCovoit" && nbPlaceSuffisant){
 
         				$(this).parent().next("td").remove();
         				$(this).parent().remove();     

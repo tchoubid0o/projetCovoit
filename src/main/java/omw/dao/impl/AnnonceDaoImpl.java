@@ -208,14 +208,34 @@ public class AnnonceDaoImpl implements AnnonceDao{
 	
 			String formatedDate = date.concat(heure).concat(minute);
 			
-			PreparedStatement stmt = connection.prepareStatement("UPDATE `annonceproposition` SET estReponseARecherche = ? ,villeDepart = ?,villeArrivee=?, dateEtHeureTrajet=?, commentaire=?, prix=?, nbPlace=? WHERE idAnnonceProposition = ?");
+			ResultSet result = null;	
+			int nbPlaceCovoit = 0;
+			int nbPlaceDispoCovoit = 0;
+			
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE idAnnonceProposition = ?");
+			stmt.setInt(1, idProp);
+			result = stmt.executeQuery();
+			
+			while(result.next()){
+			
+				nbPlaceCovoit = result.getInt("nbPlace");
+				nbPlaceDispoCovoit = result.getInt("nbPlaceDispo");
+			}
+			
+			stmt = connection.prepareStatement("UPDATE `annonceproposition` SET estReponseARecherche = ? ,villeDepart = ?,villeArrivee=?, dateEtHeureTrajet=?, commentaire=?, prix=?, nbPlace=? WHERE idAnnonceProposition = ?");
 			stmt.setInt(1, rep);
 			stmt.setString(2, villeDepart);
 			stmt.setString(3, villeArrivee);
 			stmt.setString(4, formatedDate);
 			stmt.setString(5, comment);
 			stmt.setInt(6, Integer.parseInt(prix));
-			stmt.setInt(7, Integer.parseInt(nbPlace));
+			if(nbPlaceCovoit - Integer.parseInt(nbPlace) <= nbPlaceDispoCovoit){
+				stmt.setInt(7, Integer.parseInt(nbPlace));
+			}
+			else{
+				stmt.setInt(7, nbPlaceCovoit);
+				System.out.println("il n'y aura pas assez de place pour les personnes deja acceptees");
+			}
 			stmt.setInt(8, idProp);
 			
 			stmt.executeUpdate();
@@ -288,7 +308,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			String formatedDate = date.concat(heure).concat(minute);
 			int lastId = 0;
 			
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `annonceproposition`(`estReponseARecherche`,`villeDepart`,`villeArrivee`, `dateEtHeureTrajet`, `commentaire`, `prix`, `nbPlace`, `login`) VALUES(?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `annonceproposition`(`estReponseARecherche`,`villeDepart`,`villeArrivee`, `dateEtHeureTrajet`, `commentaire`, `prix`, `nbPlace`, `nbPlaceDispo`, `login`) VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, rep);
 			stmt.setString(2, villeDepart);
 			stmt.setString(3, villeArrivee);
@@ -296,7 +316,8 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			stmt.setString(5, comment);
 			stmt.setInt(6, Integer.parseInt(prix));
 			stmt.setInt(7, Integer.parseInt(nbPlace));
-			stmt.setString(8, login);
+			stmt.setInt(8, Integer.parseInt(nbPlace));
+			stmt.setString(9, login);
 			
 			int numero = stmt.executeUpdate();
 
@@ -397,7 +418,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 
-			PreparedStatement stmt = connection.prepareStatement("DELETE FROM reserver WHERE idAnnonceProposition = ? AND login = ?");
+			PreparedStatement stmt = connection.prepareStatement("UPDATE `reserver` SET demandeConfirmee = -1 WHERE idAnnonceProposition = ? AND login = ?");
 			stmt.setInt(1, idAnnonceProposition);
 			stmt.setString(2, login);
 			stmt.executeUpdate();
@@ -411,34 +432,73 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		}		
 	}
 	
-	public void accepterDemandePourAnnonce(Integer idAnnonceProposition, String login){
+	public boolean accepterDemandePourAnnonce(Integer idAnnonceProposition, String login){
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			
-			PreparedStatement stmt = connection.prepareStatement("UPDATE `reserver` SET demandeConfirmee = ? WHERE idAnnonceProposition = ? AND login = ?");
-			stmt.setInt(1, 1);
-			stmt.setInt(2, idAnnonceProposition);
-			stmt.setString(3, login);
+			ResultSet result = null;
+			int nbPlaceDispoCovoit = 0;
 			
-			stmt.executeUpdate();
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE idAnnonceProposition = ?");
+			stmt.setInt(1, idAnnonceProposition);
+			result = stmt.executeQuery();
+			System.out.println("2");
+			
+			while(result.next()){
+			
+				nbPlaceDispoCovoit = result.getInt("nbPlaceDispo");
+			}
+			
+			if(nbPlaceDispoCovoit > 0){
+				
+				nbPlaceDispoCovoit -= 1;
+				stmt = connection.prepareStatement("UPDATE `annonceproposition` SET nbPlaceDispo = ? WHERE idAnnonceProposition = ?");
+				stmt.setInt(1, nbPlaceDispoCovoit);
+				stmt.setInt(2, idAnnonceProposition);
+				System.out.println("3");
+				
+				stmt.executeUpdate();
+				System.out.println("4");
+			
+				stmt = connection.prepareStatement("UPDATE `reserver` SET demandeConfirmee = 1 WHERE idAnnonceProposition = ? AND login = ?");
+				stmt.setInt(1, idAnnonceProposition);
+				stmt.setString(2, login);
+				System.out.println("5");
+			
+				stmt.executeUpdate();
+				System.out.println("6");
+			}else{
+				
+				System.out.println("Pas assez de place disponible dans le covoit");
+				return false;
+			}
 			
 			stmt.close();
-			connection.close();
+			result.close();
+			connection.close();	
+			
+			return true;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+			return false;
+		}
 	}
 	
-	public List<AnnonceProposition> listerAnnonceProposition() {
+	public List<AnnonceProposition> listerAnnonceProposition(String login) {
 		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
 		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			
+			PreparedStatement stmt = null;
+			ResultSet results = null;
+			
 
-			Statement stmt = connection.createStatement();
-			ResultSet results = stmt.executeQuery("SELECT * FROM annonceproposition ORDER BY idAnnonceProposition ASC");
+			stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE login != ? ORDER BY idAnnonceProposition ASC");
+			
+			stmt.setString(1, login);
+			results = stmt.executeQuery();
 
 			while (results.next()) {
 				AnnonceProposition proposition = new AnnonceProposition(

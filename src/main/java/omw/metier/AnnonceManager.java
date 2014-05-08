@@ -27,8 +27,8 @@ public class AnnonceManager {
 		return instance;
 	}
 	
-	public List<AnnonceProposition> listerAnnonceProposition(){
-		return annonceDao.listerAnnonceProposition();
+	public List<AnnonceProposition> listerAnnonceProposition(String login){
+		return annonceDao.listerAnnonceProposition(login);
 	}
 	
 	public List<AnnonceRecherche> listerAnnonceRecherche(){
@@ -71,8 +71,8 @@ public class AnnonceManager {
 		annonceDao.refuserDemandePourAnnonce(idAnnonceProposition, login);
 	}
 	
-	public void accepterDemandePourAnnonce(Integer idAnnonceProposition, String login){
-		annonceDao.accepterDemandePourAnnonce(idAnnonceProposition, login);
+	public boolean accepterDemandePourAnnonce(Integer idAnnonceProposition, String login){
+		return annonceDao.accepterDemandePourAnnonce(idAnnonceProposition, login);
 	}
 	
 	public void deleteAds(Integer idProp, String type){
