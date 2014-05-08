@@ -12,24 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import omw.metier.AnnonceManager;
 
 @WebServlet("/AjaxReserverServlet")
-public class AjaxReserverServlet extends HttpServlet {
+public class AjaxReserverServlet extends GlobalInformationsServlet{
 	private static final long serialVersionUID = 1L;
-   
-    public AjaxReserverServlet() {
-        super();
-        
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	public void getRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/404.jsp");
-		view.forward(request, response);
-		//On n'autorise pas l'affichage de la page		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		if(request.getParameter("reserverForm") != null){
+	@Override
+	public void postRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+if(request.getParameter("reserverForm") != null){
 			
 			String login = (String) request.getSession().getAttribute("login");
 			

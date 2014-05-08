@@ -1,7 +1,9 @@
 package omw.controllers;
 
 import omw.metier.AjaxContactManager;
+
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,22 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-public class AjaxContactServlet extends HttpServlet{
+public class AjaxContactServlet extends GlobalInformationsServlet{
 	
 	private static final long serialVersionUID = 5274442345250866770L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	                       throws ServletException, IOException {	    
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/404.jsp");
-		view.forward(request, response);
-		//On n'autorise pas l'affichage de la page
+	public void getRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	                      throws ServletException, IOException {
-		String erreursMessage = null;
+	public void postRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+String erreursMessage = null;
 		
 	    String email = request.getParameter("email");
 	    String nom = request.getParameter("nom");
@@ -58,7 +60,7 @@ public class AjaxContactServlet extends HttpServlet{
         	erreursMessage = e.getMessage();
         }
 	}
-
+	
 	private void validationEmail(String user_mail) throws Exception {
 		if ( user_mail != null && user_mail.trim().length() != 0 ) {
 			if ( !user_mail.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {

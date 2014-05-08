@@ -24,7 +24,7 @@
 							<td>${proposition.villeArrivee}</td>
 							<td>${proposition.prix}€</td>
 							<td>Nombre de places: ${proposition.nbPlace}</td>
-							<td>${proposition.dateEtHeureTrajet} à ${proposition.heure}h${proposition.minute}min</td>
+							<td>${proposition.dateEtHeureTrajet.substring(8, 10)}/${proposition.dateEtHeureTrajet.substring(5, 7)}/${proposition.dateEtHeureTrajet.substring(0, 4)} à ${proposition.heure}h${proposition.minute}min</td>
 							<td><img class="seeMore" data-type="offers" data-id="${proposition.idAnnonceProposition}" data-login="${proposition.login}" src="img/downarrow2.png" alt="" /></td>
 							<td>
 								<form method="post" action="reserver" class="reservation_form">
@@ -118,7 +118,7 @@
 							<td>${propositionp.villeDepartRecherche}</td>
 							<td><img src="img/rightarrow.png" alt=""></td>
 							<td>${propositionp.villeArriveeRecherche}</td>
-							<td>${propositionp.dateEtHeureRecherche} à ${propositionp.heure}h${propositionp.minute}min</td>
+							<td>${propositionp.dateEtHeureRecherche.substring(8, 10)}/${propositionp.dateEtHeureRecherche.substring(5, 7)}/${propositionp.dateEtHeureRecherche.substring(0, 4)} à ${propositionp.heure}h${propositionp.minute}min</td>
 							<td><form method="post" action="reserver" class="proposition_form"><input type="hidden" name="idAnnonceProposition" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="proposerForm" value="1" /></form></td>
 						</tr>
 						</c:forEach>

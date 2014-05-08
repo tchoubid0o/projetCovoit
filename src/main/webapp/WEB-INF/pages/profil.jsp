@@ -67,9 +67,12 @@ ${villes}
 											<td colspan="4"></td>
 											<td colspan="2" >${accepteDansCovoit.prenom} ${accepteDansCovoit.nom.substring(0,1)}.</td>
 											<td colspan="1"></td>
-											<td style="width: 25px;"><img class="personneDansCovoit"
-												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${accepteDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="voirDetail" src="img/lookAt.png"
-												alt="Voir les details de la personne" title="Regarder les details de ${accepteDansCovoit.prenom} ${accepteDansCovoit.nom.substring(0,1)}." /></td>												
+											<td style="display: inline;">
+												<form style="display: inline;" method="post" action="membre">
+													<input type="hidden" name="idMember" value="${accepteDansCovoit.login}" />
+													<input type="submit" name="searchPersonneDansCovoit" value="1" style="border: none; background: url('img/lookAt.png'); width: 20px; height: 20px;font-size: 0.1px;" />
+												</form>
+											</td>												
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -80,9 +83,12 @@ ${villes}
 											<td colspan="4"></td>
 											<td colspan="2" >${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}.</td>
 											<td colspan="1"></td>
-											<td style="width: 25px;"><img class="personneDansCovoit"
-												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="voirDetail" src="img/lookAt.png"
-												alt="Voir les details de la personne" title="Regarder les details de ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}." /></td>
+											<td style="display: inline;">
+												<form style="display: inline;" method="post" action="membre">
+													<input type="hidden" name="idMember" value="${demandePourEtreDansCovoit.login}" />
+													<input type="submit" name="searchPersonneDansCovoit" value="1" style="border: none; background: url('img/lookAt.png'); width: 20px; height: 20px;font-size: 0.1px;" />
+												</form>
+											</td>	
 											<td style="width: 25px;"><img class="personneDansCovoit"
 												style="cursor: pointer;" data-loginDesirEtreDansCovoit="${demandePourEtreDansCovoit.login}" data-idAP="${proposition.idAnnonceProposition}" data-typeDemande="accepterDansCovoit" src="img/check.png"
 												alt="Ajouter cette personne au covoiturage" title="Ajouter ${demandePourEtreDansCovoit.prenom} ${demandePourEtreDansCovoit.nom.substring(0,1)}. au covoiturage" /></td>

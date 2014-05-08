@@ -95,7 +95,7 @@
 									<td>${listeAnnonce.villeArrivee}</td>
 									<td>${listeAnnonce.prix}€</td>
 									<td>Nombre de places: ${listeAnnonce.nbPlace}</td>
-									<td>${listeAnnonce.dateEtHeureTrajet} à
+									<td>${listeAnnonce.dateEtHeureTrajet.substring(8, 10)}/${listeAnnonce.dateEtHeureTrajet.substring(5, 7)}/${listeAnnonce.dateEtHeureTrajet.substring(0, 4)} à
 										${listeAnnonce.heure}h${listeAnnonce.minute}min</td>
 									<td><img class="seeMore" data-type="offers" data-id="${listeAnnonce.idAnnonceProposition}" data-login="${listeAnnonce.login}" src="img/downarrow2.png" alt="" /></td>
 									<td>

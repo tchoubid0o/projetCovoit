@@ -49,8 +49,12 @@
     <servlet-class>omw.controllers.AjaxReserverServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>GetUserServlet</servlet-name>
+    <servlet-name>GetUser</servlet-name>
     <servlet-class>omw.controllers.GetUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Membre</servlet-name>
+    <servlet-class>omw.controllers.MembreServlet</servlet-class>
   </servlet>
   
   
@@ -103,8 +107,12 @@
     <url-pattern>/ajaxreserver</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>GetUserServlet</servlet-name>
+    <servlet-name>GetUser</servlet-name>
     <url-pattern>/getuser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Membre</servlet-name>
+    <url-pattern>/membre</url-pattern>
   </servlet-mapping>
   
   

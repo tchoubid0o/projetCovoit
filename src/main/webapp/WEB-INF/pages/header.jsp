@@ -24,7 +24,7 @@
 <script src="js/nav.js"></script>
 <!-- <script src="js/datepicker/jquery.ui.core.js"></script>
 <script src="js/datepicker/jquery.ui.widget.js"></script>
-<script src="js/datepicker/jquery.ui.datepicker.js"></script> -->
+<script src="js/datepicker/jquery.ui.datepicker.js"></script>--> 
 <script src="js/datepicker/jquery.ui.datepicker-fr.js"></script>
 <script>
 	$(function() {

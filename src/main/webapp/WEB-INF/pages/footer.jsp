@@ -19,7 +19,7 @@
 							<td><img src="img/rightarrow.png" alt=""></td>
 							<td>${last_offers.villeArrivee}</td>
 							<td>${last_offers.prix}€</td>
-							<td>le ${last_offers.dateEtHeureTrajet}</td>
+							<td>le ${last_offers.dateEtHeureTrajet.substring(8, 10)}/${last_offers.dateEtHeureTrajet.substring(5, 7)}/${last_offers.dateEtHeureTrajet.substring(0, 4)}</td>
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -35,7 +35,7 @@
 							<td>${last_searchs.villeDepartRecherche}</td>
 							<td><img src="img/rightarrow.png" alt=""></td>
 							<td>${last_searchs.villeArriveeRecherche}</td>
-							<td>le ${last_searchs.dateEtHeureRecherche}</td>
+							<td>le ${last_searchs.dateEtHeureRecherche.substring(8, 10)}/${last_searchs.dateEtHeureRecherche.substring(5, 7)}/${last_searchs.dateEtHeureRecherche.substring(0, 4)}</td>
 						</tr>
 						</c:forEach>
 					</tbody>
