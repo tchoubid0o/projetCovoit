@@ -443,7 +443,6 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE idAnnonceProposition = ?");
 			stmt.setInt(1, idAnnonceProposition);
 			result = stmt.executeQuery();
-			System.out.println("2");
 			
 			while(result.next()){
 			
@@ -456,18 +455,14 @@ public class AnnonceDaoImpl implements AnnonceDao{
 				stmt = connection.prepareStatement("UPDATE `annonceproposition` SET nbPlaceDispo = ? WHERE idAnnonceProposition = ?");
 				stmt.setInt(1, nbPlaceDispoCovoit);
 				stmt.setInt(2, idAnnonceProposition);
-				System.out.println("3");
 				
 				stmt.executeUpdate();
-				System.out.println("4");
 			
 				stmt = connection.prepareStatement("UPDATE `reserver` SET demandeConfirmee = 1 WHERE idAnnonceProposition = ? AND login = ?");
 				stmt.setInt(1, idAnnonceProposition);
 				stmt.setString(2, login);
-				System.out.println("5");
 			
 				stmt.executeUpdate();
-				System.out.println("6");
 			}else{
 				
 				System.out.println("Pas assez de place disponible dans le covoit");
@@ -478,12 +473,11 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			result.close();
 			connection.close();	
 			
-			return true;
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
+		
+		return true;
 	}
 	
 	public List<AnnonceProposition> listerAnnonceProposition(String login) {
@@ -491,29 +485,42 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
 			
-			PreparedStatement stmt = null;
-			ResultSet results = null;
-			
+			ResultSet results = null;			
 
-			stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE login != ? ORDER BY idAnnonceProposition ASC");
-			
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE login != ? ORDER BY dateEtHeureTrajet ASC");// pas de selection de ses propres annonces		
 			stmt.setString(1, login);
 			results = stmt.executeQuery();
 
 			while (results.next()) {
-				AnnonceProposition proposition = new AnnonceProposition(
-						results.getInt("idAnnonceProposition"),
-						results.getBoolean("estReponseARecherche"),
-						ucfirst(results.getString("villeDepart")),
-						ucfirst(results.getString("villeArrivee")),
-						(results.getString("dateEtHeureTrajet")).substring(0,10),
-						(results.getString("dateEtHeureTrajet")).substring(10,12),
-						(results.getString("dateEtHeureTrajet")).substring(12),
-						results.getString("commentaire"),
-						results.getInt("prix"),
-						results.getInt("nbPlace"),
-						results.getString("login"));
-				liste.add(proposition);
+				
+				ResultSet resultsBis = null;				
+				int idAP = results.getInt("idAnnonceProposition");
+				
+				PreparedStatement stmtbis = connection.prepareStatement("SELECT * FROM reserver WHERE login = ? AND idAnnonceProposition = ? AND demandeConfirmee != -1");// pas de selection des annonces deja reservees et qui sont en attente ou deja confirmees		
+				stmtbis.setString(1, login);
+				stmtbis.setInt(2, idAP);
+				resultsBis = stmtbis.executeQuery();
+				
+				if(!(resultsBis.next())){
+				
+					AnnonceProposition proposition = new AnnonceProposition(
+							idAP,
+							results.getBoolean("estReponseARecherche"),
+							ucfirst(results.getString("villeDepart")),
+							ucfirst(results.getString("villeArrivee")),
+							(results.getString("dateEtHeureTrajet")).substring(0,10),
+							(results.getString("dateEtHeureTrajet")).substring(10,12),
+							(results.getString("dateEtHeureTrajet")).substring(12),
+							results.getString("commentaire"),
+							results.getInt("prix"),
+							results.getInt("nbPlace"),
+							results.getString("login"));
+					
+					liste.add(proposition);
+				}
+				
+				resultsBis.close();
+				stmtbis.close();
 			}
 			results.close();
 			stmt.close();

@@ -165,7 +165,7 @@ ${villes}
 						idAP : idAP
         			}, 'json').done(function(data){
         				
-        				if(data[0]){
+        				if(data){
         					nbPlaceSuffisant = true;
         				}
         			});
