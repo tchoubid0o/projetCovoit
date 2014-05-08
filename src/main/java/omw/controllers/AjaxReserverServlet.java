@@ -54,7 +54,6 @@ if(request.getParameter("reserverForm") != null){
 			String loginDesirEtreDansCovoit = request.getParameter("loginDesirEtreDansCovoit");
 			
 			boolean result = AnnonceManager.getInstance().accepterDemandePourAnnonce(idAP, loginDesirEtreDansCovoit);	// acceptation d'une demande pour un covoiturage si false alors il n'y a plus assez de place dans le covoit
-			
 			Gson gson = new Gson();
 		    response.setContentType("application/json"); 
 		    response.setCharacterEncoding("utf-8");
