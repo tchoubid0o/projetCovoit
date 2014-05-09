@@ -596,26 +596,43 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		return liste;
 	}
 	
-	public List<AnnonceRecherche> listerAnnonceRecherche() {
+	public List<AnnonceRecherche> listerAnnonceRecherche(String login) {
 		List<AnnonceRecherche> liste = new ArrayList<AnnonceRecherche>();
 		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+			
+			ResultSet results = null;			
 
-			Statement stmt = connection.createStatement();
-			ResultSet results = stmt.executeQuery("SELECT * FROM annoncerecherche ORDER BY idAnnonceRecherche ASC");
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annoncerecherche WHERE login != ? ORDER BY dateEtHeureRecherche ASC");// pas de selection de ses propres annonces		
+			stmt.setString(1, login);
+			results = stmt.executeQuery();
 
 			while (results.next()) {
-				AnnonceRecherche proposition = new AnnonceRecherche(
-						results.getInt("idAnnonceRecherche"),
-						ucfirst(results.getString("villeDepartRecherche")),
-						ucfirst(results.getString("villeArriveeRecherche")),
-						(results.getString("dateEtHeureRecherche")).substring(0,10),
-						(results.getString("dateEtHeureRecherche")).substring(10,12),
-						(results.getString("dateEtHeureRecherche")).substring(12),
-						results.getString("commentaireRecherche"),
-						results.getString("login"));
-				liste.add(proposition);
+				
+				ResultSet resultsBis = null;				
+				int idAR = results.getInt("idAnnonceRecherche");
+				
+				PreparedStatement stmtbis = connection.prepareStatement("SELECT * FROM proposer WHERE login = ? AND idAnnonceRecherche = ? AND propositionConfirmee != -1");// pas de selection des annonces deja reservees et qui sont en attente ou deja confirmees		
+				stmtbis.setString(1, login);
+				stmtbis.setInt(2, idAR);
+				resultsBis = stmtbis.executeQuery();
+				
+				if(!(resultsBis.next())){
+				
+					AnnonceRecherche proposition = new AnnonceRecherche(
+							results.getInt("idAnnonceRecherche"),
+							ucfirst(results.getString("villeDepartRecherche")),
+							ucfirst(results.getString("villeArriveeRecherche")),
+							(results.getString("dateEtHeureRecherche")).substring(0,10),
+							(results.getString("dateEtHeureRecherche")).substring(10,12),
+							(results.getString("dateEtHeureRecherche")).substring(12),
+							results.getString("commentaireRecherche"),
+							results.getString("login"));
+					liste.add(proposition);
+				}
+				
+				resultsBis.close();
+				stmtbis.close();
 			}
 			results.close();
 			stmt.close();
@@ -666,9 +683,6 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			e.printStackTrace();
 		}
 		return null;
-
-
-		
 	}
 	
 	public List<AnnonceProposition> listerMesAnnonceProposition(String login) {

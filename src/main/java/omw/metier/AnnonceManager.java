@@ -31,8 +31,8 @@ public class AnnonceManager {
 		return annonceDao.listerAnnonceProposition(login);
 	}
 	
-	public List<AnnonceRecherche> listerAnnonceRecherche(){
-		return annonceDao.listerAnnonceRecherche();
+	public List<AnnonceRecherche> listerAnnonceRecherche(String login){
+		return annonceDao.listerAnnonceRecherche(login);
 	}
 	
 	public void updateProposition(Integer idProp, Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){

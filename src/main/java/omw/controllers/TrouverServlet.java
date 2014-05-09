@@ -22,12 +22,16 @@ public class TrouverServlet extends GlobalInformationsServlet{
 	public void getRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String login = (String) request.getSession().getAttribute("login");
+		if(login == null){
+			
+			login = "";
+		}
 		
 		List<AnnonceProposition> propositions = AnnonceManager.getInstance().listerAnnonceProposition(login);
 		request.setAttribute("propositions", propositions);
 		request.setAttribute("propositions_size", propositions.size());
 		
-		List<AnnonceRecherche> propositionsp = AnnonceManager.getInstance().listerAnnonceRecherche();
+		List<AnnonceRecherche> propositionsp = AnnonceManager.getInstance().listerAnnonceRecherche(login);
 		request.setAttribute("propositionsp", propositionsp);
 		request.setAttribute("propositionsp_size", propositionsp.size());
 		

@@ -20,7 +20,7 @@ public interface AnnonceDao {
 
 	public List<AnnonceProposition> listerAnnonceProposition(String login);
 
-	public List<AnnonceRecherche> listerAnnonceRecherche();
+	public List<AnnonceRecherche> listerAnnonceRecherche(String login);
 
 	public List<AnnonceRecherche> listerMesAnnonceRecherche(String login);
 
