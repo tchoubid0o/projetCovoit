@@ -197,25 +197,31 @@
             <div class="width1000" style="padding-top: 10px;">
                 <span class="titleAbout">Pour faire vite:</span>
                 <div>
-                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor
-                    nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan 
-                    ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent 
-                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus <br/><br/>
+                    CovoiturageHEI s'adresse aux étudiants de l'école d'ingénieurs HEI (Hautes études d'ingénieur).<br/><br/>
 
-                    condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, 
-                    erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim.
+					C'est un projet d'étude de 4e année, réalisé par des étudiants de l'école et dans le domaine ITI 
+					
+					(Informatique et technologies de l'information), dans le but de fournir aux élèves un endroit leur permettant de trouver facilement et rapidement un covoiturage avec des personnes d'une même école.
                 </div>
                 <span class="titleAbout">Comment ça marche:</span>
                 <div>
-                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor
-                    nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan<br/><br/>
+                    Nous proposons de mettre en contact conducteurs et passagers pour partager un véhicule le temps d'un voyage déterminé. <br/>
+                    Le covoiturage peut s'effectuer entre son domicile et son lieu de travail (périphérie/centre ville par exemple) ou d'une ville à l'autre.<br/>
+                    Il s'adresse à tous les automobilistes qui souhaitent rouler autrement.<br/>
+                    Covoiturer, c'est utiliser une seule voiture pour faire un trajet à plusieurs.<br/><br/>
 
-                    <span class="list" style="width: 945px; float: right;">
-                        <img src="img/list.png" alt="" />&nbsp;Ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. 
-                        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.<br/>
-                        <img src="img/list.png" alt="" />&nbsp;Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi.<br/>
-                        <img src="img/list.png" alt="" />&nbsp;Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam.<br/>
-                    </span>
+                    <div class="list" style="width: 945px; float: right;">
+                        <img src="img/list.png" alt="" />&nbsp;Covoiturage = La solidarité et le lien social<br/>
+							<div style="padding: 20px;">
+								En proposant votre véhicule vous permettez à des personnes qui n'en possèdent pas de se rendre par exemple sur leur lieu de travail.<br/>
+								Covoiturer c'est aussi rencontrer votre voisin ou celui qui travaille à deux pas de votre entreprise et que vous croisiez tous les matins dans votre voiture.
+							</div>
+                        <img src="img/list.png" alt="" />&nbsp;Covoiturage = respect de l'environnement<br/>
+                        	<div style="padding: 20px;">
+								Le vehicule personnel est l'un de principaux responsables des émissions de CO2 dans l'atmosphère.<br/>
+								En covoiturant vous faites diminuer le nombre de véhicules sur les routes et vous participez ainsi à la protection de votre environnement.
+							</div>
+                    </div>
                     <div style="clear: both;"></div>
                 </div>
             </div>

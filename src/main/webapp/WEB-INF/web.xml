@@ -60,6 +60,10 @@
     <servlet-name>Repondre</servlet-name>
     <servlet-class>omw.controllers.RepondreServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Calculateur</servlet-name>
+    <servlet-class>omw.controllers.CalculateurServlet</servlet-class>
+  </servlet>
   
   
   <servlet-mapping>
@@ -121,6 +125,10 @@
   <servlet-mapping>
     <servlet-name>Repondre</servlet-name>
     <url-pattern>/repondre</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Calculateur</servlet-name>
+    <url-pattern>/calculateur</url-pattern>
   </servlet-mapping>
   
   

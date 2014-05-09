@@ -5,7 +5,7 @@
             <div class="width1000">
                 <div class="align">
                     <span class="titleAbout">Les dernières annonces<br/></span>
-                    <span class="red">Lorem ipsum dolor sit amen sed non neque elit. Sed ut imperdiet nisi</span>
+                    <span class="red">C'est en ce moment sur www.CovoiturageHEI.fr ...</span>
                 </div>
                 <div class="leftColumn500" style="padding-top: 20px;">
 
@@ -95,21 +95,18 @@
                     <div class="columnInside size18" style="width: 80%; margin: auto;">
                         <div class="grey">Pour les conducteurs</div>
                         <div class="red">
-                            <a href="" class="red">Proposer un covoiturage</a><br/>
+                            <a href="proposer" class="red">Proposer un covoiturage</a><br/>
                             <div style="margin-top: -10px;">
-                                <a href="" class="red">S'inscrire maintenant</a><br/>
+                                <a href="inscription" class="red">S'inscrire maintenant</a><br/>
                             </div>
                             <div style="margin-top: -10px;">
                                 <a href="" class="red">Tutoriel conducteur</a><br/>
-                            </div>
-                            <div style="margin-top: -10px;">
-                                <a href="" class="red">Rendez-vous</a><br/>
                             </div>
                         </div>
 
                         <div class="grey">Pour les passagers</div>
                         <div class="red">
-                            <a href="" class="red">Covoiturage par ville</a><br/>
+                            <a href="trouver" class="red">Covoiturage par ville</a><br/>
                             <div style="margin-top: -10px;">
                                 <a href="" class="red">Tutoriel passager</a><br/>
                             </div>
@@ -136,7 +133,7 @@
                                 <a href="" class="red">Règles</a><br/>
                             </div>
                             <div style="margin-top: -10px;">
-                                <a href="" class="red">Prix du covoiturage</a><br/>
+                                <a href="calculateur" class="red">Prix du covoiturage</a><br/>
                             </div>
                         </div>
                     </div>
