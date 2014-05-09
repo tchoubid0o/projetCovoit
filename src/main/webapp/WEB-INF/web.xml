@@ -56,6 +56,10 @@
     <servlet-name>Membre</servlet-name>
     <servlet-class>omw.controllers.MembreServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Repondre</servlet-name>
+    <servlet-class>omw.controllers.RepondreServlet</servlet-class>
+  </servlet>
   
   
   <servlet-mapping>
@@ -113,6 +117,10 @@
   <servlet-mapping>
     <servlet-name>Membre</servlet-name>
     <url-pattern>/membre</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Repondre</servlet-name>
+    <url-pattern>/repondre</url-pattern>
   </servlet-mapping>
   
   
