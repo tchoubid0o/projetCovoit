@@ -47,29 +47,21 @@
                         <div class="columnInside">
                             <img src="img/rapide.png" alt="" />
                             <div class="columnheader">Rapide</div>
-                            This is Photoshop's version  of Lorem <br/>
-                            Ipsum. Proin gravida nibh vel velit <br/>
-                            auctor aliquet. Aenean sollicitudin, lorem <br/>
-                            quis bibendum auctor, nisi elit id elit.<br/>
+                            Après une simple inscription CovoiturageHEI vous permettra de trouver rapidement LE covoiturage désiré.<br/>
                         </div>
                     </div>
                     <div class="middleColumn">
                         <div class="columnInside">
                             <img src="img/trust.png" alt="" />
                             <div class="columnheader">Fiable</div>
-                            Proin gravida nibh vel velit <br/>
-                            auctor aliquet. Aenean sollicitudin, lorem <br/>
-                            ipsum dolor sit<br/>
+                            Grâce à la réservation, conducteurs et passagers s'engagent à effectuer le trajet ensemble.<br/>
                         </div>
                     </div>
                     <div class="rightColumn">
                         <div class="columnInside">
                             <img src="img/usefull.png" alt="" />
                             <div class="columnheader">Pratique</div>
-                            This is Photoshop's version  of Lorem <br/>
-                            Ipsum. Proin gravida nibh vel velit <br/>
-                            auctor aliquet. Aenean sollicitudin, lorem <br/>
-                            quis bibendum auctor, nisi elit id elit.<br/>
+                            En quelques clics, réservez votre covoiturage, proposez vos annonces et prenez contact avec d'autres utilisateurs de CovoiturageHEI.
                         </div>
                     </div>
                     
@@ -185,20 +177,18 @@
                         <img src="img/share.png" alt="" />
                         <span>1. Partager un trajet</span>
                     </div>
-                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh <br/>
-                    vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum <br/>
-                    auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. <br/>
-                    Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. <br/>
+                    <img src="img/rightarrow.png" alt="" />&nbsp;&nbsp;Je m'inscris <span class="red" style="font-weight: bold;">gratuitement</span><br/>
+                    <img src="img/rightarrow.png" alt="" />&nbsp;&nbsp;Je propose mes places libres<br/>
+                    <img src="img/rightarrow.png" alt="" />&nbsp;&nbsp;Des passagers me contactent<br/>
                 </div>
                 <div class="rightColumn500">
                     <div class="imgSpanAlign">
                         <img src="img/find.png" alt="" />
                         <span>2. Trouver un trajet</span>
                     </div>
-                    Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt <br/>
-                    auctor a ornare odio. Sed non  mauris vitae erat consequat <br/>
-                    auctor eu in elit. Class aptent taciti sociosqu ad litora <br/>
-                    torquent per conubia nostra, per inceptos himenaeos.<br/>
+                    <img src="img/rightarrow.png" alt="" />&nbsp;&nbsp;Je m'inscris <span class="red" style="font-weight: bold;">gratuitement</span><br/>
+                    <img src="img/rightarrow.png" alt="" />&nbsp;&nbsp;Je recherche un trajet<br/>
+                    <img src="img/rightarrow.png" alt="" />&nbsp;&nbsp;Je contacte les conducteurs<br/>
                 </div>
                 <div style="clear: both;"></div>
             </div>

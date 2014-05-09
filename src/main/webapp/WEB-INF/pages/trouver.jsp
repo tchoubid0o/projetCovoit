@@ -119,7 +119,7 @@
 							<td><img src="img/rightarrow.png" alt=""></td>
 							<td>${propositionp.villeArriveeRecherche}</td>
 							<td>${propositionp.dateEtHeureRecherche.substring(8, 10)}/${propositionp.dateEtHeureRecherche.substring(5, 7)}/${propositionp.dateEtHeureRecherche.substring(0, 4)} à ${propositionp.heure}h${propositionp.minute}min</td>
-							<td><form method="post" action="reserver" class="proposition_form"><input type="hidden" name="idAnnonceProposition" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="proposerForm" value="1" /></form></td>
+							<td><form method="post" action="repondre" class="proposition_form"><input type="hidden" name="idAnnonceRecherche" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="proposerForm" value="1" /></form></td>
 						</tr>
 						</c:forEach>
 					</tbody>

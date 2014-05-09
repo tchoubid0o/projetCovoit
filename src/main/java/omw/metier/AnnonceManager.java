@@ -47,6 +47,10 @@ public class AnnonceManager {
 		annonceDao.insertProposition(rep, villeDepart, villeArrivee, date, heure, minute, prix, nbPlace, comment, login, etapes);
 	}
 
+	public void insertPropositionReponse(String idAnnonceRecherche, Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
+		annonceDao.insertPropositionReponse(idAnnonceRecherche, rep, villeDepart, villeArrivee, date, heure, minute, prix, nbPlace, comment, login, etapes);
+	}
+	
 	public void insertRecherche(String villeDepart, String villeArrivee, String date, String heure, String minute, String comment,	String login) {
 		annonceDao.insertRecherche(villeDepart, villeArrivee, date, heure, minute, comment, login);
 	}
