@@ -28,7 +28,7 @@ public class AjaxReserverServlet extends GlobalInformationsServlet{
 	@Override
 	public void postRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-if(request.getParameter("reserverForm") != null){
+		if(request.getParameter("reserverForm") != null){
 			
 			String login = (String) request.getSession().getAttribute("login");
 			
