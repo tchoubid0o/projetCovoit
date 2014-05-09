@@ -59,15 +59,55 @@
 						});
 					});
 				</script>
-				<script>				
+			
+		<c:if test="${propositions_size == 0 }">
+			<div class="lastCars center">Aucun résultat</div>
+		</c:if>
+
+		<!-- Trouver un passager -->
+		
+		<div style="text-align: center;">
+			<span class="titleAbout">Trouver un passager</span>
+		</div>
+
+				<table class="lastCars" style="text-align: center;">
+					<tbody>
+						<c:forEach var="propositionp" begin="0" end="${propositionsp_size}"
+				step="1" items="${propositionsp}">
+						<tr>
+							<td><img src="img/passenger.png" alt="" /></td>
+							<td>${propositionp.villeDepartRecherche}</td>
+							<td><img src="img/rightarrow.png" alt=""></td>
+							<td>${propositionp.villeArriveeRecherche}</td>
+							<td>${propositionp.dateEtHeureRecherche.substring(8, 10)}/${propositionp.dateEtHeureRecherche.substring(5, 7)}/${propositionp.dateEtHeureRecherche.substring(0, 4)} à ${propositionp.heure}h${propositionp.minute}min</td>
+							<td><img class="seeMore" data-type="offers" data-id="${propositionp.idAnnonceRecherche}" data-login="${propositionp.login}" src="img/downarrow2.png" alt="" /></td>
+							<td><form method="post" action="reserver" class="proposition_form"><input type="hidden" name="idAnnonceRecherche" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="proposerForm" value="1" /></form></td>
+						</tr>
+						<tr style="display: none;">
+							<td colspan="1"></td>
+							<td colspan="2">Commentaire: ${propositionp.commentaireRecherche}</td>
+							<td colspan="6" class="tdEtapes">Etapes: ${propositionp.villeDepartRecherche}&nbsp;&nbsp;<img src="img/rightarrow.png" alt="">&nbsp;&nbsp;<span class="etapesMore${propositionp.idAnnonceRecherche}"></span>${propositionp.villeArriveeRecherche}</td>	
+						</tr>
+						<tr style="display: none;">
+							<td colspan="1"></td>
+							<td colspan="2" class="userAddMore${propositionp.idAnnonceRecherche}"></td>
+							<td colspan="6"></td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			
+		<c:if test="${propositionsp_size == 0 }">
+			<div class="lastCars center">Aucune annonce de passager.</div>
+		</c:if>
+		
+	</div>
+	<script>				
 				$(".seeMore").click(function(event){
 
 					var type= $(this).attr("data-type");
 					var id = $(this).attr("data-id");
-					var login = $(this).attr("data-login");
-					
-					
-					
+					var login = $(this).attr("data-login");					
 					
 					event.preventDefault();
 					$.ajax({ dataType: "json",url:"etapes", type:"POST", 
@@ -97,39 +137,7 @@
 						$(this).attr("src", "img/uparrow2.png");
 					}
 				});
-			</script>
-			
-		<c:if test="${propositions_size == 0 }">
-			<div class="lastCars center">Aucun résultat</div>
-		</c:if>
-
-		<!-- Trouver un passager -->
-		
-		<div style="text-align: center;">
-			<span class="titleAbout">Trouver un passager</span>
-		</div>
-
-				<table class="lastCars" style="text-align: center;">
-					<tbody>
-						<c:forEach var="propositionp" begin="0" end="${propositionsp_size}"
-				step="1" items="${propositionsp}">
-						<tr>
-							<td><img src="img/passenger.png" alt="" /></td>
-							<td>${propositionp.villeDepartRecherche}</td>
-							<td><img src="img/rightarrow.png" alt=""></td>
-							<td>${propositionp.villeArriveeRecherche}</td>
-							<td>${propositionp.dateEtHeureRecherche.substring(8, 10)}/${propositionp.dateEtHeureRecherche.substring(5, 7)}/${propositionp.dateEtHeureRecherche.substring(0, 4)} à ${propositionp.heure}h${propositionp.minute}min</td>
-							<td><form method="post" action="reserver" class="proposition_form"><input type="hidden" name="idAnnonceProposition" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="proposerForm" value="1" /></form></td>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			
-		<c:if test="${propositionsp_size == 0 }">
-			<div class="lastCars center">Aucune annonce de passager.</div>
-		</c:if>
-		
-	</div>
+		</script>
 </section>
 
 
