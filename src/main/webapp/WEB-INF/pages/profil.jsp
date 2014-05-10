@@ -529,21 +529,21 @@ $(".deleteAds").click(function(){
 				});
 			</script>
 			<div id="wrap_settings" style="display: none;padding-top: 15px; border-top: 1px dashed #7b7b7b;">
-				<form action="inscription" method="post" style="width: 400px; margin: auto;">
+				<form action="profil" id="editMySettings" method="post" style="width: 400px; margin: auto;">
 					<label for="login" class="columnheader2">Identifiant :</label><br />
 					<div>
 						<input type="text" value="<c:out value="${user.login}"/>" name="login" id="login" class="input_contact" style="line-height: 40px; height: 30px; background-color: #121212;" disabled />
 					</div>
 					<label for="email" class="columnheader2">E-mail:</label><br />
 					<div>
-						<input type="email" value="<c:out value="${user.email}"/>" name="email" id="email"  class="input_contact" style="line-height: 40px; height: 30px;background-color: #121212;"	disabled />
+						<input type="email" value="<c:out value="${user.email}"/>" name="email" id="email"  class="input_contact" style="line-height: 40px; height: 30px;" required/>
 					</div>
-					<label for="password" class="columnheader2">Mot de passe :</label><br />
+					<label for="passwordEditForm" class="columnheader2">Mot de passe :</label><br />
 					<div>
-						<input type="password" name="password" id="password" style="line-height: 40px; height: 30px;" class="input_contact" placeholder="Mot de passe" />
+						<input type="password" name="password" id="passwordEditForm" style="line-height: 40px; height: 30px;" class="input_contact" placeholder="Mot de passe" required/>
 					</div>
-					<label for="password_verif" class="columnheader2">Confirmez votre mot de passe</label><br />
-					<input type="password" placeholder="Mot de passe" name="password_verif" class="input_contact" id="password_verif" required /><br /> 
+					<label for="passwordEditForm_verif" class="columnheader2">Confirmez votre mot de passe</label><br />
+					<input type="password" placeholder="Mot de passe" name="password_verif" class="input_contact" id="passwordEditForm_verif" required /><br /> 
 					
 					<label for="nom" class="columnheader2">Nom:</label><br />
 					<div>
@@ -556,14 +556,13 @@ $(".deleteAds").click(function(){
 					<label for="telephone" class="columnheader2">Téléphone :</label><br /> <i class="columnheader2">ex:
 						0625431475</i><br />
 					<div>
-						<input type="text" value="<c:out value="${user.telephone}"/>" name="telephone" id="telephone" style="line-height: 40px; height: 30px;background-color: #121212;" class="input_contact" disabled />
+						<input type="text" maxlength="10" value="<c:out value="${user.telephone}"/>" name="telephone" id="telephone" style="line-height: 40px; height: 30px;" class="input_contact" required/>
 					</div>
-					<input type="hidden" name="connexion" value="1" />
+					<input type="hidden" name="editMySettings" value="1" />
 					<div style="margin: auto;">
-						<!--  
-						<input class="submit"
-							style="background-color: #ea3c3d; border: 1px solid white; color: white; padding-left: 15px; padding-right: 15px; height: 35px; line-height: 40px;"
-							type="submit" value="S'inscrire" id="submit" />-->
+						
+					<input class="submit" style="background-color: #ea3c3d; margin-bottom: 20px; color: white;border: 1px solid #55292a; border-radius: 4px; padding-left: 15px; padding-right: 15px; height: 35px; line-height: 40px;" type="submit" value="Modifier" id="submit" />
+					<div id="erreurEdit" style="display: none;"></div>
 				</div>
 	
 			</form>
@@ -574,6 +573,30 @@ $(".deleteAds").click(function(){
 <script>
 	$(".closeWindow").click(function(){
 		$(this).parent().slideUp();
+	});
+	$("#editMySettings").submit(function(event){
+		event.preventDefault();
+		if($("#passwordEditForm").val() != "" && $("#passwordEditForm_verif").val() != "" && $("#email").val() != "" && $("#telephone").val() != ""){
+			if($("#passwordEditForm").val() == $("#passwordEditForm_verif").val()){
+				$.ajax({url : "profil",
+					type : "POST",
+					data : $("#editMySettings").serialize()
+				}).done(function(){
+					$("#erreurEdit").html("<span class='red'>Votre compte a bien été modifié.</span>");
+					$("#erreurEdit").slideDown();
+				});
+			}
+			else{
+				$("#passwordEditForm").val("");
+				$("#passwordEditForm_verif").val("");
+				$("#erreurEdit").html("<span class='red'>Les passwords ne correspondent pas!</span>");
+				$("#erreurEdit").slideDown();
+			}
+		}
+		else{
+			$("#erreurEdit").html("<span class='red'>Veuillez remplir tous les champs!</span>");
+			$("#erreurEdit").slideDown();
+		}
 	});
 </script>
 

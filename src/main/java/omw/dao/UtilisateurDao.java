@@ -20,6 +20,8 @@ public interface UtilisateurDao {
 	public String HashMyPassword(String user_password) throws Exception;
 	
 	public String GetPasswordConnexion(String user_pseudo);
+	
+	public String editMySettings(String email, String password, String password_verif, String telephone, String login);
 	/*
 	public Integer getTheIdUser(String user_pseudo);
 

@@ -58,4 +58,8 @@ public class UtilisateurManager {
 	public String getUserPseudo(Integer idUser){
 		return usersDao.getUserPseudo(idUser);
 	}*/
+	
+	public String editMySettings(String email, String password, String password_verif, String telephone, String login){
+		return usersDao.editMySettings(email, password, password_verif, telephone, login);
+	}
 }

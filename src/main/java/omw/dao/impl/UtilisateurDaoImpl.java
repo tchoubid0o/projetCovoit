@@ -277,4 +277,32 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		return "erreur";
 	}
 	*/
+	
+	public String editMySettings(String email, String password, String password_verif, String telephone, String login){
+		try {
+			if(password.equals(password_verif)){
+				Connection connection = DataSourceProvider.getDataSource().getConnection();
+				String hashedPassword = "";
+				try {
+					hashedPassword = HashMyPassword(password);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				PreparedStatement stmt = connection.prepareStatement("UPDATE utilisateur SET email = ?, password = ?, telephone = ?  WHERE login = ?");
+				stmt.setString(1, email);
+				stmt.setString(2, hashedPassword);
+				stmt.setString(3, telephone);
+				stmt.setString(4, login);
+				stmt.executeUpdate();
+				
+				return "<span class='red'>Votre compte a bien été modifié.</span>";
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "<span class='red'>Erreur.</span>";
+	}
 }

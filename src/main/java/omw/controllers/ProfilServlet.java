@@ -6,9 +6,13 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
+import com.google.gson.Gson;
+
 import omw.metier.AnnonceManager;
+import omw.metier.EtapesManager;
 import omw.metier.UtilisateurManager;
 import omw.model.Utilisateur;
+import omw.model.Ville;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10,    // 10 MB 
 maxFileSize=1024*1024*50,          // 50 MB
@@ -96,6 +100,13 @@ public class ProfilServlet extends GlobalInformationsServlet{
 			String type = request.getParameter("type");
 			
 			AnnonceManager.getInstance().deleteAds(idProp, type);
+		}
+		if(request.getParameter("editMySettings") != null){
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			String password_verif = request.getParameter("password_verif");
+			String telephone = request.getParameter("telephone");
+			UtilisateurManager.getInstance().editMySettings(email, password, password_verif, telephone, login);
 		}
 		
 		Utilisateur user = UtilisateurManager.getInstance().getUser(login);
