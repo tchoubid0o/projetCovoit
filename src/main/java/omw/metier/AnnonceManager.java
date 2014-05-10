@@ -66,6 +66,9 @@ public class AnnonceManager {
 	public AnnonceProposition listerUneAnnonceProposition(Integer id){
 		return annonceDao.listerUneAnnonceProposition(id);
 	}
+	public List<AnnonceProposition> listerAnnoncePropositionLeConcernant(String login, int demandeConfirmee){
+		return annonceDao.listerAnnoncePropositionLeConcernant(login, demandeConfirmee);
+	}
 	
 	public void ajouterDemandePourAnnonce(Integer idAnnonceProposition, String login){
 		annonceDao.ajouterDemandePourAnnonce(idAnnonceProposition, login);

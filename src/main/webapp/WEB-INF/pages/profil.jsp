@@ -7,6 +7,206 @@ ${villes}
 <section class="wrapper3" id="wrapperInsc" style="padding: 20px;">
 	<div class="width1000">
 		<div style="text-align: center;">
+			<div id="myCovoit" style="margin-top: 10px;">
+				<span class="downTitle titleAbout">
+					Mes covoiturages
+				</span>
+				<c:if test="${covoitAccepte_size > 0 || covoitAttente_size > 0 || covoitRefuse_size > 0}">
+					<img class="down" src="img/downarrow.png" alt="" />
+				</c:if>
+				<div class="wrapProfil" style="display: none;">
+					<div class="mescovoits" data-type="covoitAccepte" style="color: #EA3C3D;width: 330px;float: left;cursor: pointer;">
+						Acceptés<c:if test="${covoitAccepte_size > 0 }"> (${covoitAccepte_size})</c:if><c:if test="${covoitAccepte_size == 0 }"> (0)</c:if>
+					</div>
+					<div class="mescovoits" data-type="covoitAttente" style="width: 330px;float: left;cursor: pointer;">
+						En attente<c:if test="${covoitAttente_size > 0 }"> (${covoitAttente_size})</c:if><c:if test="${covoitAttente_size == 0 }"> (0)</c:if>
+					</div>
+					<div class="mescovoits" data-type="covoitRefuse" style="width: 330px;float: left;cursor: pointer;">
+						Refusés<c:if test="${covoitRefuse_size > 0 }"> (${covoitRefuse_size})</c:if><c:if test="${covoitRefuse_size == 0 }"> (0)</c:if>
+					</div>	
+					<br/>			
+					<table class="lastCars" id="tabCovoitAccepte" style="text-align: center;">
+						<tbody>
+							<c:forEach var="confirme" begin="0" end="${covoitAccepte_size}"
+								step="1" items="${covoitAccepte}">
+								<tr>
+									<td><img src="img/car.png" alt="" /></td>
+									<td>${confirme.villeDepart}</td>
+									<td><img src="img/rightarrow.png" alt=""></td>
+									<td>${confirme.villeArrivee}</td>
+									<td>${confirme.prix}€</td>
+									<td>Nombre de places: ${confirme.nbPlace}</td>
+									<td>${confirme.dateEtHeureTrajet} à
+										${confirme.heure}h${confirme.minute}min</td>
+									<td><img class="seeMoreAnnonce" data-type="offers" data-id="${confirme.idAnnonceProposition}" data-login="${confirme.login}" src="img/downarrow2.png" alt="" /></td>
+									
+								</tr>
+								<tr style="display: none;">
+									<td colspan="1"></td>
+									<td colspan="2">Commentaire: ${confirme.commentaire}</td>
+									<td colspan="7" class="tdEtapes">Etapes: ${confirme.villeDepart}&nbsp;&nbsp;<img src="img/rightarrow.png" alt="">&nbsp;&nbsp;<span class="etapesMore${confirme.idAnnonceProposition}"></span>${confirme.villeArrivee}</td>	
+								</tr>
+								<tr style="display: none;">
+									<td colspan="1"></td>
+									<td colspan="2" class="userAddMore${confirme.idAnnonceProposition}"></td>
+									<td colspan="7"></td>
+								</tr>
+							</c:forEach>
+							<c:if test="${covoitAccepte_size == 0 }">
+								<tr>
+									<td colspan="4"></td>
+									<td colspan="2">Aucune demande de covoiturage confirée</td>
+									<td colspan="4"></td>
+								</tr>
+							</c:if>
+						</tbody>
+					</table>
+					<table class="lastCars" id="tabCovoitAttente" style="text-align: center;display: none;">
+						<tbody>
+							<c:forEach var="attente" begin="0" end="${covoitAttente_size}"
+								step="1" items="${covoitAttente}">
+								<tr>
+									<td><img src="img/car.png" alt="" /></td>
+									<td>${attente.villeDepart}</td>
+									<td><img src="img/rightarrow.png" alt=""></td>
+									<td>${attente.villeArrivee}</td>
+									<td>${attente.prix}€</td>
+									<td>Nombre de places: ${attente.nbPlace}</td>
+									<td>${attente.dateEtHeureTrajet} à
+										${attente.heure}h${attente.minute}min</td>
+									<td><img class="seeMoreAnnonce" data-type="offers" data-id="${attente.idAnnonceProposition}" data-login="${attente.login}" src="img/downarrow2.png" alt="" /></td>
+								</tr>
+								<tr style="display: none;">
+									<td colspan="1"></td>
+									<td colspan="2">Commentaire: ${attente.commentaire}</td>
+									<td colspan="7" class="tdEtapes">Etapes: ${attente.villeDepart}&nbsp;&nbsp;<img src="img/rightarrow.png" alt="">&nbsp;&nbsp;<span class="etapesMore${attente.idAnnonceProposition}"></span>${attente.villeArrivee}</td>	
+								</tr>
+								<tr style="display: none;">
+									<td colspan="1"></td>
+									<td colspan="2" class="userAddMore${attente.idAnnonceProposition}"></td>
+									<td colspan="7"></td>
+								</tr>
+							</c:forEach>
+							<c:if test="${covoitAttente_size == 0 }">
+								<tr>
+									<td colspan="4"></td>
+									<td colspan="2">Aucune demande de covoiturage en attente</td>
+									<td colspan="4"></td>
+								</tr>
+							</c:if>
+						</tbody>
+					</table>
+					<table class="lastCars" id="tabCovoitRefuse" style="text-align: center;display: none;">
+						<tbody>
+							<c:forEach var="refuse" begin="0" end="${covoitRefuse_size}"
+								step="1" items="${covoitRefuse}">
+								<tr>
+									<td><img src="img/car.png" alt="" /></td>
+									<td>${refuse.villeDepart}</td>
+									<td><img src="img/rightarrow.png" alt=""></td>
+									<td>${refuse.villeArrivee}</td>
+									<td>${refuse.prix}€</td>
+									<td>Nombre de places: ${refuse.nbPlace}</td>
+									<td>${refuse.dateEtHeureTrajet} à
+										${refuse.heure}h${refuse.minute}min</td>
+									<td><img class="seeMoreAnnonce" data-type="offers" data-id="${refuse.idAnnonceProposition}" data-login="${refuse.login}" src="img/downarrow2.png" alt="" /></td>
+								</tr>
+								<tr style="display: none;">
+									<td colspan="1"></td>
+									<td colspan="2">Commentaire: ${refuse.commentaire}</td>
+									<td colspan="7" class="tdEtapes">Etapes: ${refuse.villeDepart}&nbsp;&nbsp;<img src="img/rightarrow.png" alt="">&nbsp;&nbsp;<span class="etapesMore${refuse.idAnnonceProposition}"></span>${refuse.villeArrivee}</td>	
+								</tr>
+								<tr style="display: none;">
+									<td colspan="1"></td>
+									<td colspan="2" class="userAddMore${refuse.idAnnonceProposition}"></td>
+									<td colspan="7"></td>
+								</tr>
+							</c:forEach>
+							<c:if test="${covoitRefuse_size == 0 }">
+								<tr>
+									<td colspan="4"></td>
+									<td colspan="2">Aucune demande de covoiturage refusée</td>
+									<td colspan="4"></td>
+								</tr>
+							</c:if>
+						</tbody>
+					</table>
+					<div id="messageAjax"></div>
+				</div>
+			</div>
+			
+			<script>				
+				$(".mescovoits").click(function(){
+
+					var type= $(this).attr("data-type");
+					
+					if(type == "covoitAttente"){
+						
+						$(this).css("color", "#EA3C3D");
+						$(this).prev().css("color", "black");
+						$(this).next().css("color", "black");
+						$("#tabCovoitAccepte").hide();
+						$("#tabCovoitAttente").show();
+						$("#tabCovoitRefuse").hide();
+					}
+					else if(type == "covoitRefuse"){
+						
+						$(this).css("color", "#EA3C3D");
+						$(this).prev().css("color", "black");
+						$(this).prev().prev().css("color", "black");
+						$("#tabCovoitAccepte").hide();
+						$("#tabCovoitAttente").hide();
+						$("#tabCovoitRefuse").show();
+					}
+					else{
+						
+						$(this).css("color", "#EA3C3D");
+						$(this).next().css("color", "black");
+						$(this).next().next().css("color", "black");
+						$("#tabCovoitAccepte").show();
+						$("#tabCovoitAttente").hide();
+						$("#tabCovoitRefuse").hide();
+					}
+				});
+			</script>
+			<script>				
+				$(".seeMoreAnnonce").click(function(event){
+
+					var type= $(this).attr("data-type");
+					var id = $(this).attr("data-id");
+					var login = $(this).attr("data-login");
+					
+					if($(this).parent().parent().next("tr").css('display') != 'none'){
+						$(this).parent().parent().next("tr").hide();
+						$(this).parent().parent().next("tr").next("tr").hide();
+						$(this).attr("src", "img/downarrow2.png");
+					}
+					else{
+						$(this).parent().parent().next("tr").show();
+						$(this).parent().parent().next("tr").next("tr").show();
+						$(this).attr("src", "img/uparrow2.png");
+					}
+					
+					
+					event.preventDefault();
+					$.ajax({ dataType: "json",url:"etapes", type:"POST", 
+        				data: "type="+type+"&seeMoreInfos=1&id="+id
+        			}).done(function(data){
+        				var etapesTemp = "";
+        				for (var i = 0; i < data.length; ++i) {
+        					etapesTemp += ""+data[i].nomVille+"&nbsp;&nbsp;<img src='img/rightarrow.png' alt=''>&nbsp;&nbsp;";
+        				}
+        				$(".etapesMore"+id).html(etapesTemp);
+        			});
+					
+					$.ajax({ dataType: "json",url:"getuser", type:"POST", 
+        				data: "login="+login+"&seeMoreInfos=1"
+        			}).done(function(data){
+        				$(".userAddMore"+id).html("- "+data.prenom+" "+data.nom[0]+". -");
+        			});
+				});
+			</script>
+			
 			<div id="myOffer" style="margin-top: 10px;">
 				<span class="downTitle titleAbout">Mes offres de Covoiturage <c:if
 						test="${propositions_size > 0 }">
@@ -45,10 +245,10 @@ ${villes}
 										data-commentaire="${proposition.commentaire}"
 										data-prix="${proposition.prix}"
 										data-nbPlace="${proposition.nbPlace}" style="cursor: pointer;"
-										alt="Editer votre recherche" /></td>
+										alt="Editer votre recherche" title="Editer votre recherche"/></td>
 									<td style="width: 25px;"><img class="deleteAds"
 										src="img/delete.png" data-idP="${proposition.idAnnonceProposition}" data-type="proposition" style="cursor: pointer;"
-										alt="Supprimer votre recherche" /></td>
+										alt="Supprimer votre recherche" title="Supprimer votre recherche"/></td>
 								</tr>
 								<tr style="display: none;">
 									<td colspan="1"></td>
@@ -215,10 +415,10 @@ ${villes}
 										data-heure="${recherche.heure}" data-min="${recherche.minute}"
 										data-commentaire="${recherche.commentaireRecherche}"
 										style="cursor: pointer;" src="img/edit.png"
-										alt="Editer votre recherche" /></td>
+										alt="Editer votre recherche" title="Editer votre recherche"/></td>
 									<td style="width: 25px;"><img class="deleteAds"
 										style="cursor: pointer;" data-idP="${recherche.idAnnonceRecherche}" data-type="recherche" src="img/delete.png"
-										alt="Supprimer votre recherche" /></td>
+										alt="Supprimer votre recherche" title="Supprimer votre recherche"/></td>
 								</tr>
 							</c:forEach>
 						</tbody>

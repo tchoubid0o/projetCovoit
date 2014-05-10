@@ -33,6 +33,17 @@ public class ProfilServlet extends GlobalInformationsServlet{
 			Utilisateur user = UtilisateurManager.getInstance().getUser(login);
 			
 			/*LISTER SES ANNONCES*/
+				/*Les covoiturage*/
+				request.setAttribute("covoitAccepte", AnnonceManager.getInstance().listerAnnoncePropositionLeConcernant(login, 1) );
+				request.setAttribute("covoitAccepte_size", (AnnonceManager.getInstance().listerAnnoncePropositionLeConcernant(login, 1)).size() );
+				
+				request.setAttribute("covoitAttente", AnnonceManager.getInstance().listerAnnoncePropositionLeConcernant(login, 0) );
+				request.setAttribute("covoitAttente_size", (AnnonceManager.getInstance().listerAnnoncePropositionLeConcernant(login, 0)).size() );
+				
+				request.setAttribute("covoitRefuse", AnnonceManager.getInstance().listerAnnoncePropositionLeConcernant(login, -1) );
+				request.setAttribute("covoitRefuse_size", (AnnonceManager.getInstance().listerAnnoncePropositionLeConcernant(login, -1)).size() );
+				
+				
 				/*Annonces Proposition*/
 				request.setAttribute("propositions", AnnonceManager.getInstance().listerMesAnnonceProposition(login) );
 				request.setAttribute("propositions_size", (AnnonceManager.getInstance().listerMesAnnonceProposition(login)).size() );

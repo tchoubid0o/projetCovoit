@@ -28,6 +28,10 @@ public interface AnnonceDao {
 	
 	public AnnonceProposition listerUneAnnonceProposition(Integer id);
 	
+	public List<AnnonceProposition> listerAnnoncePropositionLeConcernant(String login, int demandeConfirmee);
+	
+	//public List<AnnonceProposition> listerAnnonceProposeeLeConcernant(String login, int propositionConfirmee);
+	
 	public void updateProposition(Integer idProp, Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes);
 
 	public void updateRecherche(Integer idRech, String villeDepart, String villeArrivee, String date, String heure, String minute, String comment,	String login);
