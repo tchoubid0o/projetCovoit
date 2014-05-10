@@ -90,6 +90,7 @@
 									<td>${listeAnnonce.dateEtHeureTrajet.substring(8, 10)}/${listeAnnonce.dateEtHeureTrajet.substring(5, 7)}/${listeAnnonce.dateEtHeureTrajet.substring(0, 4)} à
 										${listeAnnonce.heure}h${listeAnnonce.minute}min</td>
 									<td><img class="seeMore" data-type="offers" data-id="${listeAnnonce.idAnnonceProposition}" data-login="${listeAnnonce.login}" src="img/downarrow2.png" alt="" /></td>
+									<%if (request.getSession().getAttribute("login") != null) {%>
 									<td>
 										<form method="post" action="reserver" class="reservation_form">
 											<input type="hidden" name="idAnnonceProposition" value="${listeAnnonce.idAnnonceProposition}" />
@@ -98,6 +99,7 @@
 										</form>
 										<div class="resultReserv" style="display: none;"></div>
 									</td>
+									<%} %>
 								</tr>
 								<tr style="display: none;">
 									<td colspan="1"></td>

@@ -26,6 +26,7 @@
 							<td>Nombre de places: ${proposition.nbPlace}</td>
 							<td>${proposition.dateEtHeureTrajet.substring(8, 10)}/${proposition.dateEtHeureTrajet.substring(5, 7)}/${proposition.dateEtHeureTrajet.substring(0, 4)} à ${proposition.heure}h${proposition.minute}min</td>
 							<td><img class="seeMore" data-type="offers" data-id="${proposition.idAnnonceProposition}" data-login="${proposition.login}" src="img/downarrow2.png" alt="" /></td>
+							<%if (request.getSession().getAttribute("login") != null) {%>
 							<td>
 								<form method="post" action="reserver" class="reservation_form">
 									<input type="hidden" name="idAnnonceProposition" value="${proposition.idAnnonceProposition}" />
@@ -34,6 +35,7 @@
 								</form>
 								<div class="resultReserv" style="display: none;"></div>
 							</td>
+							<%} %>
 						</tr>
 						<tr style="display: none;">
 							<td colspan="1"></td>
@@ -80,18 +82,15 @@
 							<td><img src="img/rightarrow.png" alt=""></td>
 							<td>${propositionp.villeArriveeRecherche}</td>
 							<td>${propositionp.dateEtHeureRecherche.substring(8, 10)}/${propositionp.dateEtHeureRecherche.substring(5, 7)}/${propositionp.dateEtHeureRecherche.substring(0, 4)} à ${propositionp.heure}h${propositionp.minute}min</td>
-							<td><img class="seeMore" data-type="offers" data-id="${propositionp.idAnnonceRecherche}" data-login="${propositionp.login}" src="img/downarrow2.png" alt="" /></td>
-							<td><form method="post" action="reserver" class="proposition_form"><input type="hidden" name="idAnnonceRecherche" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="proposerForm" value="1" /></form></td>
+							<td><img class="seeMore" data-type="searchCovoit" data-id="${propositionp.idAnnonceRecherche}" data-login="${propositionp.login}" src="img/downarrow2.png" alt="" /></td>
+							<%if (request.getSession().getAttribute("login") != null) {%>
+							<td><form method="post" action="repondre" class="proposition_form"><input type="hidden" name="idAnnonceRecherche" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none; width: 100px;" /><input type="hidden" name="proposerForm" value="1" /></form></td>
+							<%} %>
 						</tr>
 						<tr style="display: none;">
 							<td colspan="1"></td>
-							<td colspan="2">Commentaire: ${propositionp.commentaireRecherche}</td>
-							<td colspan="6" class="tdEtapes">Etapes: ${propositionp.villeDepartRecherche}&nbsp;&nbsp;<img src="img/rightarrow.png" alt="">&nbsp;&nbsp;<span class="etapesMore${propositionp.idAnnonceRecherche}"></span>${propositionp.villeArriveeRecherche}</td>	
-						</tr>
-						<tr style="display: none;">
-							<td colspan="1"></td>
-							<td colspan="2" class="userAddMore${propositionp.idAnnonceRecherche}"></td>
-							<td colspan="6"></td>
+							<td colspan="2">Annonce déposée par: <span class="userAddMore${propositionp.idAnnonceRecherche}"></span></td>
+							<td colspan="6">Commentaire: ${propositionp.commentaireRecherche}</td>	
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -110,15 +109,17 @@
 					var login = $(this).attr("data-login");					
 					
 					event.preventDefault();
-					$.ajax({ dataType: "json",url:"etapes", type:"POST", 
-        				data: "type="+type+"&seeMoreInfos=1&id="+id
-        			}).done(function(data){
-        				var etapesTemp = "";
-        				for (var i = 0; i < data.length; ++i) {
-        					etapesTemp += ""+data[i].nomVille+"&nbsp;&nbsp;<img src='img/rightarrow.png' alt=''>&nbsp;&nbsp;";
-        				}
-        				$(".etapesMore"+id).html(etapesTemp);
-        			});
+					if(type == "offers"){
+						$.ajax({ dataType: "json",url:"etapes", type:"POST", 
+	        				data: "type="+type+"&seeMoreInfos=1&id="+id
+	        			}).done(function(data){
+	        				var etapesTemp = "";
+	        				for (var i = 0; i < data.length; ++i) {
+	        					etapesTemp += ""+data[i].nomVille+"&nbsp;&nbsp;<img src='img/rightarrow.png' alt=''>&nbsp;&nbsp;";
+	        				}
+	        				$(".etapesMore"+id).html(etapesTemp);
+	        			});
+					}
 					
 					$.ajax({ dataType: "json",url:"getuser", type:"POST", 
         				data: "login="+login+"&seeMoreInfos=1"
@@ -128,46 +129,20 @@
 					
 					if($(this).parent().parent().next("tr").css('display') != 'none'){
 						$(this).parent().parent().next("tr").hide();
-						$(this).parent().parent().next("tr").next("tr").hide();
+						if(type == "offers"){
+							$(this).parent().parent().next("tr").next("tr").hide();
+						}
 						$(this).attr("src", "img/downarrow2.png");
 					}
 					else{
 						$(this).parent().parent().next("tr").show();
-						$(this).parent().parent().next("tr").next("tr").slideDown();
+						if(type == "offers"){
+							$(this).parent().parent().next("tr").next("tr").slideDown();
+						}
 						$(this).attr("src", "img/uparrow2.png");
 					}
 				});
 			</script>
-			
-		<c:if test="${propositions_size == 0 }">
-			<div class="lastCars center">Aucun résultat</div>
-		</c:if>
-
-		<!-- Trouver un passager -->
-		
-		<div style="text-align: center;">
-			<span class="titleAbout">Trouver un passager</span>
-		</div>
-
-				<table class="lastCars" style="text-align: center;">
-					<tbody>
-						<c:forEach var="propositionp" begin="0" end="${propositionsp_size}"
-				step="1" items="${propositionsp}">
-						<tr>
-							<td><img src="img/passenger.png" alt="" /></td>
-							<td>${propositionp.villeDepartRecherche}</td>
-							<td><img src="img/rightarrow.png" alt=""></td>
-							<td>${propositionp.villeArriveeRecherche}</td>
-							<td>${propositionp.dateEtHeureRecherche.substring(8, 10)}/${propositionp.dateEtHeureRecherche.substring(5, 7)}/${propositionp.dateEtHeureRecherche.substring(0, 4)} à ${propositionp.heure}h${propositionp.minute}min</td>
-							<td><form method="post" action="repondre" class="proposition_form"><input type="hidden" name="idAnnonceRecherche" value="${propositionp.idAnnonceRecherche}" /><input type="submit" value="Proposer" class="submitContactForm" style="margin-bottom: 10px; height: auto; border: none;" /><input type="hidden" name="proposerForm" value="1" /></form></td>
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			
-		<c:if test="${propositionsp_size == 0 }">
-			<div class="lastCars center">Aucune annonce de passager.</div>
-		</c:if>
 		
 	</div>
 </section>
