@@ -55,7 +55,7 @@ ${villes}
 							<c:if test="${covoitAccepte_size == 0 }">
 								<tr>
 									<td colspan="4"></td>
-									<td colspan="2">Aucune demande de covoiturage confirée</td>
+									<td colspan="2">Aucune demande de covoiturage confirmée</td>
 									<td colspan="4"></td>
 								</tr>
 							</c:if>

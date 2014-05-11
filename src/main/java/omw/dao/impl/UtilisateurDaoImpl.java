@@ -223,61 +223,6 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		return "erreur";
 	}
 	
-	//On a pas d'ID utilisateur
-	
-	/*
-	public Integer getTheIdUser(String login){
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM utilisateur WHERE login = ?");
-			stmt.setString(1, login);
-			ResultSet results = null;
-			try {
-				results = stmt.executeQuery();
-				if(results.next()){
-					//Retourne juste l'idUser
-					return results.getInt(1);
-				}
-
-			} catch (SQLException e1) {
-				System.out.println("Erreur lors de l'exécution de la requête permettant de récupérer l'idUser");
-				e1.printStackTrace();
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return -1;
-	}
-	
-	public String getUserPseudo(Integer idUser){
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-
-			PreparedStatement stmt = connection.prepareStatement("SELECT login FROM utilisateur WHERE idUser = ?");
-			stmt.setInt(1, idUser);
-			ResultSet results = null;
-			try {
-				results = stmt.executeQuery();
-				if(results.next()){
-					//Retourne juste l'idUser
-					return results.getString(1);
-				}
-
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return "erreur";
-	}
-	*/
-	
 	public String editMySettings(String email, String password, String password_verif, String telephone, String login){
 		try {
 			if(password.equals(password_verif)){
