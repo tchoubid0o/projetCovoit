@@ -1,6 +1,5 @@
 package omw.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import omw.model.AnnonceProposition;

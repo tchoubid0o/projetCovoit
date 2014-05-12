@@ -1,7 +1,5 @@
 package omw.model;
 
-import java.sql.Date;
-
 public class AnnonceRecherche {
 	
 	private int idAnnonceRecherche;

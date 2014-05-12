@@ -1,7 +1,6 @@
 package omw.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import omw.metier.EtapesManager;
-import omw.metier.UtilisateurManager;
-import omw.model.Utilisateur;
 import omw.model.Ville;
 
 import com.google.gson.Gson;
@@ -45,7 +42,6 @@ public class EtapesServlet extends GlobalInformationsServlet {
 			if(request.getParameter("seeMoreInfos") != null){
 		
 				Integer id = Integer.parseInt(request.getParameter("id"));
-				String login = request.getParameter("login");
 				
 			    List<Ville> result = EtapesManager.getInstance().listerEtape(id);
 			    

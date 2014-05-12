@@ -1,20 +1,9 @@
 package omw.dao.impl;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.security.MessageDigest;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
-
-
-
-
-import omw.model.Utilisateur;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,5 @@
 package omw.metier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import omw.dao.GlobalInformationsDao;

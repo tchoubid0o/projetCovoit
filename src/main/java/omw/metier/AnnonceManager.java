@@ -1,14 +1,9 @@
 package omw.metier;
 
 import omw.dao.AnnonceDao;
-import omw.dao.UtilisateurDao;
 import omw.dao.impl.AnnonceDaoImpl;
-import omw.dao.impl.UtilisateurDaoImpl;
 import omw.model.AnnonceProposition;
 import omw.model.AnnonceRecherche;
-import omw.model.Utilisateur;
-
-import java.net.UnknownHostException;
 import java.util.List;
 
 public class AnnonceManager {

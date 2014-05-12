@@ -1,22 +1,12 @@
 package omw.dao.impl;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import omw.model.AnnonceProposition;
-import omw.model.AnnonceRecherche;
-import omw.model.Utilisateur;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.google.gson.Gson;
 
 public class AnnonceTestDaoCase {
 	
@@ -40,121 +30,6 @@ public class AnnonceTestDaoCase {
 		stmt.close();
 		connection.close();
 	}
-	
-	/*@Test
-	public void testListerRechercheProposition() throws SQLException{
-		
-		Connection connection = DataSourceProvider.getDataSource().getConnection();
-		Statement stmt = connection.createStatement();
-		
-		ResultSet results = stmt.executeQuery("SELECT DISTINCT AP.idAnnonceProposition FROM annonceproposition AP INNER JOIN etapes ET ON AP.idAnnonceProposition = ET.idAnnonceProposition WHERE AP.estReponseARecherche = 0 ");
-		Assert.assertTrue(results.next());
-		Assert.assertEquals("log", results.getString("login"));
-		Assert.assertEquals("test@gmail.com", results.getString("email"));
-		Assert.assertEquals("passwordTest", results.getString("password"));
-		Assert.assertEquals("ipTest", results.getString("ip"));
-		Assert.assertEquals("NOMTEST", results.getString("nom"));
-		Assert.assertEquals("Prenomtest", results.getString("prenom"));
-		Assert.assertEquals("0312345678", results.getString("telephone"));
-		Assert.assertEquals("2014-01-02 00:01:02.0", results.getString("registered"));
-		Assert.assertFalse(results.next());
-		
-		stmt.close();
-		connection.close();
-	}
-	
-	public List<AnnonceProposition> listerRechercheProposition(String villeDepart, String villeArrivee){
-		//Schema trajet possible:
-				// A ---> B
-				// A ~~~~ B ---> C
-				// Other ~~~~ A ~~~~ B ~~~~ D    Requête stmt et stmt2; Les 3 autres cas sont traités simplement avec stmt3
-				// Other ~~~~ A ~~~~ B
-		
-		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-
-			ResultSet results = null;
-			
-			PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT AP.idAnnonceProposition FROM annonceproposition AP INNER JOIN etapes ET ON AP.idAnnonceProposition = ET.idAnnonceProposition "
-					+ "WHERE AP.estReponseARecherche = 0 ");
-			
-			results = stmt.executeQuery();
-
-			while (results.next()) {
-				//System.out.println(results.getInt("idAnnonceProposition"));
-				int i = 0;
-				ResultSet results2 = null;
-				
-				//liste.add(proposition);
-				
-				PreparedStatement stmt2 = connection.prepareStatement("SELECT * FROM etapes WHERE idAnnonceProposition = ? ORDER BY idEtape ASC");
-				stmt2.setInt(1, results.getInt("idAnnonceProposition"));
-				results2 = stmt2.executeQuery();
-				ArrayList<String> maListe = new ArrayList<String>();
-				//System.out.println("----------------");
-				while (results2.next()) {
-					//System.out.println(results2.getString("nomVille"));
-					maListe.add(results2.getString("nomVille"));
-				}
-				
-				maListe.add("null");
-				Integer taille = maListe.size()-1;
-				Integer firstV = 0;
-				Integer lastV = 0;
-				for(i=0; i< taille; i++){
-					//System.out.println(villeDepart+" et "+maListe.get(i)+" avec "+maListe.get(i+1)+" et "+villeArrivee);
-					if(maListe.get(i).toLowerCase().equals(villeDepart)){
-						
-						//System.out.println("idAnnonceProposition"+i+"test");
-						firstV = i;
-					}
-					if(maListe.get(i).toLowerCase().equals(villeArrivee)){
-						lastV = i;
-					}
-				}
-				
-				if(firstV < lastV){
-					liste.add(listerUneAnnonceProposition(results.getInt("idAnnonceProposition")));
-				}
-				
-				results2.close();
-				stmt2.close();
-				
-			}
-			results.close();
-			stmt.close();
-
-			ResultSet results3 = null;
-			
-			PreparedStatement stmt3 = connection.prepareStatement("SELECT DISTINCT AP.idAnnonceProposition FROM annonceproposition AP RIGHT JOIN etapes ET ON AP.idAnnonceProposition = ET.idAnnonceProposition "
-					+ "WHERE AP.estReponseARecherche = 0 "
-					+ "AND ((AP.villeDepart = ? AND AP.villeArrivee = ?) OR (AP.villeDepart = ? AND ET.nomVille = ?) OR (ET.nomVille = ? AND AP.villeArrivee = ?))");
-			stmt3.setString(1,villeDepart);
-			stmt3.setString(2,villeArrivee);
-			stmt3.setString(3,villeDepart);
-			stmt3.setString(4,villeArrivee);
-			stmt3.setString(5,villeDepart);
-			stmt3.setString(6,villeArrivee);
-			
-			results3 = stmt3.executeQuery();
-
-			while (results3.next()) {
-				liste.add(listerUneAnnonceProposition(results3.getInt("idAnnonceProposition")));
-			}
-			results3.close();
-			stmt3.close();
-			
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-
-		return liste;	
-	}*/
 	
 	@Test
 	public void testDeleteAds() throws SQLException{

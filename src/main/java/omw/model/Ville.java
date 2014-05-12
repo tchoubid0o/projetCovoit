@@ -15,8 +15,5 @@ public class Ville {
 	public Ville(String nomVille) {
 		super();
 		this.nomVille = nomVille;
-	}
-	
-	
-	
+	}	
 }
