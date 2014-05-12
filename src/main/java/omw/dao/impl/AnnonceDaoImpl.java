@@ -1,7 +1,6 @@
 package omw.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,15 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.core.SubstringMatcher;
-
 import com.google.gson.Gson;
 
 import omw.dao.AnnonceDao;
 import omw.model.AnnonceProposition;
 import omw.model.AnnonceRecherche;
 import omw.model.Utilisateur;
-import omw.model.Ville;
 
 public class AnnonceDaoImpl implements AnnonceDao{
 	
@@ -609,7 +605,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 	}
 	
 	public AnnonceProposition listerUneAnnonceProposition(Integer id) {
-		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
+		
 		try {
 			Connection connection = DataSourceProvider.getDataSource()
 					.getConnection();
@@ -804,44 +800,6 @@ public class AnnonceDaoImpl implements AnnonceDao{
 		
 		return liste;		
 	}
-	
-	/*public List<AnnonceProposition> listerAnnonceProposeeLeConcernant(String login, int propositionConfirmee){
-		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
-		
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			
-			ResultSet results = null;
-			
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition INNER JOIN proposer ON idAnnonce WHERE login = ? ORDER BY idAnnonceRecherche ASC");
-			stmt.setString(1,login);
-			results = stmt.executeQuery();
-
-			while (results.next()) {
-				AnnonceProposition annonce = new AnnonceProposition(
-						results.getInt("idAnnonceProposition"),
-						results.getBoolean("estReponseARecherche"),
-						ucfirst(results.getString("villeDepart")),
-						ucfirst(results.getString("villeArrivee")),
-						(results.getString("dateEtHeureTrajet")).substring(0,10),
-						(results.getString("dateEtHeureTrajet")).substring(10,12),
-						(results.getString("dateEtHeureTrajet")).substring(12),
-						results.getString("commentaire"),
-						results.getInt("prix"),
-						results.getInt("nbPlace"),
-						results.getString("login"));
-				liste.add(annonce);
-			}
-			results.close();
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return liste;	
-	}*/
 	
 	public String ucfirst(String chaine){
 		return chaine.substring(0, 1).toUpperCase()+ chaine.substring(1).toLowerCase();
