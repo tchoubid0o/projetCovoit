@@ -23,6 +23,7 @@ public class RechercherServlet extends GlobalInformationsServlet {
 	}
 
 	public void postRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		request.setAttribute("villes", AnnonceManager.getInstance().listerVille());
 		
 		String villeDepart = request.getParameter("villeDepart");

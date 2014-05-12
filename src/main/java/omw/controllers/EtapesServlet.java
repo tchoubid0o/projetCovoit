@@ -40,6 +40,7 @@ public class EtapesServlet extends GlobalInformationsServlet {
 	public void postRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		
 			if(request.getParameter("seeMoreInfos") != null){
 		

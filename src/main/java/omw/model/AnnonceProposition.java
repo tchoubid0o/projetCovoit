@@ -13,7 +13,7 @@ public class AnnonceProposition {
 	private String heure;
 	private String minute;
 	private String commentaire;
-	private int prix;
+	private float prix;
 	private int nbPlace;
 	private String login;
 	private ArrayList<Utilisateur> listePersonneSouhaitantParticiperCovoit;
@@ -22,7 +22,7 @@ public class AnnonceProposition {
 	public AnnonceProposition(int idAnnonceProposition,
 			boolean estReponseARecherche, String villeDepart,
 			String villeArrivee, String dateEtHeureTrajet, String heure,
-			String minute, String commentaire, int prix, int nbPlace,
+			String minute, String commentaire, float prix, int nbPlace,
 			String login) {
 		super();
 		this.idAnnonceProposition = idAnnonceProposition;
@@ -45,7 +45,7 @@ public class AnnonceProposition {
 	public void setIdAnnonceProposition(int idAnnonceProposition) {
 		this.idAnnonceProposition = idAnnonceProposition;
 	}
-	public boolean isEstReponseARecherche() {
+	public boolean getEstReponseARecherche() {
 		return estReponseARecherche;
 	}
 	public void setEstReponseARecherche(boolean estReponseARecherche) {
@@ -87,10 +87,10 @@ public class AnnonceProposition {
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
-	public int getPrix() {
+	public float getPrix() {
 		return prix;
 	}
-	public void setPrix(int prix) {
+	public void setPrix(float prix) {
 		this.prix = prix;
 	}
 	public int getNbPlace() {

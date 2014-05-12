@@ -23,7 +23,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 	
 	
 	public List<AnnonceProposition> listerRechercheProposition(String villeDepart, String villeArrivee){
-		//Schema trajet possible:
+		//Schema trajet possible: on cherche un trajet de A vers B
 				// A ---> B
 				// A ~~~~ B ---> C
 				// Other ~~~~ A ~~~~ B ~~~~ D    Requête stmt et stmt2; Les 3 autres cas sont traités simplement avec stmt3
@@ -228,7 +228,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			stmt.setString(3, villeArrivee);
 			stmt.setString(4, formatedDate);
 			stmt.setString(5, comment);
-			stmt.setInt(6, Integer.parseInt(prix));
+			stmt.setFloat(6, Float.parseFloat(prix.replace(',', '.')));
 			if(nbPlaceCovoit - Integer.parseInt(nbPlace) <= nbPlaceDispoCovoit){
 				stmt.setInt(7, Integer.parseInt(nbPlace));
 			}
@@ -290,17 +290,6 @@ public class AnnonceDaoImpl implements AnnonceDao{
 	}
 	
 	public void insertProposition(Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
-		/*
-		
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		Date dateLimite = null;
-		try {
-		dateLimite = df.parse(date);
-		} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		}
-		*/
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -314,7 +303,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			stmt.setString(3, villeArrivee);
 			stmt.setString(4, formatedDate);
 			stmt.setString(5, comment);
-			stmt.setInt(6, Integer.parseInt(prix));
+			stmt.setFloat(6, Float.parseFloat(prix.replace(',', '.')));
 			stmt.setInt(7, Integer.parseInt(nbPlace));
 			stmt.setInt(8, Integer.parseInt(nbPlace));
 			stmt.setString(9, login);
@@ -347,16 +336,15 @@ public class AnnonceDaoImpl implements AnnonceDao{
 	
 	public void insertPropositionReponse(String idAnnonceRecherche, Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
 		/*
-		
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		Date dateLimite = null;
-		try {
-		dateLimite = df.parse(date);
-		} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		}
-		*/
+		 * DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		 * Date dateLimite = null;
+		 * try {
+		 * dateLimite = df.parse(date);
+		 * } catch (ParseException e) {
+		 * // TODO Auto-generated catch block
+		 * e.printStackTrace();
+		 * }
+		 */
 		
 		try {
 			Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -370,7 +358,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			stmt.setString(3, villeArrivee);
 			stmt.setString(4, formatedDate);
 			stmt.setString(5, comment);
-			stmt.setInt(6, Integer.parseInt(prix));
+			stmt.setFloat(6, Float.parseFloat(prix.replace(',', '.')));
 			stmt.setInt(7, Integer.parseInt(nbPlace));
 			stmt.setInt(8, Integer.parseInt(nbPlace));
 			stmt.setString(9, login);
@@ -428,32 +416,6 @@ public class AnnonceDaoImpl implements AnnonceDao{
 			e.printStackTrace();
 		}
 	}
-	
-	/*
-	public ArrayList<AnnonceProposition> listerAnnonceProposition(){
-		
-		ArrayList<AnnonceProposition> listAnnonceProposition = new ArrayList<AnnonceProposition>();
-		
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-	
-			Statement stmtListAnnonceProposition = connection.createStatement();
-			ResultSet resultsListAnnonceProposition = stmtListAnnonceProposition.executeQuery("SELECT * FROM annonceproposition  INNER JOIN etapes ON annonceproposition.idAnnonceProposition=etapes.idAnnonceProposition");
-			
-			while (resultsListAnnonceProposition.next()) {
-				AnnonceProposition annonceProposition = new AnnonceProposition();
-				
-				
-			}
-			connection.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return listAnnonceProposition;
-	}
-	*/
 	
 	public void ajouterDemandePourAnnonce(Integer idAnnonceProposition, String login){
 		
@@ -574,7 +536,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 							(results.getString("dateEtHeureTrajet")).substring(10,12),
 							(results.getString("dateEtHeureTrajet")).substring(12),
 							results.getString("commentaire"),
-							results.getInt("prix"),
+							results.getFloat("prix"),
 							results.getInt("nbPlace"),
 							results.getString("login"));
 					
@@ -668,7 +630,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 						(results.getString("dateEtHeureTrajet")).substring(10,12),
 						(results.getString("dateEtHeureTrajet")).substring(12),
 						results.getString("commentaire"),
-						results.getInt("prix"),
+						results.getFloat("prix"),
 						results.getInt("nbPlace"),
 						results.getString("login"));
 				
@@ -706,7 +668,7 @@ public class AnnonceDaoImpl implements AnnonceDao{
 						(results.getString("dateEtHeureTrajet")).substring(10,12),
 						(results.getString("dateEtHeureTrajet")).substring(12),
 						results.getString("commentaire"),
-						results.getInt("prix"),
+						results.getFloat("prix"),
 						results.getInt("nbPlace"),
 						results.getString("login"));
 				

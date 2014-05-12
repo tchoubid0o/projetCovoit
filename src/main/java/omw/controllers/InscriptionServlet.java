@@ -29,6 +29,7 @@ public class InscriptionServlet extends GlobalInformationsServlet{
 	@Override
 	public void postRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		
 		Map<String, String> erreursMessage = new HashMap<String, String>();
 		

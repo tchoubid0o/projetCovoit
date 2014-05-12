@@ -27,7 +27,8 @@ public class AjaxContactServlet extends GlobalInformationsServlet{
 	public void postRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-String erreursMessage = null;
+		request.setCharacterEncoding("UTF-8");
+		String erreursMessage = null;
 		
 	    String email = request.getParameter("email");
 	    String nom = request.getParameter("nom");
