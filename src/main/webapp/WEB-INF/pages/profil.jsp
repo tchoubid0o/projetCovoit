@@ -260,7 +260,9 @@ ${villes}
 									<td colspan="2" class="userAddMore${proposition.idAnnonceProposition}"></td>
 									<td colspan="7"></td>
 								</tr>	
-								
+								<c:if test='${proposition.listePersonneAccepteeDansCovoit == null || listePersonneSouhaitantParticiperCovoit == null}'>	
+									<tr style="display: none;"></tr>
+								</c:if>
 								<c:if test='${proposition.listePersonneAccepteeDansCovoit != null }'>	
 									<c:forEach var="accepteDansCovoit" items="${proposition.listePersonneAccepteeDansCovoit}">
 										<tr style="display: none;" class="souhaiteEtreOuAccepteDansCovoit${proposition.idAnnonceProposition}">

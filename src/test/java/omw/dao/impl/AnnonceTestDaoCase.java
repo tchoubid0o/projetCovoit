@@ -198,7 +198,7 @@ public class AnnonceTestDaoCase {
 		Assert.assertEquals("arriveeTestBis", results.getString("villeArrivee"));
 		Assert.assertEquals("2014/05/060304", results.getString("dateEtHeureTrajet"));
 		Assert.assertEquals("testBis", results.getString("commentaire"));
-		Assert.assertEquals(10, results.getInt("prix"));
+		Assert.assertEquals(10, results.getFloat("prix"), 0.01);
 		Assert.assertEquals(4, results.getInt("nbPlace"));
 		Assert.assertEquals(1, results.getInt("nbPlaceDispo"));
 		Assert.assertEquals("log", results.getString("login"));		
@@ -246,7 +246,7 @@ public class AnnonceTestDaoCase {
 		Assert.assertEquals("arriveeTestBis", results.getString("villeArrivee"));
 		Assert.assertEquals("2014/05/060304", results.getString("dateEtHeureTrajet"));
 		Assert.assertEquals("testBis", results.getString("commentaire"));
-		Assert.assertEquals(15, results.getInt("prix"));
+		Assert.assertEquals(15, results.getFloat("prix"), 0.01);
 		Assert.assertEquals(2, results.getInt("nbPlace"));
 		Assert.assertEquals(1, results.getInt("nbPlaceDispo"));
 		Assert.assertEquals("log", results.getString("login"));		
@@ -282,7 +282,7 @@ public class AnnonceTestDaoCase {
 		Assert.assertEquals("arriveeTestBis", results.getString("villeArrivee"));
 		Assert.assertEquals("2014/05/060304", results.getString("dateEtHeureTrajet"));
 		Assert.assertEquals("testBis", results.getString("commentaire"));
-		Assert.assertEquals(15, results.getInt("prix"));
+		Assert.assertEquals(15, results.getFloat("prix"), 0.01);
 		Assert.assertEquals(2, results.getInt("nbPlace"));
 		Assert.assertEquals(1, results.getInt("nbPlaceDispo"));
 		Assert.assertEquals("log", results.getString("login"));		
@@ -391,7 +391,7 @@ public class AnnonceTestDaoCase {
 		Assert.assertEquals("arriveeTest", results.getString("villeArrivee"));
 		Assert.assertEquals("2014/01/020001", results.getString("dateEtHeureTrajet"));
 		Assert.assertEquals("test", results.getString("commentaire"));
-		Assert.assertEquals(25, results.getInt("prix"));
+		Assert.assertEquals(25, results.getFloat("prix"), 0.01);
 		Assert.assertEquals(2, results.getInt("nbPlace"));
 		Assert.assertEquals(0, results.getInt("nbPlaceDispo"));
 		Assert.assertEquals("log", results.getString("login"));
@@ -426,7 +426,7 @@ public class AnnonceTestDaoCase {
 		Assert.assertEquals("arriveeTest", results.getString("villeArrivee"));
 		Assert.assertEquals("2014/01/020001", results.getString("dateEtHeureTrajet"));
 		Assert.assertEquals("test", results.getString("commentaire"));
-		Assert.assertEquals(25, results.getInt("prix"));
+		Assert.assertEquals(25, results.getFloat("prix"), 0.01);
 		Assert.assertEquals(2, results.getInt("nbPlace"));
 		Assert.assertEquals(1, results.getInt("nbPlaceDispo"));
 		Assert.assertEquals("log", results.getString("login"));
@@ -488,7 +488,7 @@ public class AnnonceTestDaoCase {
 		Assert.assertEquals("arriveeTest", results.getString("villeArrivee"));
 		Assert.assertEquals("2014/01/020001", results.getString("dateEtHeureTrajet"));
 		Assert.assertEquals("test", results.getString("commentaire"));
-		Assert.assertEquals(25, results.getInt("prix"));
+		Assert.assertEquals(25, results.getFloat("prix"), 0.01);
 		Assert.assertEquals(2, results.getInt("nbPlace"));
 		Assert.assertEquals(1, results.getInt("nbPlaceDispo"));
 		Assert.assertEquals("log", results.getString("login"));

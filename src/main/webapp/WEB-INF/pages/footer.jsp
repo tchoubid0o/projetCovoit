@@ -237,7 +237,7 @@
                     	$(document).ready(function(){
                     		$("#contact_form").submit(function(event){
                     			event.preventDefault(); 
-                    			if($("#nomcontact").val() != "" && $("#emailcontact").val() != "" && $("#messagecontact").text() != ""){
+                    			if($("#nomcontact").val() != "" && $("#emailcontact").val() != "" && $("#messagecontact").val() != ""){
                     			$.ajax({ url:"ajaxcontact", type:"POST", 
                     				data: $("#contact_form").serialize()
                     			}).done(function (response){		  		
