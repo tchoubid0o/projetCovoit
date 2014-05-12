@@ -18,16 +18,27 @@ public class RepondreServlet extends GlobalInformationsServlet{
 	@Override
 	public void getRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
+		String login = (String) request.getSession().getAttribute("login");
+		
+		if(login != null && !login.equals("")){
 		
 		request.setAttribute("villes", AnnonceManager.getInstance().listerVille());
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/repondre.jsp");
 		view.forward(request, response);
+		}
+		else{
+
+			response.sendRedirect("accueil");
+		}
 	}
 
 	@Override
 	public void postRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String login = (String) request.getSession().getAttribute("login");
+		
+		if(login != null && !login.equals("")){
 		request.setCharacterEncoding("UTF-8");
 		
 		request.setAttribute("villes", AnnonceManager.getInstance().listerVille());
@@ -48,16 +59,17 @@ public class RepondreServlet extends GlobalInformationsServlet{
 			String comment = request.getParameter("comment");
 	 
 	        String[] etapes=request.getParameterValues("etapes");
-	        
-			
-			String login = (String) request.getSession().getAttribute("login");
 			
 			AnnonceManager.getInstance().insertPropositionReponse(idAnnonceRecherche, 1, villeDepart, villeArrivee, date, heure, minute, prix, nbPlace, comment, login, etapes);
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/repondre.jsp");
 		view.forward(request, response);
+		}
+		else{
 
+			response.sendRedirect("accueil");
+		}
 	}
 	
 }

@@ -37,15 +37,20 @@ public class AdministrationServlet extends GlobalInformationsServlet {
 			
 			listUsers = UtilisateurManager.getInstance().listerUsers();
 			listAnnonceProp = AnnonceManager.getInstance().listerAnnonceProposition("");
-			listAnnonceRech = AnnonceManager.getInstance().listerAnnonceRecherche("");
+			listAnnonceRech = AnnonceManager.getInstance().listerAnnonceRecherche("");	
+			
+			request.setAttribute("listUsers", listUsers);	
+			request.setAttribute("listAnnonceProp", listAnnonceProp);
+			request.setAttribute("listAnnonceRech", listAnnonceRech);
+			
+				
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/administration.jsp");
+			view.forward(request, response);
 		}
-		
-		request.setAttribute("listUsers", listUsers);	
-		request.setAttribute("listAnnonceProp", listAnnonceProp);
-		request.setAttribute("listAnnonceRech", listAnnonceRech);
-		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/administration.jsp");
-		view.forward(request, response);
+		else{
+
+			response.sendRedirect("accueil");
+		}	
 	}
 
 	@Override

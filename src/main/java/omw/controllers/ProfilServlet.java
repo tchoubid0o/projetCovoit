@@ -54,9 +54,8 @@ public class ProfilServlet extends GlobalInformationsServlet{
 			view.forward(request, response);
 		}
 		else{
-			request.setAttribute("erreurs", "<div class='erreur_message'>Vous devez être connecté pour visualiser cette page.</div>");
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/pages/profil.jsp");
-			view.forward(request, response);
+			
+			response.sendRedirect("accueil");
 		}
 	}
 

@@ -94,8 +94,22 @@
                 <div class="rightColumn" style="text-align: left;">
                     <div class="columnInside size18" style="width: 80%; margin: auto;">
                         <div class="grey">Pour les conducteurs</div>
+                        
                         <div class="red">
-                            <a href="proposer" class="red">Proposer un covoiturage</a><br/>
+                        <%
+							if (request.getSession().getAttribute("login") != null) {
+						%>
+                            <a href="proposer" class="red">Proposer un covoiturage</a><br/>                            
+						<%
+							}
+                        %>
+                        <%
+							if (request.getSession().getAttribute("login") == null) {
+						%>
+                             <div style="height: 10px;"></div>                            
+						<%
+							}
+                        %>
                             <div style="margin-top: -10px;">
                                 <a href="inscription" class="red">S'inscrire maintenant</a><br/>
                             </div>
