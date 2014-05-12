@@ -68,6 +68,18 @@
     <servlet-name>Administration</servlet-name>
     <servlet-class>omw.controllers.AdministrationServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>InformationsDiverses</servlet-name>
+    <servlet-class>omw.controllers.InformationsDiversesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TutoConducteur</servlet-name>
+    <servlet-class>omw.controllers.TutoConducteurServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TutoPassager</servlet-name>
+    <servlet-class>omw.controllers.TutoPassagerServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
     <url-pattern>/accueil</url-pattern>
@@ -135,6 +147,18 @@
   <servlet-mapping>
     <servlet-name>Administration</servlet-name>
     <url-pattern>/administration</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InformationsDiverses</servlet-name>
+    <url-pattern>/infolegales</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TutoConducteur</servlet-name>
+    <url-pattern>/tutoconducteur</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TutoPassager</servlet-name>
+    <url-pattern>/tutopassager</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>accueil</welcome-file>

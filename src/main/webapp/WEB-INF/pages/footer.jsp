@@ -114,41 +114,29 @@
                                 <a href="inscription" class="red">S'inscrire maintenant</a><br/>
                             </div>
                             <div style="margin-top: -10px;">
-                                <a href="" class="red">Tutoriel conducteur</a><br/>
+                                <a href="tutoconducteur" class="red">Tutoriel conducteur</a><br/>
                             </div>
                         </div>
 
                         <div class="grey">Pour les passagers</div>
                         <div class="red">
-                            <a href="trouver" class="red">Covoiturage par ville</a><br/>
+                            <a href="trouver" class="red">Trouver un covoiturage</a><br/>
                             <div style="margin-top: -10px;">
-                                <a href="" class="red">Tutoriel passager</a><br/>
+                                <a href="inscription" class="red">S'inscrire maintenant</a><br/>
+                            </div>
+                            <div style="margin-top: -10px;">
+                                <a href="tutopassager" class="red">Tutoriel passager</a><br/>
                             </div>
                         </div>
 
                         <div class="grey">Légale</div>
                         <div class="red">
-                            <a href="" class="red">Informations légales</a><br/>
-                            <div style="margin-top: -10px;">
-                                <a href="" class="red">Conditions générales</a><br/>
-                            </div>
-                            <div style="margin-top: -10px;">
-                                <a href="" class="red">Confidentialité</a><br/>
-                            </div>
+                            <a href="infolegales" class="red">Informations légales</a><br/>
                         </div>
 
                         <div class="grey">Aide</div>
                         <div class="red">
-                            <a href="" class="red">Premiers pas</a><br/>
-                            <div style="margin-top: -10px;">
-                                <a href="" class="red">Questions fréquentes</a><br/>
-                            </div>
-                            <div style="margin-top: -10px;">
-                                <a href="" class="red">Règles</a><br/>
-                            </div>
-                            <div style="margin-top: -10px;">
-                                <a href="calculateur" class="red">Prix du covoiturage</a><br/>
-                            </div>
+                              <a href="calculateur" class="red">Prix du covoiturage</a><br/>
                         </div>
                         
                         <c:if test="${estAdmin}">
