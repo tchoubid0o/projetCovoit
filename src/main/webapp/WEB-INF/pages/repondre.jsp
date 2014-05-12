@@ -42,22 +42,6 @@
      				<div id="dynamicInput15" style="display: none;">Etape 15<br><input type="text" id="villeEtape15" name="etapes"></div>
      				
      				<input type="button" value="Ajouter une autre étape" style="font-family: Verdana,Arial,sans-serif;font-size: 12px;" onClick="addInput('dynamicInput');">
-					<script>
-					var counter = 1;
-					var limit = 15;
-		
-					function addInput(divName){
-					     if (counter == limit)  {
-					          alert("Vous avez atteint la limite des " + counter + " étapes possibles.");
-					     }
-					     else {
-					    	 
-					    	 $("#dynamicInput"+(counter+1)).show();
-					    	 counter++;
-					         	
-					     }
-					}
-					</script>
 				</div>
 				<label for="date">Date :</label><br /> 
 					<input type="text" class="datepicker" name="date" id="date" required/><br /> 
@@ -125,4 +109,5 @@
 	</div>
 </section>
 
+<script src="js/repondreJs.js"></script>
 <jsp:include page="footer.jsp" />

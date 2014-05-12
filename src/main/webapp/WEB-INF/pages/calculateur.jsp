@@ -57,33 +57,10 @@
 					<td colspan="3" style="padding: 0 90px 0 90px;"><input type="text" id="prixTotal" class="submitContactForm" style="text-align: center; cursor: auto;" value="0.00€" readonly></td>
 				</tr>
 			</table>
-			<script>
-				var prixSelect = $("#prixForm option:selected");
-				var km = $("#km").val();
-				var prixCalc = 0;
-				$("#prixForm").change(function(){
-					prixSelect = $("#prixForm option:selected").val();
-					km = $("#km").val();
-					if(km == null || km == ""){km = 0;}
-					prixCalc = (parseFloat(prixSelect)*parseFloat(km))/100;
-					
-					$("#prixTotal").val(prixCalc+"€");
-				});
-				
-				$("#km").keyup(function(){
-					
-					prixSelect = $("#prixForm option:selected").val();
-					km = $(this).val();
-					if(km == null || km == ""){km = 0;}
-					
-					prixCalc = (parseFloat(prixSelect)*parseFloat(km))/100;
-					
-					$("#prixTotal").val(prixCalc+"€");
-				});
-			</script>
 			
 		</div>
 	</div>
 </section>
 
+<script src="js/calculateurJs.js"></script>
 <jsp:include page="footer.jsp" />
