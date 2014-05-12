@@ -11,9 +11,7 @@ ${villes}
 				<span class="downTitle titleAbout">
 					Mes covoiturages
 				</span>
-				<c:if test="${covoitAccepte_size > 0 || covoitAttente_size > 0 || covoitRefuse_size > 0}">
-					<img class="down" src="img/downarrow.png" alt="" />
-				</c:if>
+				<img class="down" src="img/downarrow.png" alt="" />
 				<div class="wrapProfil" style="display: none;">
 					<div class="mescovoits" data-type="covoitAccepte" style="color: #EA3C3D;width: 330px;float: left;cursor: pointer;">
 						Acceptés<c:if test="${covoitAccepte_size > 0 }"> (${covoitAccepte_size})</c:if><c:if test="${covoitAccepte_size == 0 }"> (0)</c:if>
@@ -260,7 +258,9 @@ ${villes}
 									<td colspan="2" class="userAddMore${proposition.idAnnonceProposition}"></td>
 									<td colspan="7"></td>
 								</tr>	
-								
+								<c:if test='${proposition.listePersonneAccepteeDansCovoit == null || listePersonneSouhaitantParticiperCovoit == null}'>	
+									<tr style="display: none;"></tr>
+								</c:if>
 								<c:if test='${proposition.listePersonneAccepteeDansCovoit != null }'>	
 									<c:forEach var="accepteDansCovoit" items="${proposition.listePersonneAccepteeDansCovoit}">
 										<tr style="display: none;" class="souhaiteEtreOuAccepteDansCovoit${proposition.idAnnonceProposition}">
