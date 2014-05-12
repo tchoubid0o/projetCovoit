@@ -22,6 +22,8 @@ public interface UtilisateurDao {
 	public String GetPasswordConnexion(String user_pseudo);
 	
 	public String editMySettings(String email, String password, String password_verif, String telephone, String login);
+	
+	public boolean estAdministrateur(String login);
 	/*
 	public Integer getTheIdUser(String user_pseudo);
 

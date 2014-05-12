@@ -250,4 +250,25 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		}
 		return "<span class='red'>Erreur.</span>";
 	}
+	
+	public boolean estAdministrateur(String login){
+		
+		try {
+			Connection connection = DataSourceProvider.getDataSource().getConnection();
+
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM utilisateur WHERE login = ? AND estAdmin = 1");
+			stmt.setString(1, login);
+
+			ResultSet results = null;
+			results = stmt.executeQuery();
+			
+			if(results.next()){
+				return true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

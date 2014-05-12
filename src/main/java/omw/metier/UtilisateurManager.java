@@ -62,4 +62,8 @@ public class UtilisateurManager {
 	public String editMySettings(String email, String password, String password_verif, String telephone, String login){
 		return usersDao.editMySettings(email, password, password_verif, telephone, login);
 	}
+	
+	public boolean estAdministateur(String login){
+		return usersDao.estAdministrateur(login);
+	}
 }

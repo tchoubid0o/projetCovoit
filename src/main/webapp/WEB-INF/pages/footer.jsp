@@ -136,6 +136,13 @@
                                 <a href="calculateur" class="red">Prix du covoiturage</a><br/>
                             </div>
                         </div>
+                        
+                        <c:if test="${estAdmin}">
+	                        <div class="grey">Administration</div>
+	                        <div class="red">
+	                            <a href="administration" class="red">Lister les utilisateurs</a><br/>
+	                        </div>
+                        </c:if>
                     </div>
                 </div>
                 <div style="clear: both;"></div>

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import omw.metier.AnnonceManager;
 import omw.metier.GlobalInformationsManager;
+import omw.metier.UtilisateurManager;
 import omw.model.AnnonceProposition;
 import omw.model.AnnonceRecherche;
 
@@ -24,6 +24,11 @@ public abstract class GlobalInformationsServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String login = (String) request.getSession().getAttribute("login");		
+		boolean estAdmin = UtilisateurManager.getInstance().estAdministateur(login);
+		
+		request.setAttribute("estAdmin", estAdmin);
 	
 		List<AnnonceProposition> last_offers = GlobalInformationsManager.getInstance().listLastOffers();
 		List<AnnonceRecherche> last_searchs = GlobalInformationsManager.getInstance().listLastSearch();

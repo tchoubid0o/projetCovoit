@@ -245,10 +245,10 @@ ${villes}
 										data-commentaire="${proposition.commentaire}"
 										data-prix="${proposition.prix}"
 										data-nbPlace="${proposition.nbPlace}" style="cursor: pointer;"
-										alt="Editer votre recherche" title="Editer votre recherche"/></td>
+										alt="Editer votre annonce" title="Editer votre annonce"/></td>
 									<td style="width: 25px;"><img class="deleteAds"
 										src="img/delete.png" data-idP="${proposition.idAnnonceProposition}" data-type="proposition" style="cursor: pointer;"
-										alt="Supprimer votre recherche" title="Supprimer votre recherche"/></td>
+										alt="Supprimer votre annonce" title="Supprimer votre annonce"/></td>
 								</tr>
 								<tr style="display: none;">
 									<td colspan="1"></td>
@@ -689,6 +689,11 @@ $(".editAds").click(function() {
 
 $(".deleteAds").click(function(){
 	$(this).parent().parent().hide();
+	
+	if($(this).attr("data-type") == "proposition"){
+		$(this).parent().parent().next().hide();
+		$(this).parent().parent().next().next().hide();
+	}
 	var nbS = parseInt($(this).parent().parent().parent().parent().parent().parent().children(".titleAbout").children(".nbS").text());
 	var nbSafter = nbS - 1;
 	$(this).parent().parent().parent().parent().parent().parent().children(".titleAbout").children(".nbS").html(nbSafter);

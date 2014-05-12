@@ -142,9 +142,8 @@
 						$(this).attr("src", "img/uparrow2.png");
 					}
 				});
-			</script>
+	</script>
 		
-	</div>
 </section>
 
 
