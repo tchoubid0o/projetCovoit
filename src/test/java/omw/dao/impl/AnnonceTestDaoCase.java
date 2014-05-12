@@ -28,7 +28,7 @@ public class AnnonceTestDaoCase {
 		stmt.executeUpdate("DELETE FROM proposer");
 		stmt.executeUpdate("INSERT INTO `proposer`(`idProposer`,`idAnnonceRecherche`, `login`, `idAnnonceProposition`, `propositionConfirmee`) VALUES (1, 1,'log', 1, 0)");
 		stmt.executeUpdate("DELETE FROM reserver");
-		stmt.executeUpdate("INSERT INTO `reserver`(`idReserver`,`login`, `demandeConfirmee`) VALUES (1, 'log', 1, 0");
+		stmt.executeUpdate("INSERT INTO `reserver`(`idReserver`,`login`, `idAnnonceProposition`, `demandeConfirmee`) VALUES (1, 'log', 1, 0)");
 		stmt.executeUpdate("DELETE FROM etapes");
 		stmt.executeUpdate("INSERT INTO `etapes`(`idEtape`,`idAnnonceProposition`, `nomVille`, `ordre`) VALUES (1, 1, 'etapeTest',0)");
 		stmt.executeUpdate("DELETE FROM annonceproposition");
@@ -277,7 +277,7 @@ public class AnnonceTestDaoCase {
 		
 		Assert.assertTrue(results.next());
 		Assert.assertEquals(2, results.getInt("idAnnonceProposition"));
-		Assert.assertEquals(0, results.getInt("estReponseARecherche"));
+		Assert.assertEquals(1, results.getInt("estReponseARecherche"));
 		Assert.assertEquals("departTestBis", results.getString("villeDepart"));
 		Assert.assertEquals("arriveeTestBis", results.getString("villeArrivee"));
 		Assert.assertEquals("2014/05/060304", results.getString("dateEtHeureTrajet"));
@@ -298,479 +298,203 @@ public class AnnonceTestDaoCase {
 		Assert.assertEquals(0, results.getInt("ordre"));	
 		Assert.assertFalse(results.next());
 		
+		stmt.executeUpdate("INSERT INTO `proposer`(`idProposer`,`idAnnonceRecherche`, `login`, `idAnnonceProposition` , `propositionConfirmee`) VALUES(2,1,'log',2, 0)");
+		results = stmt.executeQuery("SELECT * FROM proposer WHERE idProposer = 2");		
+
+		Assert.assertTrue(results.next());
+		Assert.assertEquals(2, results.getInt("idProposer"));
+		Assert.assertEquals(1, results.getInt("idAnnonceRecherche"));
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertEquals(2, results.getInt("idAnnonceProposition"));	
+		Assert.assertEquals(0, results.getInt("propositionConfirmee"));
+		Assert.assertFalse(results.next());
+		
 		stmt.close();
 		connection.close();
 	}
 	
-	public void insertPropositionReponse(String idAnnonceRecherche, Integer rep, String villeDepart, String villeArrivee, String date, String heure, String minute, String prix, String nbPlace, String comment, String login, String[] etapes){
-		/*
+	@Test
+	public void testInsertRecherche() throws SQLException{
 		
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		Date dateLimite = null;
-		try {
-		dateLimite = df.parse(date);
-		} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		}
-		*/
+		Connection connection = DataSourceProvider.getDataSource().getConnection();
+		Statement stmt = connection.createStatement();
 		
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-	
-			String formatedDate = date.concat(heure).concat(minute);
-			int lastId = 0;
-			
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `annonceproposition`(`estReponseARecherche`,`villeDepart`,`villeArrivee`, `dateEtHeureTrajet`, `commentaire`, `prix`, `nbPlace`, `nbPlaceDispo`, `login`) VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, rep);
-			stmt.setString(2, villeDepart);
-			stmt.setString(3, villeArrivee);
-			stmt.setString(4, formatedDate);
-			stmt.setString(5, comment);
-			stmt.setInt(6, Integer.parseInt(prix));
-			stmt.setInt(7, Integer.parseInt(nbPlace));
-			stmt.setInt(8, Integer.parseInt(nbPlace));
-			stmt.setString(9, login);
-			
-			int numero = stmt.executeUpdate();
-
-			ResultSet rs = stmt.getGeneratedKeys();
-			if (rs.next()){
-			    lastId = rs.getInt(1);
-			}
-			
-			for(int i=0;i<etapes.length;i++){
-				if(etapes[i] != ""){
-					PreparedStatement stmt2 = connection.prepareStatement("INSERT INTO `etapes`(`idAnnonceProposition`, `nomVille`, `ordre`) VALUES(?,?,?)");
-					stmt2.setInt(1, lastId);
-					stmt2.setString(2, etapes[i]);
-					stmt2.setInt(3, i);
-					stmt2.executeUpdate();
-				}
-		    }
-			
-			PreparedStatement stmt3 = connection.prepareStatement("INSERT INTO `proposer`(`idAnnonceRecherche`, `login`, `idAnnonceProposition` , `propositionConfirmee`) VALUES(?,?,?, 0)");
-			stmt3.setInt(1, Integer.parseInt(idAnnonceRecherche));
-			stmt3.setString(2, login);
-			stmt3.setInt(3, lastId);
-			stmt3.executeUpdate();
-			
-			stmt.close();
-			connection.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		stmt.executeUpdate("INSERT INTO `annoncerecherche`(`idAnnonceRecherche`,`villeDepartRecherche`,`villeArriveeRecherche`, `dateEtHeureRecherche`, `commentaireRecherche`, `login`) VALUES(2,'departTest','arriveeTest','2014/05/060708','test','log')");
+		ResultSet results = stmt.executeQuery("SELECT * FROM annoncerecherche WHERE idAnnonceRecherche = 2");		
 		
-	}
-	
-	public void insertRecherche(String villeDepart, String villeArrivee, String date, String heure, String minute, String comment,	String login){
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-	
-			String formatedDate = date.concat(heure).concat(minute);
-			
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `annoncerecherche`(`villeDepartRecherche`,`villeArriveeRecherche`, `dateEtHeureRecherche`, `commentaireRecherche`, `login`) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, villeDepart);
-			stmt.setString(2, villeArrivee);
-			stmt.setString(3, formatedDate);
-			stmt.setString(4, comment);
-			stmt.setString(5, login);	
-			stmt.executeUpdate();
-			
-			stmt.close();
-			connection.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void ajouterDemandePourAnnonce(Integer idAnnonceProposition, String login){
+		Assert.assertTrue(results.next());
+		Assert.assertEquals(2, results.getInt("idAnnonceRecherche"));
+		Assert.assertEquals("departTest", results.getString("villeDepartRecherche"));
+		Assert.assertEquals("arriveeTest", results.getString("villeArriveeRecherche"));
+		Assert.assertEquals("2014/05/060708", results.getString("dateEtHeureRecherche"));
+		Assert.assertEquals("test", results.getString("commentaireRecherche"));
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertFalse(results.next());
 		
-		try{
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO `reserver`(`login`,`idAnnonceProposition`, `demandeConfirmee`) VALUES(?,?,0)");
-			
-			stmt.setString(1, login);
-			stmt.setInt(2, idAnnonceProposition);
-			
-			stmt.executeUpdate();			
-			
-			stmt.close();
-			connection.close();
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
+		stmt.close();
+		connection.close();
 	}
 	
-	public void refuserDemandePourAnnonce(Integer idAnnonceProposition, String login){
+	@Test
+	public void testAjouterDemandePourAnnonce() throws SQLException{
 		
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-
-			PreparedStatement stmt = connection.prepareStatement("UPDATE `reserver` SET demandeConfirmee = -1 WHERE idAnnonceProposition = ? AND login = ?");
-			stmt.setInt(1, idAnnonceProposition);
-			stmt.setString(2, login);
-			stmt.executeUpdate();
-				
-			stmt.close();
-				
-			connection.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-	}
-	
-	public boolean accepterDemandePourAnnonce(Integer idAnnonceProposition, String login){
+		Connection connection = DataSourceProvider.getDataSource().getConnection();
+		Statement stmt = connection.createStatement();
 		
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			
-			ResultSet result = null;
-			int nbPlaceDispoCovoit = 0;
-			
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE idAnnonceProposition = ?");
-			stmt.setInt(1, idAnnonceProposition);
-			result = stmt.executeQuery();
-			
-			while(result.next()){
-			
-				nbPlaceDispoCovoit = result.getInt("nbPlaceDispo");
-			}
-			
-			if(nbPlaceDispoCovoit > 0){
-				
-				nbPlaceDispoCovoit -= 1;
-				stmt = connection.prepareStatement("UPDATE `annonceproposition` SET nbPlaceDispo = ? WHERE idAnnonceProposition = ?");
-				stmt.setInt(1, nbPlaceDispoCovoit);
-				stmt.setInt(2, idAnnonceProposition);
-				
-				stmt.executeUpdate();
-			
-				stmt = connection.prepareStatement("UPDATE `reserver` SET demandeConfirmee = 1 WHERE idAnnonceProposition = ? AND login = ?");
-				stmt.setInt(1, idAnnonceProposition);
-				stmt.setString(2, login);
-			
-				stmt.executeUpdate();
-			}else{
-				
-				System.out.println("Pas assez de place disponible dans le covoit");
-				return false;
-			}
-			
-			stmt.close();
-			result.close();
-			connection.close();	
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		stmt.executeUpdate("INSERT INTO `reserver`(`idReserver`,`login`,`idAnnonceProposition`, `demandeConfirmee`) VALUES(2,'log',1,0)");
+		ResultSet results = stmt.executeQuery("SELECT * FROM reserver WHERE idReserver = 2");		
 		
-		return true;
-	}
-	
-	public List<AnnonceProposition> listerAnnonceProposition(String login) {
-		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			
-			ResultSet results = null;			
-
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE login != ? ORDER BY dateEtHeureTrajet ASC");// pas de selection de ses propres annonces		
-			stmt.setString(1, login);
-			results = stmt.executeQuery();
-
-			while (results.next()) {
-				
-				ResultSet resultsBis = null;				
-				int idAP = results.getInt("idAnnonceProposition");
-				
-				PreparedStatement stmtbis = connection.prepareStatement("SELECT * FROM reserver WHERE login = ? AND idAnnonceProposition = ? AND demandeConfirmee != -1");// pas de selection des annonces deja reservees et qui sont en attente ou deja confirmees		
-				stmtbis.setString(1, login);
-				stmtbis.setInt(2, idAP);
-				resultsBis = stmtbis.executeQuery();
-				
-				if(!(resultsBis.next())){
-				
-					AnnonceProposition proposition = new AnnonceProposition(
-							idAP,
-							results.getBoolean("estReponseARecherche"),
-							ucfirst(results.getString("villeDepart")),
-							ucfirst(results.getString("villeArrivee")),
-							(results.getString("dateEtHeureTrajet")).substring(0,10),
-							(results.getString("dateEtHeureTrajet")).substring(10,12),
-							(results.getString("dateEtHeureTrajet")).substring(12),
-							results.getString("commentaire"),
-							results.getInt("prix"),
-							results.getInt("nbPlace"),
-							results.getString("login"));
-					
-					liste.add(proposition);
-				}
-				
-				resultsBis.close();
-				stmtbis.close();
-			}
-			results.close();
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-
-		return liste;
-	}
-	
-	public List<AnnonceRecherche> listerAnnonceRecherche(String login) {
-		List<AnnonceRecherche> liste = new ArrayList<AnnonceRecherche>();
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			
-			ResultSet results = null;			
-
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annoncerecherche WHERE login != ? ORDER BY dateEtHeureRecherche ASC");// pas de selection de ses propres annonces		
-			stmt.setString(1, login);
-			results = stmt.executeQuery();
-
-			while (results.next()) {
-				
-				ResultSet resultsBis = null;				
-				int idAR = results.getInt("idAnnonceRecherche");
-				
-				PreparedStatement stmtbis = connection.prepareStatement("SELECT * FROM proposer WHERE login = ? AND idAnnonceRecherche = ? AND propositionConfirmee != -1");// pas de selection des annonces deja reservees et qui sont en attente ou deja confirmees		
-				stmtbis.setString(1, login);
-				stmtbis.setInt(2, idAR);
-				resultsBis = stmtbis.executeQuery();
-				
-				if(!(resultsBis.next())){
-				
-					AnnonceRecherche proposition = new AnnonceRecherche(
-							results.getInt("idAnnonceRecherche"),
-							ucfirst(results.getString("villeDepartRecherche")),
-							ucfirst(results.getString("villeArriveeRecherche")),
-							(results.getString("dateEtHeureRecherche")).substring(0,10),
-							(results.getString("dateEtHeureRecherche")).substring(10,12),
-							(results.getString("dateEtHeureRecherche")).substring(12),
-							results.getString("commentaireRecherche"),
-							results.getString("login"));
-					liste.add(proposition);
-				}
-				
-				resultsBis.close();
-				stmtbis.close();
-			}
-			results.close();
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-
-		return liste;
-	}
-	
-	public AnnonceProposition listerUneAnnonceProposition(Integer id) {
-		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
-		try {
-			Connection connection = DataSourceProvider.getDataSource()
-					.getConnection();
-			
-			ResultSet results = null;
-
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE idAnnonceProposition = ?");
-			stmt.setInt(1,id);
-			results = stmt.executeQuery();
-
-			while (results.next()) {
-				AnnonceProposition proposition = new AnnonceProposition(
-						results.getInt("idAnnonceProposition"),
-						results.getBoolean("estReponseARecherche"),
-						ucfirst(results.getString("villeDepart")),
-						ucfirst(results.getString("villeArrivee")),
-						(results.getString("dateEtHeureTrajet")).substring(0,10),
-						(results.getString("dateEtHeureTrajet")).substring(10,12),
-						(results.getString("dateEtHeureTrajet")).substring(12),
-						results.getString("commentaire"),
-						results.getInt("prix"),
-						results.getInt("nbPlace"),
-						results.getString("login"));
-				
-				return proposition;
-				
-			}
-			results.close();
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public List<AnnonceProposition> listerMesAnnonceProposition(String login) {
-		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			
-			ResultSet results = null;
-
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition WHERE login = ? ORDER BY idAnnonceProposition ASC");
-			stmt.setString(1,login);
-			results = stmt.executeQuery();
-
-			while (results.next()) {
-				AnnonceProposition proposition = new AnnonceProposition(
-						results.getInt("idAnnonceProposition"),
-						results.getBoolean("estReponseARecherche"),
-						ucfirst(results.getString("villeDepart")),
-						ucfirst(results.getString("villeArrivee")),
-						(results.getString("dateEtHeureTrajet")).substring(0,10),
-						(results.getString("dateEtHeureTrajet")).substring(10,12),
-						(results.getString("dateEtHeureTrajet")).substring(12),
-						results.getString("commentaire"),
-						results.getInt("prix"),
-						results.getInt("nbPlace"),
-						results.getString("login"));
-				
-				ResultSet resultsBis = null;
-				
-				PreparedStatement stmtBis = connection.prepareStatement("SELECT * FROM reserver INNER JOIN utilisateur ON reserver.login = utilisateur.login WHERE reserver.idAnnonceProposition = ? AND reserver.demandeConfirmee = 1 ORDER BY reserver.idReserver ASC ");
-				stmtBis.setInt(1,proposition.getIdAnnonceProposition());
-				resultsBis = stmtBis.executeQuery();
-				
-				while(resultsBis.next()){
-					
-					Utilisateur utilisateur = new Utilisateur(
-							resultsBis.getString("login"), 
-							resultsBis.getString("email"), 
-							resultsBis.getString("password"), 
-							resultsBis.getString("ip"),
-							resultsBis.getString("nom"),
-							resultsBis.getString("prenom"), 
-							resultsBis.getString("telephone"), 
-							resultsBis.getDate("registered"));
-					
-					proposition.addPersonneAccepteeDansCovoit(utilisateur);
-				}
-				
-				resultsBis = null;
-				
-				stmtBis = connection.prepareStatement("SELECT * FROM reserver INNER JOIN utilisateur ON reserver.login = utilisateur.login WHERE reserver.idAnnonceProposition = ? AND reserver.demandeConfirmee = 0 ORDER BY reserver.idReserver ASC ");
-				stmtBis.setInt(1,proposition.getIdAnnonceProposition());
-				resultsBis = stmtBis.executeQuery();
-				
-				while(resultsBis.next()){
-					
-					Utilisateur utilisateur = new Utilisateur(
-							resultsBis.getString("login"), 
-							resultsBis.getString("email"), 
-							resultsBis.getString("password"), 
-							resultsBis.getString("ip"),
-							resultsBis.getString("nom"),
-							resultsBis.getString("prenom"), 
-							resultsBis.getString("telephone"), 
-							resultsBis.getDate("registered"));
-					
-					proposition.addPersonneSouhaitantParticiperCovoit(utilisateur);
-				}				
-				
-				resultsBis.close();
-				stmtBis.close();
-				
-				liste.add(proposition);
-			}
-			results.close();
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-
-		return liste;
-	}
-	
-	public List<AnnonceRecherche> listerMesAnnonceRecherche(String login) {
-		List<AnnonceRecherche> liste = new ArrayList<AnnonceRecherche>();
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			
-			ResultSet results = null;
-			
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annoncerecherche WHERE login = ? ORDER BY dateEtHeureRecherche ASC");
-			stmt.setString(1,login);
-			results = stmt.executeQuery();
-
-			while (results.next()) {
-				AnnonceRecherche proposition = new AnnonceRecherche(
-						results.getInt("idAnnonceRecherche"),
-						ucfirst(results.getString("villeDepartRecherche")),
-						ucfirst(results.getString("villeArriveeRecherche")),
-						(results.getString("dateEtHeureRecherche")).substring(0,10),
-						(results.getString("dateEtHeureRecherche")).substring(10,12),
-						(results.getString("dateEtHeureRecherche")).substring(12),
-						results.getString("commentaireRecherche"),
-						results.getString("login"));
-				liste.add(proposition);
-			}
-			results.close();
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-
-		return liste;
-	}
-	
-	public List<AnnonceProposition> listerAnnoncePropositionLeConcernant(String login, int demandeConfirmee){
-		List<AnnonceProposition> liste = new ArrayList<AnnonceProposition>();
+		Assert.assertTrue(results.next());
+		Assert.assertEquals(2, results.getInt("idReserver"));
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertEquals(1, results.getInt("idAnnonceProposition"));
+		Assert.assertEquals(0, results.getInt("demandeConfirmee"));
+		Assert.assertFalse(results.next());
 		
-		try {
-			Connection connection = DataSourceProvider.getDataSource().getConnection();
-			
-			ResultSet results = null;
-			
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM annonceproposition INNER JOIN reserver ON annonceproposition.idAnnonceProposition = reserver.idAnnonceProposition WHERE reserver.login = ? AND reserver.demandeConfirmee = ? ORDER BY annonceproposition.dateEtHeureTrajet ASC");
-			stmt.setString(1,login);
-			stmt.setInt(2,demandeConfirmee);
-			results = stmt.executeQuery();
-
-			while (results.next()) {
-				AnnonceProposition annonce = new AnnonceProposition(
-						results.getInt("idAnnonceProposition"),
-						results.getBoolean("estReponseARecherche"),
-						ucfirst(results.getString("villeDepart")),
-						ucfirst(results.getString("villeArrivee")),
-						(results.getString("dateEtHeureTrajet")).substring(0,10),
-						(results.getString("dateEtHeureTrajet")).substring(10,12),
-						(results.getString("dateEtHeureTrajet")).substring(12),
-						results.getString("commentaire"),
-						results.getInt("prix"),
-						results.getInt("nbPlace"),
-						results.getString("login"));
-				liste.add(annonce);
-			}
-			results.close();
-			stmt.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		stmt.close();
+		connection.close();
+	}
+	
+	@Test
+	public void testRefuserDemandePourAnnonce() throws SQLException{
 		
-		return liste;		
+		Connection connection = DataSourceProvider.getDataSource().getConnection();
+		Statement stmt = connection.createStatement();
+		
+		stmt.executeUpdate("UPDATE `reserver` SET demandeConfirmee = -1 WHERE idAnnonceProposition = 1 AND login = 'log'");
+		ResultSet results = stmt.executeQuery("SELECT * FROM reserver WHERE idAnnonceProposition = 1 AND login = 'log'");		
+		
+		Assert.assertTrue(results.next());
+		Assert.assertEquals(1, results.getInt("idReserver"));
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertEquals(1, results.getInt("idAnnonceProposition"));
+		Assert.assertEquals(-1, results.getInt("demandeConfirmee"));
+		Assert.assertFalse(results.next());
+		
+		stmt.close();
+		connection.close();
+	}
+
+	@Test
+	public void testAccepterDemandePourAnnonce() throws SQLException{
+		
+		Connection connection = DataSourceProvider.getDataSource().getConnection();
+		Statement stmt = connection.createStatement();
+		
+		stmt.executeUpdate("UPDATE `annonceproposition` SET nbPlaceDispo = 0 WHERE idAnnonceProposition = 1");
+		ResultSet results = stmt.executeQuery("SELECT * FROM annonceproposition WHERE idAnnonceProposition = 1");		
+		
+		Assert.assertTrue(results.next());
+		Assert.assertEquals(1, results.getInt("idAnnonceProposition"));
+		Assert.assertEquals(0, results.getInt("estReponseARecherche"));
+		Assert.assertEquals("departTest", results.getString("villeDepart"));
+		Assert.assertEquals("arriveeTest", results.getString("villeArrivee"));
+		Assert.assertEquals("2014/01/020001", results.getString("dateEtHeureTrajet"));
+		Assert.assertEquals("test", results.getString("commentaire"));
+		Assert.assertEquals(25, results.getInt("prix"));
+		Assert.assertEquals(2, results.getInt("nbPlace"));
+		Assert.assertEquals(0, results.getInt("nbPlaceDispo"));
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertFalse(results.next());
+		
+		stmt.executeUpdate("UPDATE `reserver` SET demandeConfirmee = 1 WHERE idAnnonceProposition = 1 AND login = 'log'");
+		results = stmt.executeQuery("SELECT * FROM reserver WHERE idAnnonceProposition = 1 AND login = 'log'");		
+		
+		Assert.assertTrue(results.next());
+		Assert.assertEquals(1, results.getInt("idReserver"));
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertEquals(1, results.getInt("idAnnonceProposition"));
+		Assert.assertEquals(1, results.getInt("demandeConfirmee"));
+		Assert.assertFalse(results.next());
+		
+		stmt.close();
+		connection.close();
+	}
+	
+	@Test
+	public void testListerMesAnnonceProposition() throws SQLException{
+		
+		Connection connection = DataSourceProvider.getDataSource().getConnection();
+		Statement stmt = connection.createStatement();
+		
+		ResultSet results = stmt.executeQuery("SELECT * FROM annonceproposition WHERE login = 'log' ORDER BY idAnnonceProposition ASC");		
+		
+		Assert.assertTrue(results.next());
+		Assert.assertEquals(1, results.getInt("idAnnonceProposition"));
+		Assert.assertEquals(0, results.getInt("estReponseARecherche"));
+		Assert.assertEquals("departTest", results.getString("villeDepart"));
+		Assert.assertEquals("arriveeTest", results.getString("villeArrivee"));
+		Assert.assertEquals("2014/01/020001", results.getString("dateEtHeureTrajet"));
+		Assert.assertEquals("test", results.getString("commentaire"));
+		Assert.assertEquals(25, results.getInt("prix"));
+		Assert.assertEquals(2, results.getInt("nbPlace"));
+		Assert.assertEquals(1, results.getInt("nbPlaceDispo"));
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertFalse(results.next());
+		
+		results = stmt.executeQuery("SELECT * FROM reserver INNER JOIN utilisateur ON reserver.login = utilisateur.login WHERE reserver.idAnnonceProposition = 1 AND reserver.demandeConfirmee = 1 ORDER BY reserver.idReserver ASC ");		
+		
+		Assert.assertFalse(results.next());
+		
+		results = stmt.executeQuery("SELECT * FROM reserver INNER JOIN utilisateur ON reserver.login = utilisateur.login WHERE reserver.idAnnonceProposition = 1 AND reserver.demandeConfirmee = 0 ORDER BY reserver.idReserver ASC ");		
+		
+		Assert.assertTrue(results.next());
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertEquals("test@gmail.com", results.getString("email"));
+		Assert.assertEquals("passwordTest", results.getString("password"));
+		Assert.assertEquals("ipTest", results.getString("ip"));
+		Assert.assertEquals("NOMTEST", results.getString("nom"));
+		Assert.assertEquals("Prenomtest", results.getString("prenom"));
+		Assert.assertEquals("0312345678", results.getString("telephone"));
+		Assert.assertEquals("2014-01-02 00:01:02.0", results.getString("registered"));
+		
+		stmt.close();
+		connection.close();
+	}
+	
+	@Test
+	public void testListerMesAnnonceRecherche() throws SQLException{
+		
+		Connection connection = DataSourceProvider.getDataSource().getConnection();
+		Statement stmt = connection.createStatement();
+		
+		ResultSet results = stmt.executeQuery("SELECT * FROM annoncerecherche WHERE login = 'log' ORDER BY dateEtHeureRecherche ASC");		
+		
+		Assert.assertTrue(results.next());
+		Assert.assertEquals(1, results.getInt("idAnnonceRecherche"));
+		Assert.assertEquals("departRechercheTest", results.getString("villeDepartRecherche"));
+		Assert.assertEquals("arriveeRechercheTest", results.getString("villeArriveeRecherche"));
+		Assert.assertEquals("2014/05/060708", results.getString("dateEtHeureRecherche"));
+		Assert.assertEquals("testRecherche", results.getString("commentaireRecherche"));
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertFalse(results.next());
+		
+		stmt.close();
+		connection.close();
+	}
+	
+	@Test
+	public void testListerAnnoncePropositionLeConcernant() throws SQLException{
+		
+		Connection connection = DataSourceProvider.getDataSource().getConnection();
+		Statement stmt = connection.createStatement();
+		
+		ResultSet results = stmt.executeQuery("SELECT * FROM annonceproposition INNER JOIN reserver ON annonceproposition.idAnnonceProposition = reserver.idAnnonceProposition WHERE reserver.login = 'log' AND reserver.demandeConfirmee = 0 ORDER BY annonceproposition.dateEtHeureTrajet ASC");		
+		
+		Assert.assertTrue(results.next());
+		Assert.assertEquals(1, results.getInt("idAnnonceProposition"));
+		Assert.assertEquals(0, results.getInt("estReponseARecherche"));
+		Assert.assertEquals("departTest", results.getString("villeDepart"));
+		Assert.assertEquals("arriveeTest", results.getString("villeArrivee"));
+		Assert.assertEquals("2014/01/020001", results.getString("dateEtHeureTrajet"));
+		Assert.assertEquals("test", results.getString("commentaire"));
+		Assert.assertEquals(25, results.getInt("prix"));
+		Assert.assertEquals(2, results.getInt("nbPlace"));
+		Assert.assertEquals(1, results.getInt("nbPlaceDispo"));
+		Assert.assertEquals("log", results.getString("login"));
+		Assert.assertFalse(results.next());
+		
+		stmt.close();
+		connection.close();
 	}
 }
