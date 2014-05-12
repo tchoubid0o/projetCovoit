@@ -25,6 +25,7 @@ public class AjaxNewsletterServlet extends GlobalInformationsServlet{
 	public void postRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		String email = request.getParameter("email");
 	    String result = AjaxNewsletterManager.getInstance().addMailInNewsletter(email);
 	    Gson gson = new Gson();

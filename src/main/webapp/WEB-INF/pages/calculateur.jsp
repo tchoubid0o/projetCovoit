@@ -65,7 +65,7 @@
 					prixSelect = $("#prixForm option:selected").val();
 					km = $("#km").val();
 					if(km == null || km == ""){km = 0;}
-					prixCalc = parseFloat(prixSelect)*parseFloat(km);
+					prixCalc = (parseFloat(prixSelect)*parseFloat(km))/100;
 					
 					$("#prixTotal").val(prixCalc+"€");
 				});
@@ -76,7 +76,7 @@
 					km = $(this).val();
 					if(km == null || km == ""){km = 0;}
 					
-					prixCalc = parseFloat(prixSelect)*parseFloat(km);
+					prixCalc = (parseFloat(prixSelect)*parseFloat(km))/100;
 					
 					$("#prixTotal").val(prixCalc+"€");
 				});

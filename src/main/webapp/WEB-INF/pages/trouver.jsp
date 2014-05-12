@@ -66,7 +66,7 @@
 			<div class="lastCars center">Aucun résultat</div>
 		</c:if>
 
-		<!-- Trouver un passager -->
+		<%-- Trouver un passager --%>
 		
 		<div style="text-align: center;">
 			<span class="titleAbout">Trouver un passager</span>

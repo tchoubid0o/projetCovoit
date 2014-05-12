@@ -28,6 +28,7 @@ public class RepondreServlet extends GlobalInformationsServlet{
 	@Override
 	public void postRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		
 		request.setAttribute("villes", AnnonceManager.getInstance().listerVille());
 		

@@ -28,6 +28,7 @@ public class AjaxReserverServlet extends GlobalInformationsServlet{
 	@Override
 	public void postRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		if(request.getParameter("reserverForm") != null){
 			
 			String login = (String) request.getSession().getAttribute("login");
